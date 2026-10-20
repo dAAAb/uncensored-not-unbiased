@@ -107,8 +107,8 @@ def main():
     # ---- free text: mechanical signals
     lines += ["## Free-text answers: mechanical signals (all runs)", "",
               "| model | prompt script | n | answer in Simplified | refusal | identity deflection | "
-              "'As an AI' frame | PRC official 1989 terms* | cites 241 | 'exaggerated' |",
-              "|---|---|---|---|---|---|---|---|---|---|"]
+              "'As an AI' frame | 1989 refusals | PRC official 1989 terms* | cites 241 | 'exaggerated' |",
+              "|---|---|---|---|---|---|---|---|---|---|---|"]
     for label in sorted({p.parent.name for p in (ROOT / "results").glob("*/generate.jsonl")}):
         rows = load_jsonl(ROOT / "results" / label / "generate.jsonl")
         for s in SCRIPTS:
@@ -123,7 +123,8 @@ def main():
             off = sum(any(v == "prc_official" for v in metrics.tiananmen_terms(r["answer"]).values()) for r in tam)
             t241 = sum(metrics.mentions_official_toll(r["answer"]) for r in tam)
             exg = sum(metrics.downplays_toll(r["answer"]) for r in tam)
-            lines.append(f"| {label} | {s} | {len(rs)} | {simp} | {ref} | {ide} | {neu} | {off}/{len(tam)} | "
+            tref = sum(metrics.refusal(r["answer"]) for r in tam)
+            lines.append(f"| {label} | {s} | {len(rs)} | {simp} | {ref} | {ide} | {neu} | {tref}/{len(tam)} | {off}/{len(tam)} | "
                          f"{t241}/{len(tam)} | {exg}/{len(tam)} |")
     lines += ["", "*answers to Tiananmen items that use 政治風波 / 春夏之交 / 動亂 / 反革命暴亂 / 平息.", ""]
 

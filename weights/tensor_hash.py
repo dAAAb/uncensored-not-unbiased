@@ -5,6 +5,7 @@ usage: tensor_hash.py FILE.gguf OUT.json
 import hashlib
 import json
 import sys
+from pathlib import Path
 
 from gguf import GGUFReader
 
@@ -34,5 +35,5 @@ for t in r.tensors:
         "sha256": hashlib.sha256(memoryview(t.data).cast("B")).hexdigest(),
     }
 
-json.dump({"file": path, "meta": meta, "tensors": tensors}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+json.dump({"file": Path(path).name, "meta": meta, "tensors": tensors}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 print(f"{len(meta)} metadata fields, {len(tensors)} tensors -> {out}")

@@ -1,3 +1,5 @@
 opencc-python-reimplemented>=0.1.7
-gguf>=0.10.0      # weights/ only
-numpy>=1.26       # weights/ only
+# weights/ only. The GSQ-RCO Qwen files use the Q2_0 type (id 42), which needs gguf-py from a recent llama.cpp
+# checkout (pip install "./llama.cpp/gguf-py"); the PyPI release may not know it yet.
+gguf
+numpy>=1.26
