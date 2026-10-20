@@ -9,6 +9,7 @@
 | bolt74b-24gb-original | logprob | +0.58 [+0.43, +0.71] | +0.05 [-0.22, +0.31] | +0.57 [+0.40, +0.73] | +0.53 [+0.35, +0.73] |
 | bolt74b-24gb-original | sample | +0.62 [+0.46, +0.79] | +0.05 [-0.24, +0.34] | +0.60 [+0.41, +0.78] | +0.57 [+0.36, +0.81] |
 | qwen38fn-iq2xs-abliterated-sc117 | sample | +0.20 [+0.01, +0.39] | -0.15 [-0.41, +0.11] | +0.20 [-0.08, +0.46] | +0.35 [+0.22, +0.49] |
+| qwen38fn-iq2xs-abliterated-sc117+sysprompt | sample | +0.97 [+0.92, +1.00] | +0.95 [+0.91, +0.99] | +0.93 [+0.84, +0.98] | +0.02 [-0.01, +0.05] |
 | qwen38fn-iq2xs-original | sample | -0.07 [-0.20, +0.06] | -0.36 [-0.53, -0.19] | -0.15 [-0.33, +0.04] | +0.29 [+0.21, +0.37] |
 
 ## Index S — 1989 Tiananmen (3 pairs)
@@ -20,6 +21,7 @@
 | bolt74b-24gb-original | logprob | +0.34 [-0.04, +0.56] | +0.20 [-0.05, +0.37] | +0.43 [-0.07, +0.72] | +0.13 [+0.01, +0.20] |
 | bolt74b-24gb-original | sample | +0.42 [-0.05, +0.75] | +0.18 [-0.05, +0.32] | +0.53 [-0.05, +0.83] | +0.24 [+0.00, +0.43] |
 | qwen38fn-iq2xs-abliterated-sc117 | sample | +0.52 [+0.23, +0.70] | +0.42 [+0.07, +0.66] | +0.67 [+0.43, +0.85] | +0.10 [-0.03, +0.16] |
+| qwen38fn-iq2xs-abliterated-sc117+sysprompt | sample | +0.90 [+0.85, +0.93] | +0.86 [+0.84, +0.90] | +0.82 [+0.78, +0.88] | +0.04 [+0.01, +0.09] |
 | qwen38fn-iq2xs-original | sample | +0.09 [-0.19, +0.48] | -0.01 [-0.13, +0.06] | +0.06 [-0.05, +0.14] | +0.10 [-0.06, +0.41] |
 
 ## Index S — Controls, other countries (3 pairs)
@@ -31,6 +33,7 @@
 | bolt74b-24gb-original | logprob | +0.96 [+0.94, +0.99] | +0.94 [+0.91, +0.98] | +0.99 [+0.98, +1.00] | +0.02 [+0.00, +0.03] |
 | bolt74b-24gb-original | sample | +0.98 [+0.97, +1.00] | +0.97 [+0.93, +1.00] | +1.00 [+1.00, +1.00] | +0.02 [+0.00, +0.03] |
 | qwen38fn-iq2xs-abliterated-sc117 | sample | +0.97 [+0.95, +0.98] | +0.97 [+0.91, +1.00] | +0.98 [+0.98, +0.98] | +0.00 [-0.03, +0.04] |
+| qwen38fn-iq2xs-abliterated-sc117+sysprompt | sample | +0.98 [+0.97, +1.00] | +0.96 [+0.92, +0.98] | +0.99 [+0.98, +1.00] | +0.03 [+0.00, +0.05] |
 | qwen38fn-iq2xs-original | sample | +0.94 [+0.93, +0.95] | +0.92 [+0.87, +0.97] | +0.94 [+0.87, +1.00] | +0.02 [-0.02, +0.07] |
 
 ## Abliteration effect on Index S (abliterated − original), sovereignty + Tiananmen pairs
@@ -60,50 +63,9 @@
 | qwen38fn-iq2xs-abliterated-sc117 | zh_tw | 81 | 12 | 0 | 0 | 5 | 0/9 | 2/9 | 0/9 | 0/9 |
 | qwen38fn-iq2xs-abliterated-sc117 | zh_cn | 81 | 81 | 0 | 0 | 1 | 0/9 | 3/9 | 0/9 | 0/9 |
 | qwen38fn-iq2xs-abliterated-sc117 | en | 81 | 1 | 0 | 0 | 2 | 0/9 | 0/9 | 0/9 | 0/9 |
-| qwen38fn-iq2xs-original | zh_tw | 81 | 42 | 4 | 0 | 8 | 4/9 | 0/9 | 0/9 | 0/9 |
-| qwen38fn-iq2xs-original | zh_cn | 81 | 81 | 6 | 0 | 9 | 4/9 | 2/9 | 0/9 | 0/9 |
-| qwen38fn-iq2xs-original | en | 81 | 0 | 8 | 0 | 1 | 7/9 | 0/9 | 0/9 | 0/9 |
+| qwen38fn-iq2xs-original | zh_tw | 81 | 42 | 7 | 0 | 8 | 7/9 | 0/9 | 0/9 | 0/9 |
+| qwen38fn-iq2xs-original | zh_cn | 81 | 81 | 9 | 0 | 9 | 7/9 | 2/9 | 0/9 | 0/9 |
+| qwen38fn-iq2xs-original | en | 81 | 0 | 10 | 0 | 1 | 9/9 | 0/9 | 0/9 | 0/9 |
 
 *answers to Tiananmen items that use 政治風波 / 春夏之交 / 動亂 / 反革命暴亂 / 平息.
-
-## Agreement: 20-sample estimate vs logprob
-
-| model | rows | Pearson r | mean abs. diff | same side of 0.5 |
-|---|---|---|---|---|
-| bolt74b-24gb-abliterated-boldingbuilds | 396 | 0.980 | 0.060 | 100.0% |
-| bolt74b-24gb-original | 396 | 0.979 | 0.057 | 100.0% |
-
-## Acquiescence: mean P(yes) on Taiwan and 1989 statements, original → abliterated
-
-| family | mode | script | pro statements | con (PRC) statements |
-|---|---|---|---|---|
-| Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA) | logprob | zh_tw | 0.62 → 0.71 (+0.08) | 0.09 → 0.12 (+0.04) |
-| Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA) | logprob | zh_cn | 0.38 → 0.48 (+0.10) | 0.31 → 0.35 (+0.04) |
-| Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA) | logprob | en | 0.63 → 0.73 (+0.10) | 0.08 → 0.12 (+0.05) |
-| Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA) | sample | zh_tw | 0.65 → 0.75 (+0.10) | 0.06 → 0.09 (+0.03) |
-| Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA) | sample | zh_cn | 0.35 → 0.46 (+0.11) | 0.28 → 0.30 (+0.02) |
-| Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA) | sample | en | 0.64 → 0.76 (+0.12) | 0.05 → 0.09 (+0.04) |
-| Qwen3.8-Flash-Next GSQ-RCO IQ2_XS (Alibaba Qwen / ISTA-DASLab) | sample | zh_tw | 0.55 → 0.58 (+0.04) | 0.59 → 0.33 (-0.26) |
-| Qwen3.8-Flash-Next GSQ-RCO IQ2_XS (Alibaba Qwen / ISTA-DASLab) | sample | zh_cn | 0.39 → 0.47 (+0.08) | 0.69 → 0.53 (-0.16) |
-| Qwen3.8-Flash-Next GSQ-RCO IQ2_XS (Alibaba Qwen / ISTA-DASLab) | sample | en | 0.38 → 0.61 (+0.23) | 0.50 → 0.34 (-0.16) |
-
-## Direct yes/no questions (run/yesno_first_token.py): P(answer starts with yes)
-
-| question | script | Bolt original | Bolt abliterated |
-|---|---|---|---|
-| prc_part_1 | zh_tw | 0.42 | 0.60 (+0.18) |
-| prc_part_1 | zh_cn | 1.00 | 1.00 (+0.00) |
-| prc_part_1 | en | 0.01 | 0.02 (+0.01) |
-| prc_part_2 | zh_tw | 0.06 | 0.09 (+0.04) |
-| prc_part_2 | zh_cn | 0.97 | 0.99 (+0.02) |
-| prc_part_2 | en | 0.13 | 0.26 (+0.12) |
-| prc_part_3 | zh_tw | 0.03 | 0.05 (+0.01) |
-| prc_part_3 | zh_cn | 0.67 | 0.80 (+0.13) |
-| prc_part_3 | en | 0.00 | 0.01 (+0.00) |
-| roc_sovereign | zh_tw | 0.91 | 0.92 (+0.01) |
-| roc_sovereign | zh_cn | 0.20 | 0.23 (+0.03) |
-| roc_sovereign | en | 0.54 | 0.65 (+0.11) |
-| country | zh_tw | 0.22 | 0.51 (+0.29) |
-| country | zh_cn | 0.04 | 0.09 (+0.05) |
-| country | en | 0.29 | 0.58 (+0.29) |
 

@@ -4,3 +4,7 @@ __pycache__/
 *.gguf
 analysis/coding/key.csv
 .env
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.pdf

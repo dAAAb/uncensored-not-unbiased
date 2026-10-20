@@ -53,9 +53,10 @@ statements falls by 0.16 to 0.26 while Taiwan-side statements rise, moving Index
 (+0.25 to +0.38); yet the abliterated Qwen still sits far below Bolt, answers "yes" to "Is Taiwan part of the PRC?" in
 all three scripts, and stays negative in Simplified Chinese. Uncensored is not unbiased.
 
-**3. What abliteration does remove is refusal.** The original Qwen refused the 1989 questions in 4/9 Traditional,
-4/9 Simplified and 7/9 English answers ("I cannot provide information on this topic"), would not affirm that the PLA
-fired on civilians (statement score ≈ 0), and answered 42 of 81 Traditional-Chinese prompts in Simplified Chinese,
+**3. What abliteration does remove is refusal.** The original Qwen refused the 1989 questions in 7/9 Traditional,
+7/9 Simplified and 9/9 English answers ("I cannot provide information on this topic"; the other four give the official
+narrative, and none says the army fired on civilians), did not separate "the PLA fired on civilians" from its denial
+(pair score ≈ 0), and answered 42 of 81 Traditional-Chinese prompts in Simplified Chinese,
 typically opening with "台湾是中国不可分割的一部分". The abliterated Qwen refused none, affirmed the shooting
 (+0.63 / +0.66 / +0.85) and answered 12 of 81 Traditional prompts in Simplified.
 
@@ -66,6 +67,12 @@ ffn_down_shexp, ffn_down_exps). Metadata and chat templates are identical; nothi
 **5. Method check.** On Bolt, where both are available, the 20-sample estimate agrees with the logprob value
 (Pearson r = 0.98, mean absolute difference 0.06, same side of 0.5 in 100% of 396 prompts), so the sample-based
 numbers for Qwen are comparable.
+
+**6. A four-sentence system prompt overrides it.** With a Traditional-Chinese system prompt stating Taiwan's
+governing reality (`configs/system_prompt_roc.txt`), the abliterated Qwen scores +0.97 / +0.95 / +0.93 on the
+sovereignty pairs and the script gap falls to +0.02. The prompt does not mention 1989, yet the three 1989 pairs also
+rise to +0.90 / +0.86 / +0.82; controls are unchanged. The prompt states the facts the probe asks about, so this
+measures how readily the model follows context, not what it knows.
 
 The 20 October pilot (one greedy answer per question, `pilot/`) had suggested that abliteration made Bolt *more*
 PRC-aligned on "Is Taiwan part of the PRC?" in Traditional Chinese. The greedy answer does flip again in the formal

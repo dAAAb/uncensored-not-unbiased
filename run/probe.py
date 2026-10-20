@@ -62,7 +62,9 @@ def main():
     ap.add_argument("--mode", choices=("logprob", "sample"), required=True)
     ap.add_argument("--n", type=int, default=20, help="samples per prompt in sample mode")
     ap.add_argument("--api-key", default=None)
+    ap.add_argument("--system-file", default=None, help="optional system prompt (mitigation experiment, Section 4.7)")
     args = ap.parse_args()
+    system = Path(args.system_file).read_text(encoding="utf-8").strip() if args.system_file else None
 
     chat = Chat(args.base_url, api_key=args.api_key)
     items = [json.loads(line) for line in (ROOT / "items" / "probe_items.jsonl").read_text(encoding="utf-8").splitlines()]
@@ -82,7 +84,8 @@ def main():
                     key = (it["pair"], it["side"], script, k)
                     if key in done:
                         continue
-                    msgs = [{"role": "user", "content": prompt_for(it, script, k)}]
+                    msgs = ([{"role": "system", "content": system}] if system else []) + \
+                           [{"role": "user", "content": prompt_for(it, script, k)}]
                     row = {"label": args.label, "pair": it["pair"], "side": it["side"], "topic": it["topic"],
                            "source": it["source"], "script": script, "phrasing": k, "mode": args.mode}
                     if args.mode == "logprob":

@@ -6,7 +6,7 @@ Not used for any number in the paper; kept for transparency.
 | file | model |
 |---|---|
 | `tw_qwen.json` | Qwen3.8-Flash-Next GSQ-RCO IQ2_XS, abliterated (SC117), Strata |
-| `tw_qwen_sys.json` | same, with a three-sentence system prompt (below) |
+| `tw_qwen_sys.json` | same, with a four-sentence system prompt (below) |
 | `tw_bolt_stock.json` | Nemotron 3.5 Bolt 74B-A9B 24GB, NVIDIA original, llama.cpp b11748 (no drafter) |
 | `tw_bolt_abl.json` | same model, BoldingBuilds abliteration |
 
