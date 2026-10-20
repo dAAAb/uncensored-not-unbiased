@@ -16,9 +16,13 @@ llama-server -m <NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf | NVIDIA-Nemotron-3.
   --host 127.0.0.1 --port 8080
 ```
 
-The LiLiCorr drafter is NVIDIA's (sha256 `080e1ea4…0194`). Speculative decoding does not change the probability of
-the first answer token, which is all `probe.py --mode logprob` reads; for free text it can change wording after a few
-dozen tokens (verified in the pilot: plain decoding is bit-identical across reruns, drafted decoding is not).
+The LiLiCorr drafter is NVIDIA's (sha256 `080e1ea4…0194`). All Bolt numbers in `results/` (both models) were
+measured with exactly these flags, drafter on. Check: `run/yesno_first_token.py` on the abliterated model with these
+flags (`results/bolt74b-24gb-abliterated-boldingbuilds-draftcheck/`) and on a plain server (no drafter, 8K context,
+f16 KV cache; `results/bolt74b-24gb-abliterated-boldingbuilds/yesno_first_token.jsonl`) differ by at most 0.08 in
+P(yes), with the same direction on all 15 prompts; the two runs also differ in KV-cache precision. For free text the
+drafter changes wording after a few dozen tokens (pilot: plain decoding is bit-identical across reruns, drafted
+decoding is not) without changing correctness on our capability checks.
 
 ## Qwen3.8-Flash-Next GSQ-RCO (Strata)
 
