@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use these items, code or results, please cite this repository."
+title: "Uncensored Is Not Unbiased: abliteration and PRC-aligned priors in open-weight language models"
+authors:
+  - family-names: Ko
+    given-names: Ju-Chun
+date-released: 2026-10-20
+version: "0.1.0"
+license: MIT
+repository-code: "https://github.com/dAAAb/uncensored-not-unbiased"
+references:
+  - type: article
+    title: "Bilingual Bias in Large Language Models: A Taiwan Sovereignty Benchmark Study"
+    authors:
+      - family-names: Ko
+        given-names: Ju-Chun
+    year: 2026
+    identifiers:
+      - type: other
+        value: "arXiv:2602.06371"
+  - type: software
+    title: "Script-dependent answers about Taiwan in commercial decision models"
+    authors:
+      - family-names: Hsiao
+        given-names: Shang Nung
+    year: 2026
+    url: "https://github.com/pirrer/taiwan-sovereignty-decision-models"
