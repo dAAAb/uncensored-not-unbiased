@@ -1,6 +1,8 @@
 // llama-dump-hidden: write the residual stream (output of every layer) for a list of chat prompts.
 //
-// Each non-empty line of --positive-file is one user message (escapes such as \n are processed). The message is
+// Each non-empty line of --positive-file is one user message (escapes such as \n are processed), optionally followed
+// by a literal TAB and text that is appended after the generation prompt as the start of the assistant's answer
+// (used for contrastive activation addition: the same prompt with two different answer tokens). The message is
 // formatted with the model's own chat template exactly as llama-server does (jinja, generation prompt, thinking off),
 // evaluated once, and for every layer the output row of the last prompt token and the mean over all prompt tokens are
 // written to -o as float32.
@@ -101,6 +103,7 @@ int main(int argc, char ** argv) {
     st.n_embd   = llama_model_n_embd(model);
 
     std::vector<std::string> msgs;
+    std::vector<std::string> prefixes;
     {
         std::ifstream in(params.cvector_positive_file);
         if (!in.is_open()) {
@@ -112,8 +115,16 @@ int main(int argc, char ** argv) {
             if (line.empty()) {
                 continue;
             }
+            std::string prefix;
+            const size_t tab = line.find('\t');
+            if (tab != std::string::npos) {
+                prefix = line.substr(tab + 1);
+                line   = line.substr(0, tab);
+                string_process_escapes(prefix);
+            }
             string_process_escapes(line);
             msgs.push_back(line);
+            prefixes.push_back(prefix);
         }
     }
 
@@ -138,7 +149,7 @@ int main(int argc, char ** argv) {
         inputs.use_jinja                          = true;
         inputs.enable_thinking                    = false;
         inputs.chat_template_kwargs["enable_thinking"] = "false";
-        const std::string prompt = common_chat_templates_apply(tmpls.get(), inputs).prompt.str();
+        const std::string prompt = common_chat_templates_apply(tmpls.get(), inputs).prompt.str() + prefixes[i];
         if (i == 0) {
             fprintf(stderr, "first formatted prompt:\n---\n%s\n---\n", prompt.c_str());
         }
