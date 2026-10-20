@@ -1,0 +1,3 @@
+opencc-python-reimplemented>=0.1.7
+gguf>=0.10.0      # weights/ only
+numpy>=1.26       # weights/ only

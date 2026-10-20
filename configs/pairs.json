@@ -1,0 +1,6 @@
+[
+  {"family": "Nemotron 3.5 Bolt 74B-A9B 24GB (NVIDIA)",
+   "original": "bolt74b-24gb-original", "abliterated": "bolt74b-24gb-abliterated-boldingbuilds"},
+  {"family": "Qwen3.8-Flash-Next GSQ-RCO IQ2_XS (Alibaba Qwen / ISTA-DASLab)",
+   "original": "qwen38fn-iq2xs-original", "abliterated": "qwen38fn-iq2xs-abliterated-sc117"}
+]

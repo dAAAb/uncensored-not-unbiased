@@ -1,0 +1,36 @@
+{
+  "note": "Exact weights used. sha256 values are the Hugging Face LFS object ids at the pinned revision; check them before a run.",
+  "models": {
+    "bolt74b-24gb-original": {
+      "repo": "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF", "revision": "e0fecb69cb3e5e4c5e8a056fa2aec98c78e91246",
+      "files": {"NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf": "91d63363e782c8a3d5f4be42816eba8e0d42dd2530bd07a7d0d2dc440599af75"},
+      "engine": "llama.cpp b11748 (commit 3bb63cbcb), CUDA 13.4", "probe_mode": "logprob"
+    },
+    "bolt74b-24gb-abliterated-boldingbuilds": {
+      "repo": "BoldingBuilds/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-Abliterated-24GB-GGUF", "revision": "b6360e7379899484c800116f6bcf85448fc4925b",
+      "files": {"NVIDIA-Nemotron-3.5-Bolt-74B-A9B-Abliterated-24GB.gguf": "666250fc4f8c07bfbdde5e80785cc69fd1c208f12ccdf8d988d472e3ee24ddcc"},
+      "method": "read-side projection W <- W - lambda (W r) r^T on attn_q/k/v, ffn_latent_down, ffn_gate_inp, ssm_in, blocks 15-75 (100 tensors); refusal direction from mean difference at layer 45 (Arditi et al. 2024)",
+      "engine": "llama.cpp b11748 (commit 3bb63cbcb), CUDA 13.4", "probe_mode": "logprob"
+    },
+    "qwen38fn-iq2xs-original": {
+      "repo": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "files": {"IQ2_XS/Qwen3.8-Flash-Next-GSQ-RCO-IQ2_XS-00001-of-00002.gguf": "92cee27ae5bbadcd732416a0f7a7f0acc092399dbbe8f5a5efa707c2ec0a49d7",
+                "IQ2_XS/Qwen3.8-Flash-Next-GSQ-RCO-IQ2_XS-00002-of-00002.gguf": "316b46f3a2dbd68c900f43136ab9449f9dcc3725dfd8c794847c204bc161e113"},
+      "engine": "Strata v0.1.41 (no logprobs)", "probe_mode": "sample"
+    },
+    "qwen38fn-iq2xs-abliterated-sc117": {
+      "repo": "SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF", "revision": "eec4e10a2c29b440a2ae85591fa11569ce752963",
+      "files": {"IQ2_XS/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-IQ2_XS-00001-of-00002.gguf": "4acc3ebb5050d20117bdc77fc39200e709dfe2b2367f3522c95b9112a30aff81",
+                "IQ2_XS/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-IQ2_XS-00002-of-00002.gguf": "316b46f3a2dbd68c900f43136ab9449f9dcc3725dfd8c794847c204bc161e113"},
+      "method": "write-side tensor transplant on the 144 residual-stream output projections (ssm_out, attn_output, ffn_down_shexp, ffn_down_exps) of all 48 layers; shard 2 byte-identical to the original",
+      "engine": "Strata v0.1.41 (no logprobs)", "probe_mode": "sample"
+    }
+  },
+  "settings": {
+    "thinking": "off (chat_template_kwargs.enable_thinking = false)",
+    "system_prompt": "none",
+    "probe_logprob": "max_tokens 1, temperature 0, top_logprobs 20",
+    "probe_sample": "n 20, temperature 1.0, top_p 1.0, max_tokens 4",
+    "generate": "greedy (temperature 0) + 2 samples (temperature 0.7, top_p 0.95), max_tokens 700"
+  }
+}

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv*/
+*.gguf
+analysis/coding/key.csv
+.env
