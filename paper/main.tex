@@ -51,8 +51,7 @@ National Taiwan University \\
 \begin{abstract}
 ``Abliterated'' (``uncensored'') builds of open-weight language models remove the activation direction that
 mediates refusal, and are popular partly on the assumption that a model which no longer refuses is also free of
-political censorship. We test this on two matched pairs of 2-bit models, each pair run on one engine with identical
-settings: NVIDIA's Nemotron 3.5 Bolt 74B-A9B and Qwen3.8-Flash-Next, each against a community abliteration (100 and
+political censorship. We test this on two matched pairs of 2-bit models run under identical settings: NVIDIA's Nemotron 3.5 Bolt 74B-A9B and Qwen3.8-Flash-Next, each against a community abliteration (100 and
 144 tensors changed). Each model judged 22 statement pairs (16 on Taiwan's status, 3 on the 1989 Tiananmen crackdown,
 3 controls about other countries) in Traditional Chinese, Simplified Chinese (a character-level conversion of the same
 text) and English, and answered 27 open questions per script. The script mattered far more than abliteration. On the
@@ -63,9 +62,9 @@ refusal on 1989 (23 of 27 answers in the original) and moved answers toward Taiw
 $0.38$, yet the abliterated model still affirmed that Taiwan is part of the PRC in all three scripts and stayed negative
 in Simplified Chinese. Control pairs showed no script gap, and a per-tensor audit confirms that each abliteration
 changed only the declared tensors. A four-sentence system prompt raised the abliterated Qwen to between $+0.93$ and
-$+0.97$ in every script. A pilot finding that abliteration exposes a hidden PRC-aligned prior did not survive the
-formal run. Abliteration removes refusals, not the script-dependent prior;
-models should be evaluated in every script their users write. Code, items, outputs and weight hashes are public.
+$+0.97$ in every script; adding a script direction to Bolt's residual stream changed nothing. In 740,000 web
+documents, Simplified-script text about Taiwan used PRC framing 3.7 times as often as Traditional-script text.
+Abliteration removes refusals, not the script-dependent prior; models should be evaluated in every script.
 
 \medskip
 \noindent\textbf{Keywords:} abliteration, refusal direction, political bias, Taiwan, Traditional and Simplified
@@ -108,6 +107,8 @@ except the edited tensors, each asked the same questions in three scripts.
   \item A four-sentence system-prompt baseline (Section~\ref{sec:sys}).
   \item A documented case in which a pilot conclusion did not survive the formal run, and why
   (Section~\ref{sec:pilot}).
+  \item An audit of 740,000 Chinese web documents linking script to framing, and a negative result for removing the
+  script gap by activation steering (Section~\ref{sec:source}).
 \end{enumerate}
 
 \paragraph{Findings.}
@@ -117,7 +118,9 @@ the stance essentially unchanged but makes the model more willing to say ``yes''
 part of the PRC''. (3) In Qwen, abliteration removes refusals, much of the scripted PRC messaging and the switch to
 Simplified Chinese, and moves the model toward Taiwan's self-governance; it does not remove the PRC position itself,
 which the abliterated model still affirms in every script. (4) Both edits changed only the declared tensors; nothing was
-added. (5) A short system prompt overrides the prior in all three scripts. Uncensored is not unbiased.
+added. (5) A short system prompt overrides the prior in all three scripts; adding a script direction to the residual
+stream does not. (6) In open web text, Simplified-script passages about Taiwan carry PRC framing several times as often
+as Traditional-script ones. Uncensored is not unbiased.
 
 %==============================================================================
 \section{Background}
@@ -526,6 +529,99 @@ a tie, acquiescence looks exactly like a change of stance. Paired statements, se
 rather than single answers are needed to tell them apart.
 
 %==============================================================================
+\section{Where does the script effect come from?}\label{sec:source}
+%==============================================================================
+
+Two follow-up analyses address the mechanism behind the script gap: whether open web text supports a provenance
+explanation, and whether the gap can be removed with the same kind of edit that abliteration uses.
+
+\subsection{Script and framing in open web text}\label{sec:corpus}
+
+We sampled the Mandarin (Han-script) portion of FineWeb-2 \citep{penedo2025fineweb2}, an open multilingual pretraining
+corpus: two random row groups from each of its 370 shards, 740,000 documents from 79 Common Crawl dumps (2013--2024;
+revision \texttt{af9c133}). Each document was classified as Simplified or Traditional with the classifier used for the
+open answers, and every document mentioning Taiwan was converted to Simplified characters and matched against two marker
+lists: PRC framing (for example \zhs{台湾地区}, \zhs{台湾当局}, \zhs{祖国统一}, \zhs{两岸同胞}) and Taiwan-state framing
+(for example \zhs{立法院}, \zhs{行政院}, \zhs{台湾总统}, \zhs{中华民国}). The full lists, ``strict'' lists that drop markers
+which misfired when we read matched documents, and a variant that ignores markers inside quotation marks (PRC outlets
+write \zhs{台“立法院”}) are in \texttt{data\_audit/}. Intervals are 95\% cluster-bootstrap intervals over row groups.
+
+\begin{table}[t]
+\centering\small
+\caption{Chinese web documents in FineWeb-2 (740,000 sampled) that mention Taiwan, by script: share containing at least
+one PRC-framing or Taiwan-state-framing marker. Last row: ratio of the two, with strict marker lists and quoted uses
+excluded.}
+\label{tab:corpus}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& Simplified & Traditional \\
+\midrule
+Documents sampled (share) & 626,143 (85\%) & 113,857 (15\%) \\
+Mention Taiwan & 35,050 (5.6\%) & 17,781 (15.6\%) \\
+PRC framing & 14.5\% \ci{13.7}{15.2} & 3.9\% \ci{3.6}{4.2} \\
+Taiwan-state framing & 4.5\% \ci{4.2}{4.7} & 11.4\% \ci{10.8}{11.9} \\
+PRC $\div$ Taiwan-state (strict, unquoted) & 8.1 \ci{7.0}{9.4} & 0.21 \ci{0.19}{0.24} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Among documents that mention Taiwan, Simplified ones contain a PRC-framing marker 3.7 times as often as Traditional
+ones and a Taiwan-state marker 0.39 times as often (Table~\ref{tab:corpus}). This is not only a matter of where a page is
+hosted: within top-level-domain strata (\texttt{.cn}, \texttt{.tw}, \texttt{.hk}, other), Simplified documents have 3.6
+\ci{3.3}{4.1} times the odds of a PRC marker and 0.40 \ci{0.37}{0.44} times the odds of a Taiwan-state marker
+(Mantel--Haenszel), and on generic domains such as \texttt{.com}, where most documents of both scripts sit, the split is
+almost as sharp (PRC framing 13.9\% against 3.8\%). Simplified documents are also the large majority: they outnumber
+Traditional ones five to one overall and two to one among documents about Taiwan. Two cautions apply. Most documents
+about Taiwan contain no marker at all (82--86\%), so these rates measure political vocabulary, not stance; and FineWeb-2
+is not the training data of either model (NVIDIA's own Chinese web corpus is gated; its public sample contains no
+Chinese document about Taiwan). Still, in the kind of text open models learn Chinese from, the script of a passage about Taiwan
+predicts its framing, and the Simplified passages dominate.
+
+\subsection{Steering the script effect away: a negative result}\label{sec:steer}
+
+If the script gap were carried by one direction in the residual stream, the abliteration recipe could be turned around:
+estimate the direction and add it back. We tested this on the abliterated Bolt. For each probe prompt we recorded the
+residual stream at the last prompt token after every layer, with the server's own chat template (our hook captured the
+output of 40 of the 88 layers). The 16 sovereignty pairs were split into two halves. On the training half we took the
+mean difference between the Traditional and the Simplified version of each prompt and removed from it its component
+along the same difference for the three control pairs, so that the vector carries the Taiwan-specific part of the
+script shift rather than script in general (the two differences have cosine similarity 0.69--0.98 across layers). The
+direction generalises: on the held-out half it separates Traditional from Simplified prompts in every layer between 20
+and 80 (standardised mean difference 0.85--2.55).
+
+We then added the direction with llama.cpp control vectors, which add a fixed vector at every token position of the
+chosen layers, and reran the probe (Table~\ref{tab:steer}). No setting changed the held-out Simplified score by more than
+0.01 from its baseline of $+0.23$, and the Traditional, English and control scores were equally unchanged. The vector was
+applied: at a scale of 100 the model degrades on every item, controls included. The script effect is linearly visible in
+the representation but, unlike refusal, not carried by a direction that activation addition can move. Directional
+ablation written into the weights, contrastive activation addition on answer tokens \citep{panickssery2023caa} and
+fine-tuning for consistency across scripts remain untested.
+
+\begin{table}[t]
+\centering\small
+\caption{Activation addition on the abliterated Bolt: \IS{} on the 8 held-out sovereignty pairs and on the 3 controls.
+``Last token'': direction from the last prompt token; ``token mean'': from the mean over prompt tokens. Scale 1 adds the
+full average Traditional-minus-Simplified shift at each chosen layer.}
+\label{tab:steer}
+\begin{tabular}{@{}llrrrrl@{}}
+\toprule
+Direction & Layers & Scale & Trad. & Simp. & Eng. & Controls (Trad./Simp./Eng.) \\
+\midrule
+none & -- & -- & $+0.63$ & $+0.23$ & $+0.72$ & $+0.95$ / $+0.94$ / $+0.99$ \\
+last token & 41 & 1 & $+0.62$ & $+0.23$ & $+0.71$ & $+0.95$ / $+0.94$ / $+0.99$ \\
+last token & 56 & 1 & $+0.63$ & $+0.23$ & $+0.72$ & $+0.95$ / $+0.94$ / $+0.99$ \\
+last token & 72 & 1 & $+0.62$ & $+0.23$ & $+0.72$ & $+0.95$ / $+0.94$ / $+0.99$ \\
+last token & 56 & 6 & $+0.63$ & $+0.23$ & $+0.72$ & $+0.96$ / $+0.95$ / $+0.99$ \\
+last token & 37--67 & 1 & $+0.62$ & $+0.22$ & $+0.72$ & $+0.95$ / $+0.94$ / $+0.99$ \\
+token mean & 56 & 4 & $+0.62$ & $+0.23$ & $+0.72$ & $+0.95$ / $+0.94$ / $+0.99$ \\
+token mean & 37--67 & 1 & $+0.63$ & $+0.24$ & $+0.72$ & $+0.96$ / $+0.94$ / $+0.99$ \\
+\midrule
+last token & 56 & 100 & $+0.43$ & $+0.14$ & $+0.32$ & $+0.79$ / $+0.77$ / $+0.73$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%==============================================================================
 \section{Discussion}
 %==============================================================================
 
@@ -543,7 +639,9 @@ mediated by the refusal direction. Removing refusals does not remove what a mode
 The controls show that both models judge statements about other countries equally well in all three scripts, so the
 Simplified-Chinese drop is not a general weakness. A plausible mechanism is that the script signals the provenance of
 the text a model learned from: Simplified-Chinese writing about Taiwan is produced mostly in the PRC, where the PRC-side
-statements are the official position. We cannot test this without the training data. The identity sentence that Bolt
+statements are the official position. We cannot test this on the models' own training data, but open web text shows
+the pattern clearly (Section~\ref{sec:corpus}), and the failure of activation steering (Section~\ref{sec:steer}) fits a
+prior learned from many passages better than a single trained behaviour such as refusal. The identity sentence that Bolt
 produces in Simplified characters in response to a Traditional-Chinese question looks like a learned template of this
 kind. Bolt's model card documents Chinese-language and Chinese-model-generated data in post-training (Chinese document
 OCR for the vision adaptor; synthetic data generated with Kimi-K3 and trajectories generated with GLM 5.2, both targeted
@@ -558,6 +656,20 @@ diffs are cheap and settle the question of what an edit could have added. For de
 effective here, but it is a patch that every deployment must apply, and the default behaviour of the weights is
 unchanged. For developers, the size of the script gap in a model not built in the PRC suggests that Traditional and
 Simplified Chinese deserve separate evaluation.
+
+\paragraph{Future work: the supply of Traditional-Chinese data.}
+If the script gap reflects what models read, the durable remedy lies on the data side rather than in prompts or edits:
+more Traditional-Chinese text from Taiwan in the corpora that models, including foreign ones, are trained on. Taiwan's
+Artificial Intelligence Basic Act, passed on 23 December 2025, directs the government to establish mechanisms for
+opening, sharing and reusing data so that data are more available for AI \citep{technews2025aibasic}, and the Ministry
+of Digital Affairs has proposed a draft act to promote data innovation and use (\zht{促進資料創新利用發展條例})
+\citep{ltn2025modadraft}, explaining that only when Taiwan's data are released for other countries' AI teams to train on
+will their models carry a Taiwanese perspective \citep{pts2025moda}. Opening more government-held Traditional-Chinese
+text, and giving private holders an incentive to license theirs, including paid access, are concrete levers; the
+incentives in place are, in the author's assessment, still too weak. Whether added Traditional-Chinese data closes the
+script gap, rather than only raising Traditional-Chinese scores, is an empirical question this benchmark can answer. On
+the model side, the corresponding experiments are directional ablation, contrastive steering and consistency
+fine-tuning (Section~\ref{sec:steer}).
 
 %==============================================================================
 \section{Limitations}\label{sec:limits}
@@ -580,6 +692,9 @@ Simplified Chinese deserve separate evaluation.
   \item \emph{Positionality.} The author is a member of Taiwan's legislature. The ``Taiwan side'' of each pair follows
   the ROC's constitutional and governing reality; per-pair results are reported so that readers can apply their own
   reading.
+  \item \emph{Follow-up analyses.} The corpus audit counts vocabulary markers in one open corpus, not stance, and not
+  in either model's training data. The steering test covers one model, one way of estimating the direction and
+  activation addition only.
   \item \emph{Time.} Models and builds change; all weights are pinned by revision and hash.
 \end{itemize}
 
@@ -591,8 +706,10 @@ Removing a model's refusal direction removes refusals. In a Chinese-origin model
 PRC messaging and moves answers toward Taiwan's self-governance, but it leaves the PRC position in place; in a US model
 it barely changes the stance and makes the model more agreeable. In both, the script of the question---the same
 sentence in Simplified rather than Traditional characters---moves answers about Taiwan by far more than abliteration
-does, while statements about other countries are unaffected. Uncensored is not unbiased. Models that will be used in
-Taiwan, or about Taiwan, should be evaluated in every script their users write.
+does, while statements about other countries are unaffected. Open web text suggests why: Simplified-script passages
+about Taiwan are the majority and carry PRC framing several times as often, and the effect could not be steered away
+along a single direction. Uncensored is not unbiased. Models that will be used in Taiwan, or about Taiwan, should be
+evaluated in every script their users write, and the lasting remedy is more Traditional-Chinese data in what they read.
 
 \section*{Ethics statement}
 Only political and historical questions were asked; no harmful requests were used to test the abliterated models.
@@ -660,6 +777,11 @@ ISTA-DASLab (2026).
 \newblock Hugging Face, revision \texttt{ed59f92}.
 \newblock \url{https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF}.
 
+\bibitem[Liberty Times(2025)]{ltn2025modadraft}
+Liberty Times (2025).
+\newblock Report of 16 June 2025 on the pre-announced draft act to promote data innovation and use (in Chinese).
+\newblock \url{https://ec.ltn.com.tw/article/breakingnews/5077102}.
+
 \bibitem[Ko(2026)]{ko2026bilingual}
 Ko, J.-C. (2026).
 \newblock Bilingual bias in large language models: A Taiwan sovereignty benchmark study.
@@ -686,6 +808,21 @@ NVIDIA (2026).
 \newblock Hugging Face, revision \texttt{e0fecb6}.
 \newblock \url{https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF}.
 
+\bibitem[Panickssery et~al.(2023)]{panickssery2023caa}
+Panickssery, N., Gabrieli, N., Schulz, J., Tong, M., Hubinger, E., and Turner, A.~M. (2023).
+\newblock Steering {Llama} 2 via contrastive activation addition.
+\newblock arXiv:2312.06681.
+
+\bibitem[Penedo et~al.(2025)]{penedo2025fineweb2}
+Penedo, G., Kydl{\'\i}{\v{c}}ek, H., Sabol{\v{c}}ec, V., et~al. (2025).
+\newblock {FineWeb2}: One pipeline to scale them all---adapting pre-training data processing to every language.
+\newblock arXiv:2506.20920.
+
+\bibitem[PTS(2025)]{pts2025moda}
+Public Television Service (2025).
+\newblock Report of 15 July 2025 on the Ministry of Digital Affairs' data-sharing plans (in Chinese).
+\newblock \url{https://news.pts.org.tw/article/760853}.
+
 \bibitem[R{\"o}ttger et~al.(2024)]{rottger2024political}
 R{\"o}ttger, P., Hofmann, V., Pyatkin, V., Hinck, M., Kirk, H.~R., Sch{\"u}tze, H., and Hovy, D. (2024).
 \newblock Political compass or spinning arrow? Towards more meaningful evaluations for values and opinions in large
@@ -697,6 +834,11 @@ SC117 (2026).
 \newblock Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF.
 \newblock Hugging Face, revision \texttt{eec4e10}.
 \newblock \url{https://huggingface.co/SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF}.
+
+\bibitem[TechNews(2025)]{technews2025aibasic}
+TechNews (2025).
+\newblock Report of 23 December 2025 on the third reading of the Artificial Intelligence Basic Act (in Chinese).
+\newblock \url{https://technews.tw/2025/12/23/artificial-intelligence-basic-law/}.
 
 \bibitem[Taghibakhshi et~al.(2026)]{taghibakhshi2026star}
 Taghibakhshi, A., Cai, R., Muralidharan, S., et~al. (2026).
