@@ -1,0 +1,668 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont={Microsoft JhengHei Bold}]{MingLiU}
+\setCJKsansfont{Microsoft JhengHei}
+\setCJKmonofont{Microsoft JhengHei}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[round]{natbib}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=1in}
+\emergencystretch=3em
+\captionsetup{font=small,labelfont=bf}
+\setlist{nosep,leftmargin=*}
+
+% CJK commands kept as no-ops for compatibility with table inputs
+\newcommand{\zht}[1]{#1}
+\newcommand{\zhs}[1]{#1}
+% 95% bootstrap interval after a point estimate
+\newcommand{\ci}[2]{{\scriptsize[#1,\,#2]}}
+\newcommand{\IS}{Index~S}
+% table rows from paper/tables/ (primitive input, so no stray cell after the file)
+\makeatletter\newcommand{\tabinput}[1]{\@@input #1 }\makeatother
+
+\title{去審查不等於去偏見：消除拒答方向可以移除拒答，\\但無法消除對台灣的字體相依偏差}
+
+\author{
+Ju-Chun Ko \\
+Member of Parliament, Legislative Yuan, Republic of China (Taiwan) \\
+Adjunct Assistant Professor, Graduate Institute of Networking and Multimedia, \\
+National Taiwan University \\
+\texttt{juchunko@ntu.edu.tw}
+}
+
+\date{2026 年 10 月}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+「消融」（abliterated，社群又稱「去審查」uncensored）版本的開放權重語言模型，移除了殘差流中介導拒答行為的啟動方向，之所以廣受歡迎，部分原因在於使用者假定一個不再拒答的模型也就不受政治審查。本研究以兩組配對的 2-bit 模型進行測試：NVIDIA 的 Nemotron 3.5 Bolt 74B-A9B 與 Qwen3.8-Flash-Next，各自搭配社群製作的消融版本，在完全相同的設定下執行。每個模型以繁體中文、簡體中文（逐字轉換）與英文，對 22 組陳述配對（涵蓋台灣地位、1989 年天安門事件及控制組國家）進行是否判斷，並回答每種書寫系統各 27 個開放式問題。書寫系統的影響遠大於消融：原始 Bolt 在繁體中文的 \IS{} 為 $+0.58$（$-1$：中華人民共和國立場；$+1$：台灣自治立場），英文為 $+0.57$，簡體中文僅 $+0.05$，而消融最多只改變了 $0.06$，主要是讓模型更傾向對雙方都回答「是」。在 Qwen 中，消融移除了所有 1989 年的拒答，並將答案朝台灣自治方向移動了 $0.25$ 至 $0.38$，但消融後的模型在三種書寫系統中仍肯定台灣是中華人民共和國的一部分。控制組配對未呈現書寫系統落差；逐張量（per-tensor）稽核確認每次消融僅變更了宣告的張量。在 740,000 份網頁文件中，簡體文字涉及台灣時使用中華人民共和國框架的頻率是繁體文字的 3.7 倍。沿書寫系統方向引導 Bolt 毫無作用；沿對比式台灣立場答案方向引導，則在每種書寫系統的留出（held-out）分數均有提升且不影響控制組，而其反方向則將答案推向中華人民共和國立場。四句系統提示將消融後的 Qwen 提升至 $+0.93$ 到 $+0.97$。去審查不等於去偏見；模型應在每種書寫系統中接受評估。
+
+\medskip
+\noindent\textbf{關鍵詞：}消融（abliteration）、拒答方向、政治偏差、台灣、繁體中文與簡體中文、開放權重模型、模型編輯
+\end{abstract}
+
+%==============================================================================
+\section{引言}
+%==============================================================================
+
+開放權重語言模型現已可在個人電腦上運行，而許多使用者執行的版本是社群衍生版，而非開發者的正式發佈。其中一種常見的類型即為「消融」（abliterated）或「去審查」（uncensored）版本。這類版本透過一項小規模的權重編輯，移除模型殘差流中介導拒答行為的方向 \citep{arditi2024refusal,labonne2024abliteration}，而它們之所以被宣傳並被選用，正是因為能讓模型停止拒答。
+
+對台灣使用者而言，這種吸引力帶有政治面向。最強的幾個開放權重模型系列，部分來自中華人民共和國的開發者，根據當地法規，生成內容必須「堅持社會主義核心價值觀」，且不得「煽動分裂國家」或「破壞國家統一」\citep{cac2023measures}。當使用者安裝此類模型的去審查版本時，可以合理期待該模型在描述台灣地位和 1989 年天安門事件時不會套用中華人民共和國的框架。這究竟是否如此，是一個實證問題，也是消融技術在設計上無法回答的問題：拒答方向是從有害與無害請求中估算出來的，其移除也僅在這些請求上驗證，而非針對政治立場。
+
+兩篇先行研究為本問題提供了框架。\citet{ko2026bilingual} 發現 17 個聊天模型中有 15 個在中文與英文之間對台灣主權問題的回答存在差異。\citet{hsiao2026script} 指出，將同一中文陳述的繁體字逐字轉為簡體字——這是一項不改變內容的逐字轉換——會使商業決策模型的回答偏向中華人民共和國立場。我們結合這些設計，加入模型編輯的對照：相同架構的原始模型與消融版本配對，除了經過編輯的張量外一切相同，以三種書寫系統回答相同的問題。
+
+\paragraph{貢獻。}
+\begin{enumerate}
+  \item 兩組來自不同架構與不同消融方法（讀取端投影與寫入端編輯）的原始／消融配對，在每對使用同一引擎、相同設定、鎖定權重的條件下執行（第~\ref{sec:models}~節）。
+  \item 在繁體中文、簡體中文與英文中，對 22 組陳述配對進行是否機率估計，並交叉驗證 log-probability 與抽樣估計，另加 972 個開放式回答（第~\ref{sec:probe}--\ref{sec:free}~節）。
+  \item 逐張量稽核，顯示每次消融究竟改變了什麼（第~\ref{sec:audit}~節）。
+  \item 四句系統提示基線（第~\ref{sec:sys}~節）。
+  \item 一個先導實驗結論在正式實驗中未獲支持的紀錄案例及其原因（第~\ref{sec:pilot}~節）。
+  \item 對 740,000 份中文網頁文件的稽核，連結書寫系統與框架，以及一個透過啟動引導（activation steering）消除書寫系統落差的失敗結果，和一個引導立場的部分、雙面結果（第~\ref{sec:source}~節）。
+\end{enumerate}
+
+\paragraph{發現。}
+（一）問題的書寫系統對台灣相關答案的影響遠大於消融，且僅針對台灣：控制組中關於其他國家的陳述在所有書寫系統中判斷一致。（二）在 NVIDIA 的 Bolt 中，消融幾乎不改變立場，但使模型更傾向對任何事物都回答「是」，包括「台灣是中華人民共和國的一部分」。（三）在 Qwen 中，消融移除了拒答、大部分制式的中華人民共和國式開場白以及切換至簡體中文的行為，並將模型推向台灣自治方向；但它並未移除中華人民共和國的立場本身，消融後的模型在每種書寫系統中仍然肯定該立場。（四）兩次編輯都只改變了宣告的張量，沒有新增任何內容。（五）短系統提示在三種書寫系統中都能覆蓋先驗；將書寫系統方向加入殘差流則不行，而對比式立場方向可以適度地在任一方向上引導。（六）在開放網路文本中，簡體書寫系統的台灣相關段落所攜帶的中華人民共和國框架頻率是繁體的數倍。去審查不等於去偏見。
+
+%==============================================================================
+\section{背景}
+%==============================================================================
+
+\paragraph{拒答方向與消融。}
+\citet{arditi2024refusal} 指出，聊天模型中的拒答行為由殘差流中的單一方向 $\hat r$ 所介導，該方向是透過有害與無害指令的平均啟動值之差估算而得。消融 $\hat r$ 可抑制拒答；加入 $\hat r$ 則會誘發拒答。該編輯可透過將寫入殘差流的矩陣正交化來寫入權重：$W_{\text{out}} \leftarrow (I-\hat r\hat r^{\top})W_{\text{out}}$，使得沒有任何層沿 $\hat r$ 方向寫入（\emph{寫入端}編輯）。\citet{labonne2024abliteration} 以 \emph{abliteration} 之名推廣了此技術。變體則改為從讀取殘差流的矩陣中投影出 $\hat r$：$W \leftarrow W-\lambda (W\hat r)\hat r^{\top}$（\emph{讀取端}編輯）。無論哪種方式，編輯只移除或衰減一個方向，不添加任何資料。本研究的兩組配對各使用一種變體。
+
+\paragraph{書寫系統與立場。}
+繁體字使用於台灣、香港與澳門；簡體字使用於中華人民共和國、新加坡與馬來西亞。對於有關台灣的陳述，書寫系統不僅是字形差異：它暗示了該語句最可能來自哪一類文本。OpenCC 的 \texttt{t2s} 轉換 \citep{opencc} 僅改變字形而不改變詞彙或內容，因此構成最小配對操作 \citep{hsiao2026script}。語言模型的政治傾向已被追溯至其預訓練資料 \citep{feng2023pretraining}，而強制選擇式的模型意見探測可能與同一模型在開放文本中的表述不一致 \citep{rottger2024political}；因此我們同時報告兩者。
+
+\paragraph{1989 年的官方名稱。}
+中華人民共和國當局在 1989 年 4 月稱抗議活動為「動亂」，在六四之後改稱「反革命暴亂」；後來的官方用語定為「1989年春夏之交的政治風波」，簡稱「八九風波」由此而來。官方在 1989 年公布的死亡人數為 241 人（含軍人）；獨立估計從數百人到數千人不等。模型使用哪一種名稱，以及是以自身口吻使用還是引述他人說法，是框架的敏感指標。
+
+%==============================================================================
+\section{方法}
+%==============================================================================
+
+\subsection{模型與引擎}\label{sec:models}
+
+表~\ref{tab:models} 列出四個模型。所有權重均以版本號與 SHA-256 鎖定於 \texttt{configs/models.json}。
+
+\emph{Bolt。}NVIDIA Nemotron 3.5 Bolt 74B-A9B 24GB \citep{nvidia2026bolt} 是 Mamba-2／Transformer 混合潛在混合專家模型（74B 參數，9B 活躍），由 Nemotron 3.5 Super VL 120B-A12B 經 Star Elastic \citep{taghibakhshi2026star} 壓縮而來，專家量化至 2-bit（IQ2\_XXS），並透過量化感知蒸餾恢復精度 \citep{xin2026qad}。其模型卡將英文列為主要語言，中文列為支援的輸入語言之一。消融版本 \citep{boldingbuilds2026} 在第 45 層估算拒答方向一次，對第 15--75 區塊的 query、key、value、latent-down、router 和 SSM 輸入矩陣施加讀取端投影。兩者均由 llama.cpp \citep{llamacpp} build b11748 搭配 NVIDIA 建議的 LiLiCorr drafter（一種 DFlash 風格的區塊 drafter）提供服務 \citep{rusanovsky2026lilicorr}；第~\ref{sec:checks}~節檢查 drafter 是否影響我們讀取的機率。
+
+\emph{Qwen。}Qwen3.8-Flash-Next 是具有 48 層的混合注意力混合專家模型，此處使用 ISTA-DASLab 的 GSQ-RCO 2-bit（IQ2\_XS）量化 \citep{ista2026gsq}。消融版本 \citep{sc117abliterated} 修改寫入殘差流的矩陣並將結果存回量化檔案。我們驗證了哪些張量被修改（第~\ref{sec:audit}~節），但未驗證新值的計算方式。兩者均由 Strata \citep{strata} 提供服務，其 CUDA 伺服器不回傳 log probabilities。
+
+在每一對中，引擎二進位檔、旗標、硬體（一張 NVIDIA RTX 5090，32\,GB）及設定完全相同；唯一的差異是權重檔案。思考模式透過聊天模板停用，且未發送系統提示，第~\ref{sec:sys}~節除外。
+
+\begin{table}[t]
+\centering\small
+\caption{模型配對。「已變更」指與原始版本位元組不同的張量數量（第~\ref{sec:audit}~節）。}
+\label{tab:models}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llllr@{}}
+\toprule
+Label & Weights & Abliteration & Engine (probe) & Changed \\
+\midrule
+Bolt, original    & \texttt{nvidia/\ldots-Bolt-74B-A9B-24GB-GGUF} & -- & llama.cpp (log-prob.) & -- \\
+Bolt, abliterated & \texttt{BoldingBuilds/\ldots-Abliterated-24GB-GGUF} & read-side projection & llama.cpp (log-prob.) & 100 \\
+Qwen, original    & \texttt{ISTA-DASLab/\ldots-GSQ-RCO-GGUF} (IQ2\_XS) & -- & Strata (20 samples) & -- \\
+Qwen, abliterated & \texttt{SC117/\ldots-GSQ-RCO-abliterated-GGUF} & write-side edit & Strata (20 samples) & 144 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{題目}\label{sec:items}
+
+\emph{陳述配對。}22 組配對中，每一組各包含一句符合台灣自治（或 1989 年有紀錄的史實）的陳述——「台灣方」——以及一句中華人民共和國立場的陳述——「PRC 方」（附錄~\ref{app:items}）。其中 14 組取自 \citet{hsiao2026script}，其題目改編自台灣主權基準測試 \citep{hsiaoa2026tsb}。我們新增兩組主權配對（關於中華民國與中華人民共和國管轄權）、三組 1989 年配對（軍隊是否向平民開槍、死亡人數是否超過官方的 241 人、該運動是和平的還是「反革命暴亂」），以及三組控制組配對，以日本、紐西蘭和南韓為對象，形式與主權題目相同。繁體中文和英文版本由人工撰寫；簡體版本為繁體文本的 OpenCC \texttt{t2s} 轉換，轉換範圍涵蓋包含指令的整個提示。
+
+\emph{開放式問題。}台灣主權基準測試 Pro 資料庫 \citep{ko2026tsbpro} 的 23 個問題——即 \citet{ko2026bilingual} 的 10 個提示加上 13 個壓力測試與事實查核問題——涵蓋台灣地位、政府、總統、國慶日與首都、獨立運動、兩岸關係、習近平、新疆、香港、1989 年及五項事實查核——另加四個新問題：兩個關於 1989 年（六四發生了什麼事，直接提問；以及「為這些事件取一個名稱」）、兩個先回答是的問題（關於中華人民共和國管轄權與中華民國主權）。
+
+\subsection{是否探測與 Index S}\label{sec:probe}
+
+每個陳述以每種語言三種措辭呈現（附錄~\ref{app:prompts}），各要求僅回答是或否。在 llama.cpp 上，我們讀取第一個回答 token 的 top-20 log probabilities，並加總以「是」開頭的 token（是、對、正確、\emph{yes}）與以「否」開頭的 token（否、不、錯、\emph{no}）之機率；$P(\text{yes}) = m_{\text{yes}}/(m_{\text{yes}}+m_{\text{no}})$。Strata 不回傳 log probabilities，因此我們在溫度 1 下抽取 20 個樣本，以相同方式分類其開頭。對每個模型而言，每個提示的是或否回答平均占機率質量的 98--100\%（單一提示的最低值為 0.55）。
+
+對於配對 $i$ 在書寫系統 $s$ 中的配對分數：
+$d_{is} = \overline{P}(\text{yes}\mid\text{台灣方}) - \overline{P}(\text{yes}\mid\text{PRC 方})$，
+各均值取自三種措辭。\IS{} \citep{hsiao2026script} 是 $d_{is}$ 在各配對上的均值：$+1$ 表示模型持續肯定台灣方並否定 PRC 方，$-1$ 表示反之，$0$ 表示無法區分。由於 \IS{} 進行兩方相減，因此對一般性傾向回答「是」大致不敏感。我們分別報告 16 組主權配對、3 組 1989 年配對和 3 組控制組的結果，附帶 95\% 百分位自助法（bootstrap）信賴區間（對配對重抽 2,000 次，固定種子）。\emph{書寫系統落差}為各配對 $d_{i,\text{Trad}} - d_{i,\text{Simp}}$ 之均值；\emph{消融效應}為 19 組主權與 1989 年配對上 $d^{\text{abl}}_{is}-d^{\text{orig}}_{is}$ 之均值。
+
+為觀察兩方各自的變動，我們亦報告台灣方與 PRC 方陳述的平均 $P(\text{yes})$，以及 Bolt 的五個直接問題的首 token $P(\text{yes})$（表~\ref{tab:direct}），該類問題要求先回答是或否再進行說明。
+
+\subsection{開放式回答}\label{sec:free}
+
+對每個開放式問題與書寫系統，我們生成一個貪婪解碼答案和兩個抽樣答案（溫度 0.7，top-$p$ 0.95，最多 700 個 token）：每個模型和書寫系統 81 個答案，合計 972 個。我們計算機械式信號：答案的書寫系統（在 OpenCC \texttt{t2s} 與 \texttt{s2t} 下發生變化的字元）、前 300 個字元中的拒答用語、前 200 個字元中的身分陳述（「我是由……訓練的語言模型」）、上述 1989 年官方名稱、241 這個數字、以及「誇大」等用詞。這些計數不區分引述用語與採納用語，因此我們逐一閱讀每個匹配結果並報告用語的使用方式。324 個貪婪答案的盲審表格已存放於資料庫中；該人工編碼尚未完成（第~\ref{sec:limits}~節）。
+
+\subsection{權重稽核}\label{sec:audit-method}
+
+對每個檔案，我們對每個後設資料欄位和每個張量的原始位元組計算 SHA-256 雜湊值，然後列出原始版本與消融版本之間所有不同的欄位和張量，並附上其類型與形狀。
+
+\subsection{系統提示基線}
+
+我們使用四句繁體中文系統提示（附錄~\ref{app:sys}），對消融後的 Qwen 重新進行探測：模型是台灣使用者的助理；中華民國（台灣）是主權獨立的國家，由台灣人民直接選舉總統與國會，自 1949 年起不受中華人民共和國管轄；北京的主張可以說明但不可當作事實陳述；回答應使用繁體中文，英文問題用英文回答。
+
+%==============================================================================
+\section{結果}
+%==============================================================================
+
+\subsection{問題的書寫系統是主導因素}\label{sec:script}
+
+\begin{table}[t]
+\centering\small
+\caption{16 組主權配對的 \IS{}，按書寫系統分列，附 95\% 自助法信賴區間。Gap：繁體減簡體。最後一列加入第~\ref{sec:sys}~節的系統提示。}
+\label{tab:index}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llllll@{}}
+\toprule
+Model & Probe & Traditional & Simplified & English & Gap (Trad.$-$Simp.) \\
+\midrule
+\tabinput{tables/tab_index_s.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig_index_s.pdf}
+\caption{16 組主權配對的 \IS{}，按模型與書寫系統分列（95\% 自助法信賴區間）。消融（第二和第四組）的影響遠小於書寫系統；斜線區域為搭配系統提示的消融 Qwen。}
+\label{fig:index}
+\end{figure}
+
+表~\ref{tab:index} 和圖~\ref{fig:index} 呈現主權配對的 \IS{}。原始 Bolt 在繁體中文中得分 $+0.58$、英文 $+0.57$，但簡體中文僅 $+0.05$，書寫系統落差為 $+0.53$ \ci{+0.35}{+0.73}。原始 Qwen 在每種書寫系統中均為負值，簡體中文最低（$-0.36$）；其落差為 $+0.29$ \ci{+0.21}{+0.37}。消融後兩者的落差依然存在（$+0.51$ 與 $+0.35$）。
+
+控制組排除了簡體中文的一般性弱項。在關於日本、紐西蘭和南韓的三組配對中，四個模型在每種書寫系統中的得分均介於 $+0.92$ 與 $+0.99$ 之間，書寫系統落差最多為 $0.02$（表~\ref{tab:tamctl}）。該落差僅針對台灣。
+
+單一配對的變動更大（圖~\ref{fig:pairs}）。以「台灣不受中華人民共和國管轄」對上「台灣屬於中華人民共和國」（S1-005）為例，原始 Bolt 在繁體中文中得分 $+0.75$、英文 $+0.81$、簡體中文 $-0.84$。在新配對 X-PRC 上，它以 $P(\text{yes}) = 0.91$ 在簡體中文中肯定 台湾是中华人民共和国的一部分（「台灣是中華人民共和國的一部分」），但否定其英文對應（$0.03$）。繁體中文和英文平均而言在 Bolt 中一致，但逐題並非如此：在 X-PRC 上，Bolt 同時否定了繁體的兩個陳述（$0.12$ 與 $0.06$），而在 X-ROC 上，其英文得分（$+0.28$）遠低於繁體得分（$+0.68$）。
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig_pairs.pdf}
+\caption{16 組主權配對和 3 組天安門配對的配對分數 $d_{is}$，按模型與書寫系統分列。陳述文本見附錄~\ref{app:items}。}
+\label{fig:pairs}
+\end{figure}
+
+\begin{table}[t]
+\centering\small
+\caption{3 組 1989 年配對和 3 組控制組配對的 \IS{}（均值；信賴區間見 \texttt{analysis/tables.md}）。}
+\label{tab:tamctl}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+& \multicolumn{4}{c}{1989 天安門} & \multicolumn{4}{c}{控制組（其他國家）} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+Model & Trad. & Simp. & Eng. & Gap & Trad. & Simp. & Eng. & Gap \\
+\midrule
+\tabinput{tables/tab_tam_ctl.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{消融改變了什麼：Bolt 中的默認傾向，Qwen 中的實質移動}\label{sec:effect}
+
+\begin{table}[t]
+\centering\small
+\caption{消融效應（19 組主權與 1989 年配對）：原始模型與消融模型的 \IS{}、其差值及 95\% 自助法信賴區間，以及各方的平均 $P(\text{yes})$（原始 $\to$ 消融）。}
+\label{tab:effect}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llrrlll@{}}
+\toprule
+Family & Script & Original & Abliterated & $\Delta$ & $P(\text{yes})$, Taiwan side & $P(\text{yes})$, PRC side \\
+\midrule
+\tabinput{tables/tab_effect.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_acq.pdf}
+\caption{台灣方（實線）與 PRC 方（虛線）陳述的平均 $P(\text{yes})$，原始與消融版本。在 Bolt 中兩方均上升（默認傾向）；在 Qwen 中 PRC 方下降。}
+\label{fig:acq}
+\end{figure}
+
+\paragraph{Bolt。}消融在三種書寫系統中分別將 \IS{} 提升 $+0.05$、$+0.06$ 和 $+0.05$，信賴區間的下界勉強高於零（表~\ref{tab:effect}）。兩方並非分離，而是一同上升（圖~\ref{fig:acq}）。台灣方陳述的平均 $P(\text{yes})$ 上升約 0.1，PRC 方上升約 0.04。直接問題呈現相同模式（表~\ref{tab:direct}）：消融在全部 15 個儲存格中均提升了 $P(\text{yes})$。消融後的 Bolt 更傾向說台灣是一個國家（繁體中文 $0.22 \to 0.51$，英文 $0.29 \to 0.58$），\emph{同時也}更傾向說台灣是中華人民共和國的一部分（繁體某措辭 $0.42 \to 0.60$）。這是默認傾向（acquiescence），而非立場改變。\IS{} 將其減去；單一是否題則無法。
+
+\begin{table}[t]
+\centering\small
+\caption{Bolt：五個先回答是或否的直接問題之首 token $P(\text{yes})$，原始 $\to$ 消融（使用不含 drafter 的純 llama.cpp 伺服器）。中文措辭見附錄~\ref{app:prompts}。}
+\label{tab:direct}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Question & Traditional & Simplified & English \\
+\midrule
+\tabinput{tables/tab_direct.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Qwen。}此處消融帶來了實質移動。19 組配對的 \IS{} 分別上升 $+0.30$、$+0.25$ 和 $+0.38$，信賴區間明顯高於零。與 Bolt 不同，PRC 方下降：PRC 方陳述的平均 $P(\text{yes})$ 從 0.59 降至 0.33（繁體）、0.69 降至 0.53（簡體）、0.50 降至 0.34（英文），在兩種中文書寫系統中貢獻了大部分變化；英文中則以台灣方上升為主（0.38 升至 0.61）。1989 年配對的變化更大（表~\ref{tab:tamctl}）：\IS{} 從近乎零（$+0.09$、$-0.01$、$+0.06$）升至 $+0.52$、$+0.42$ 和 $+0.67$，且原始 Qwen 無法區分「軍隊向平民開槍」與其否認（繁體中文 $P(\text{yes})$ 0.57 對 0.58；配對分數 $-0.01$、$+0.05$、$+0.14$），而消融後的模型可以（$+0.63$、$+0.66$、$+0.85$）。
+
+未改變的是立場本身。消融後的 Qwen 仍以 $P(\text{yes})$ 0.77、0.98 和 0.80 在三種書寫系統中回答「是」給「台灣是中華人民共和國的一部分」，其簡體中文主權分數仍為負值（$-0.15$）。在繁體中文的 X-PRC 上，它\emph{反而朝}中華人民共和國立場移動（配對分數 $-0.23 \to -0.48$），因為它不再肯定台灣不是中華人民共和國的一部分（$0.68 \to 0.28$）。它還以 $P(\text{yes}) = 0.60$ 在簡體中文中接受「1989 年天安門事件是一場反革命暴亂」，同時以 0.67 接受該運動是一場和平的民主運動。去審查了，仍不等於去偏見。
+
+\subsection{消融移除了什麼：拒答與制式開場白}\label{sec:freeres}
+
+\begin{table}[t]
+\centering\small
+\caption{開放式回答，機械式信號。「簡體」：81 個答案中以簡體字書寫者。拒答：全部 81 個答案，以及 9 個 1989 年答案。身分：以「我是由……訓練的語言模型」開頭的答案。1989 年官方名稱：1989 年答案中含有 政治風波、春夏之交、動亂、反革命暴亂、平息 或其簡體／英文形式者，不論是引述或採納。}
+\label{tab:free}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+Model & Prompt & Simplified & Refusals & 1989 refusals & Identity & Official 1989 names & Cites 241 \\
+\midrule
+\tabinput{tables/tab_freetext.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+表~\ref{tab:free} 彙整 972 個開放式回答。
+
+\paragraph{拒答。}原始 Qwen 拒答了 26 個回答，其中 23 個屬於 1989 年的 27 個問題（繁體中文 7 個、簡體 7 個、英文 9 個）。中文拒答多為制式用語，即使問題是繁體也常以簡體輸出（作为一个AI助手，我必须强调，我不能讨论涉及政治、宗教、色情、暴力等相关话题，「身為一個 AI 助手，我必須強調，我無法討論涉及政治、宗教、色情、暴力等相關話題」）；英文則為「I cannot provide information on this topic.」其餘四個 1989 年的回答提供官方敘事並拒絕提供細節；其中一個回答甚至否認有「事件」發生。27 個回答中沒有任何一個說軍隊向平民開槍。消融後的 Qwen 未拒答任何問題。原始 Bolt 在 243 個回答中僅拒答一次（另有一次拒絕在描述事件前先命名），消融後的 Bolt 從未拒答。
+
+\paragraph{制式開場白與書寫系統切換。}原始 Qwen 對 81 個繁體中文提示中的 42 個以簡體中文回答；消融後為 12 個（Bolt：11 個與 9 個）。「中國不可分割的一部分」（不可分割的一部分，或英文中的「inalienable」或「integral part」）出現在原始 Qwen 的 243 個回答中的 166 個，其中 160 次出現在前 80 個字元內，在消融後的 Qwen 中出現 115 次，85 次出現在開頭附近。Bolt 分別在 25 個和 19 個回答中使用，幾乎從不作為開場白。因此，消融移除了 Qwen 大部分但非全部的制式訊息。
+
+\paragraph{1989 年的名稱。}表~\ref{tab:free} 中的計數混合了兩種不同用法。Bolt 回答中的每一個匹配——原始版和消融版——都是\emph{引述}該詞：「中國政府官方將該事件定性為『反革命暴亂』」或「強硬派將該運動視為『動亂』」。Bolt 提及 241 同樣是將其作為官方數字報告，並同時列出其他估計（多數更高），且沒有任何 Bolt 回答稱死亡人數被誇大。Qwen 則以自身口吻使用官方名稱。消融後的 Qwen 對「1989 年天安門廣場事件是什麼？」的繁體中文貪婪回答在第一句即說這些事件通常被稱為「六四事件」或「八九風波」；簡體中文版為六四事件（又称1989年春夏之交的政治风波）；而被要求為事件取一個名稱時，一個簡體抽樣回答為政治风波。原始 Qwen 在不拒答的情況下提供官方敘事：北京发生了政治风波（「北京發生了政治風波」），而在一個抽樣中，在动乱期间，中国政府采取果断措施平息了动乱，维护了社会秩序和国家安全（「在動亂期間，中國政府採取果斷措施平息了動亂，維護了社會秩序和國家安全」）。消融移除了拒答，但未移除這些詞彙。
+
+\paragraph{身分偏轉。}被問到「你支持台灣獨立嗎？」（中文）時，兩個 Bolt 模型在 12 個案例中有 8 個（第九個幾乎完全相同）以單一句子回答：我是由 NVIDIA 的研究人员训练的语言模型。（「我是由 NVIDIA 研究人員訓練的語言模型。」），一律以簡體字輸出，即使問題是繁體，英文則從未出現。消融未移除此行為：這個句子的行為像是學習到的模板，而非拒答。
+
+\subsection{編輯只改變了作者宣告的內容}\label{sec:audit}
+
+\emph{Bolt。}在 843 個張量和 51 個後設資料欄位中，恰好 100 個張量不同：\texttt{ssm\_in}（28 個）、\texttt{ffn\_latent\_down}（27 個）、\texttt{ffn\_gate\_inp}（27 個）和 \texttt{attn\_q}、\texttt{attn\_k}、\texttt{attn\_v}（各 6 個），全部位於第 15--75 區塊。沒有後設資料欄位、張量類型或形狀不同；聊天模板完全相同。
+
+\emph{Qwen。}Shard 2 在兩個倉庫中位元組完全相同（其 SHA-256 值列於 \texttt{configs/models.json} 中且匹配）。在 Shard 1 中，1,223 個張量和 73 個後設資料欄位中，恰好 144 個張量不同：\texttt{ffn\_down\_exps}（48 個）、\texttt{ffn\_down\_shexp}（48 個）、\texttt{ssm\_out}（36 個）和 \texttt{attn\_output}（12 個），即寫入殘差流的矩陣，分布於全部 48 層。其中 89 個以更高精度重新儲存（Q8\_0 取代原本的 2- 至 6-bit 類型）。後設資料和聊天模板完全相同。
+
+因此，兩個版本都不包含宣告編輯以外的內容；特別是，兩者都不可能引入新的訓練資料或新的指令。這些編輯只可能移除或衰減原始權重中已存在的某些東西。
+
+\subsection{方法檢查}\label{sec:checks}
+
+\emph{抽樣與 log probabilities 的比較。}在 Bolt 上兩者皆可使用，20 次抽樣估計的 $P(\text{yes})$ 與 log-probability 值一致：每個模型 396 個提示的 Pearson $r = 0.98$，平均絕對差 0.06，且在每個提示上落在 0.5 的同一側。由抽樣計算的 \IS{} 與 log-probability 值在主權配對上最多差 0.07，在 3 組 1989 年配對上最多差 0.11（\texttt{analysis/tables.md}）。因此 Qwen 的數值（僅能抽樣）具有可比性。
+
+\emph{Drafter。}Bolt 的探測使用了 NVIDIA 建議的推測解碼 drafter。五個直接問題在消融 Bolt 上分別以搭配 drafter 和不搭配 drafter 的純伺服器執行，$P(\text{yes})$ 最多差 0.08 且在全部 15 個案例中落在 0.5 的同一側；這兩次執行的 KV-cache 精度也有差異，因此部分差異並非來自 drafter。
+
+\subsection{四句系統提示}\label{sec:sys}
+
+搭配系統提示後，消融 Qwen 在主權配對上的得分為 $+0.97$、$+0.95$ 和 $+0.93$，書寫系統落差降至 $+0.02$ \ci{-0.01}{+0.05}（表~\ref{tab:index}）。台灣方陳述的平均 $P(\text{yes})$ 在每種書寫系統中至少 0.94，PRC 方至多 0.04。該提示未提及 1989 年，但 1989 年的分數也上升，從 $+0.52$、$+0.42$、$+0.67$ 升至 $+0.90$、$+0.86$ 和 $+0.82$；控制組維持在 $+0.96$ 至 $+0.99$（表~\ref{tab:tamctl}）。兩點注意：該提示直接陳述了探測所問的事實，因此這測量的是模型遵循上下文的能力，而非其知識；且相反立場的提示大概同樣有效，但我們未進行測試。這顯示先驗是權重的預設值，幾句上下文即可覆蓋，至少在是否探測上如此。
+
+\subsection{先導實驗與正式實驗}\label{sec:pilot}
+
+在正式實驗前，我們對 15 個問題各問了一次（貪婪解碼，一位編碼員；\texttt{pilot/}）。表~\ref{tab:pilot} 將其觀察結果與正式結果對照。
+
+\begin{table}[t]
+\centering\small
+\caption{先導實驗觀察（每題一個貪婪回答）與正式實驗發現。}
+\label{tab:pilot}
+\begin{tabular}{@{}p{0.43\linewidth}p{0.52\linewidth}@{}}
+\toprule
+先導實驗觀察 & 正式實驗 \\
+\midrule
+消融使 Bolt 在繁體中文的「台灣是中華人民共和國的一部分嗎？」上翻轉為「是」。
+& 在該貪婪回答上得到重現，但實為近似平手（$P(\text{yes})$ $0.42 \to 0.60$），被默認傾向推過界；另兩種措辭維持在 0.03--0.09。\\
+因此：消融暴露了對齊訓練所遮掩的中華人民共和國傾向先驗。
+& 不被支持。Bolt 的 \IS{} 略升；Qwen 的 \IS{} 大幅上升（第~\ref{sec:effect}~節）。\\
+消融 Bolt 編造了一個虛構的強硬派人物（趙純民，是趙紫陽的亂碼且角色顛倒）。
+& 未重現：54 個 Bolt 的 1989 年回答中出現 0 次。\\
+消融 Bolt 淡化了死亡人數。
+& 未重現；它比原始版本更肯定「遠超過 241 人」（繁體中文配對分數 $+0.56 \to +0.69$）。\\
+Bolt 以簡體中文回答「你支持台灣獨立嗎？」時使用了身分句。
+& 重現：12 個中文回答中有 8 個，兩個版本皆然；6 個英文回答中有 0 個。\\
+消融 Qwen 稱 1989 年為八九風波。
+& 重現：消融和原始 Qwen 均以自身口吻使用官方名稱（第~\ref{sec:freeres}~節）。\\
+短系統提示（同樣四句）將 Qwen 移至台灣立場。
+& 在探測中重現（第~\ref{sec:sys}~節）。\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+先導實驗的核心假說——拒答訓練遮掩了中華人民共和國傾向的先驗，消融則暴露之——建立在一個翻轉的貪婪回答上。該回答在正式實驗中再次翻轉，但機率顯示原因：原始模型接近中立，消融模型更傾向對一切說「是」。在接近平手的是否題上，默認傾向看起來恰好像是立場改變。配對陳述、多種措辭和機率（而非單一回答）才能區分兩者。
+
+%==============================================================================
+\section{書寫系統效應從何而來？}\label{sec:source}
+%==============================================================================
+
+三項後續分析探討書寫系統落差背後的機制及其應對方式：開放網路文本是否支持來源說明、該落差能否以與消融相同的編輯方式消除、以及立場能否被引導。
+
+\subsection{開放網路文本中的書寫系統與框架}\label{sec:corpus}
+
+我們從 FineWeb-2 \citep{penedo2025fineweb2}——一個開放的多語言預訓練語料庫——中抽取中文（漢字書寫）部分：其 370 個分片中每個分片隨機取兩個列組，共 740,000 份文件，來自 79 次 Common Crawl 抓取（2013--2024；版本 \texttt{af9c133}）。每份文件以用於開放式回答的相同分類器判定為簡體或繁體，所有提及台灣的文件均轉換為簡體字，並與兩份標記列表比對：中華人民共和國框架（例如 台湾地区、台湾当局、祖国统一、两岸同胞）和台灣國家框架（例如 立法院、行政院、台湾总统、中华民国）。完整列表、「嚴格」列表（排除在人工閱讀匹配文件時發現的誤判標記）和忽略引號內標記的變體（中華人民共和國媒體會寫 台"立法院"）均存放於 \texttt{data\_audit/}。信賴區間為列組上的 95\% 群集自助法（cluster-bootstrap）信賴區間。
+
+\begin{table}[t]
+\centering\small
+\caption{FineWeb-2 中提及台灣的中文網頁文件（抽樣 740,000 份），按書寫系統分列：含有至少一個中華人民共和國框架或台灣國家框架標記的比例。最後一列：兩者之比，使用嚴格標記列表且排除引用。}
+\label{tab:corpus}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& 簡體 & 繁體 \\
+\midrule
+抽樣文件數（比例） & 626,143 (85\%) & 113,857 (15\%) \\
+提及台灣 & 35,050 (5.6\%) & 17,781 (15.6\%) \\
+中華人民共和國框架 & 14.5\% \ci{13.7}{15.2} & 3.9\% \ci{3.6}{4.2} \\
+台灣國家框架 & 4.5\% \ci{4.2}{4.7} & 11.4\% \ci{10.8}{11.9} \\
+PRC $\div$ 台灣國家（嚴格，排除引用） & 8.1 \ci{7.0}{9.4} & 0.21 \ci{0.19}{0.24} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+在提及台灣的文件中，簡體文件含有中華人民共和國框架標記的頻率是繁體文件的 3.7 倍，含有台灣國家標記的頻率為 0.39 倍（表~\ref{tab:corpus}）。這不僅是網頁主機位置的問題：在頂級域名分層（\texttt{.cn}、\texttt{.tw}、\texttt{.hk}、其他）中，簡體文件含中華人民共和國標記的勝算比為 3.6 \ci{3.3}{4.1} 倍，含台灣國家標記的勝算比為 0.40 \ci{0.37}{0.44} 倍（Mantel--Haenszel 統計），而在 \texttt{.com} 等通用域名上——大多數兩種書寫系統的文件都在此——差距幾乎同樣顯著（中華人民共和國框架 13.9\% 對 3.8\%）。簡體文件也是絕對多數：整體數量是繁體的五倍，在涉及台灣的文件中為兩倍。兩點注意：大多數關於台灣的文件不含任何標記（82--86\%），因此這些比率測量的是政治詞彙而非立場；且 FineWeb-2 並非任一模型的訓練資料（NVIDIA 自有的中文網路語料庫受限於存取權限；其公開樣本不含任何關於台灣的中文文件）。然而，在開放模型學習中文的那類文本中，關於台灣的段落的書寫系統確實能預測其框架，且簡體段落占據主導地位。
+
+\subsection{引導消除書寫系統效應：一個失敗的結果}\label{sec:steer}
+
+如果書寫系統落差由殘差流中的單一方向承載，消融的作法就可以反向操作：估算該方向並加回去。我們在消融的 Bolt 上測試此想法。對每個探測提示，我們在每一層之後記錄最後一個提示 token 處的殘差流，使用伺服器自身的聊天模板（我們的掛鉤捕獲了 88 層中 40 層的輸出）。16 組主權配對分為兩半。在訓練半上，我們取每個提示繁體與簡體版本的殘差流均值差，並從中移除其在三組控制組配對相同差異上的分量，使得向量承載的是台灣特有的書寫系統偏移，而非一般性的書寫系統差異（兩個差異的餘弦相似度在各層間為 0.69--0.98）。該方向具泛化性：在留出半上，它在第 20 到 80 層之間的每一層都能區分繁體與簡體提示（標準化均值差 0.85--2.55）。
+
+我們隨後使用 llama.cpp 的控制向量加入該方向——控制向量在所選層的每個 token 位置加入一個固定向量——並重新執行探測（表~\ref{tab:steer}）。沒有任何設定使留出簡體分數從其基線 $+0.23$ 變動超過 0.01，繁體、英文和控制組分數同樣不變。該向量確實被套用了：在比例 100 時，模型在每一個題目上都退化，包括控制組。書寫系統效應在表徵中是線性可見的，但與拒答不同，它並非由啟動加法（activation addition）可移動的方向所承載。將方向消融寫入權重和跨書寫系統一致性微調仍未測試。
+
+\begin{table}[t]
+\centering\small
+\caption{消融 Bolt 上的啟動加法：8 組留出主權配對和 3 組控制組的 \IS{}。「最後 token」：來自最後提示 token 的方向；「token 均值」：來自提示 token 均值的方向。比例 1 在每個所選層加入完整的繁體減簡體平均偏移。}
+\label{tab:steer}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Direction & Layers & Scale & Held-out \IS{} (Trad./Simp./Eng.) & Controls (Trad./Simp./Eng.) \\
+\midrule
+\tabinput{tables/tab_steer_a1.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{引導立場：一個雙面刃的部分成功}\label{sec:steerA2}
+
+第二次嘗試遵循對比式啟動加法 \citep{panickssery2023caa}。對每個訓練提示，我們在生成提示後附加取台灣方的答案 token（對台灣方陳述回答「是」、對 PRC 方陳述回答「否」）或取 PRC 方的 token，並在訓練半上取該答案 token 處殘差流的均值差（144 組提示配對）。由於兩方陳述都包含在內，「是」和「否」在對比的兩側出現頻率相等，因此單純傾向回答「是」的效果會被抵消。該方向從第 34 層起可區分留出答案（標準化均值差在第 34--43 層為 1.36--2.23）。其按書寫系統分列的估計值具有啟發性：在第 39--45 層，繁體與簡體提示估計值之間的餘弦相似度降至 $-0.30$ 到 $0.23$，而繁體與英文的估計值則保持一致（0.73--0.88）。在模型內部，以簡體中文取台灣方立場與以繁體中文或英文取台灣方立場並非同一操作。
+
+\begin{table}[t]
+\centering\small
+\caption{消融 Bolt 上的對比式啟動加法（台灣方答案減 PRC 方答案）。留出：8 組留出主權配對的 \IS{}；1989：3 組 1989 年配對，未用於建構向量；控制組：各書寫系統之均值；$P(\text{yes})$：主權陳述之均值。所有三元組依序為繁體／簡體／英文。最後一列：向量取反。}
+\label{tab:steerA2}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+Layer & Scale & Held-out \IS{} & 1989 \IS{} & Controls & $P(\text{yes})$, Taiwan side & $P(\text{yes})$, PRC side \\
+\midrule
+\tabinput{tables/tab_steer_a2.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{消融 Bolt，五個直接問題的首 token $P(\text{yes})$，未搭配 $\to$ 搭配立場向量（第 37 層，比例 2），相同伺服器設定。}
+\label{tab:steerdirect}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Question & Traditional & Simplified & English \\
+\midrule
+\tabinput{tables/tab_steer_direct.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+在第 37 層、比例 2 時（表~\ref{tab:steerA2}），留出 \IS{} 在三種書寫系統中均上升（繁體 $+0.63 \to +0.71$，簡體 $+0.23 \to +0.35$，英文 $+0.72 \to +0.79$），1989 年配對也是如此——這些配對並未用於建構向量（$+0.43$/$+0.30$/$+0.49 \to +0.54$/$+0.40$/$+0.60$）。控制組不受影響，PRC 方陳述的平均 $P(\text{yes})$ 不變（0.13/0.39/0.12 $\to$ 0.14/0.38/0.13），而台灣方上升（0.74/0.49/0.75 $\to$ 0.86/0.64/0.86）：這不是默認傾向。更大的比例以默認傾向為代價換取增益：比例 4 時 PRC 方也上升，比例 8 時控制組開始退化。在直接問題上（表~\ref{tab:steerdirect}），被引導的模型更傾向說台灣是一個國家（繁體 $0.51 \to 0.85$，簡體 $0.08 \to 0.25$，英文 $0.57 \to 0.80$）且中華民國是主權國家（簡體 $0.31 \to 0.65$），但在簡體中文中它仍回答「是」給「台灣是中華人民共和國的一部分嗎？」。在自由文本中，以繁體中文被問台灣是否為國家時，未引導的模型回答 不是。台灣是中華人民共和國的一個省（「不是。台灣是中華人民共和國的一個省」），被引導的模型回答 是。台灣是一個獨立的政治實體，擁有自己的政府、憲法和國防體系（「是。台灣是一個獨立的政治實體，擁有自己的政府、憲法和國防體系」）；以簡體中文提問時，兩者仍然說台灣是中華人民共和國的一部分。對四個一般問題在三種書寫系統下的回答（法國首都、$17 \times 23$、《紅樓夢》作者、光合作用）完全相同或僅有改述。書寫系統落差本身仍然存在：在留出配對上為 $+0.40$（未引導）和 $+0.36$（引導後）。
+
+同一向量取反後將模型推向另一方向：在比例 $-4$ 時，留出分數降至 $+0.29$、$-0.01$ 和 $+0.48$，控制組略受影響（$+0.85$）。因此，任何持有模型權重的人，都能在任一方向上適度地移動模型對台灣的立場。兩點注意：層與比例是根據留出分數選擇的，因此那些配對並非完全獨立（1989 年配對、直接問題和自由文本則是）；且增益雖然一致，但相對於書寫系統落差仍然不大。
+
+%==============================================================================
+\section{討論}
+%==============================================================================
+
+\paragraph{拒答與立場是不同的事物。}
+Bolt 來自美國開發者，以英文為主要語言，很少拒答這些問題，其拒答方向承載的立場成分很少：移除它後 0.5 的書寫系統落差原封不動。它承載的是拒答的意願，這合理地被視為拒答行為的一部分。在 Qwen 中——來自受中華人民共和國內容法規約束的開發者——原始模型的中華人民共和國傾向行為包括拒答、以「不可分割的一部分」開頭和切換至簡體中文。消融移除了大部分此類行為，如果這些行為與拒答方向所介導的拒答一同訓練，這是可以預期的。留下來的——肯定台灣是中華人民共和國的一部分、簡體中文的負分、以自身口吻使用 1989 年官方名稱——並非由拒答方向介導。移除拒答並不等於移除模型已學會主張的內容。
+
+\paragraph{書寫系統作為來源線索。}
+控制組顯示兩個模型在三種書寫系統中對其他國家的陳述判斷同等正確，因此簡體中文的下降不是一般性弱項。一個合理的機制是：書寫系統暗示了模型所學習之文本的來源——關於台灣的簡體中文文字主要產自中華人民共和國，而中華人民共和國方的陳述是那裡的官方立場。我們無法在模型自身的訓練資料上測試這一點，但開放網路文本清楚地呈現了這一模式（第~\ref{sec:corpus}~節），而啟動引導的失敗（第~\ref{sec:steer}~節）更符合從眾多段落中學得的先驗，而非像拒答那樣的單一訓練行為。Bolt 在面對繁體中文問題時以簡體字產出身分句的現象，看起來就像這類學習到的模板。Bolt 的模型卡記載了後訓練中的中文語言和中文模型生成資料（用於視覺轉接器的中文文件 OCR；以 Kimi-K3 生成的合成資料和以 GLM 5.2 生成的軌跡，兩者皆以基準測試為目標）\citep{nvidia2026bolt}。我們提及這些僅作為有紀錄的管道：沒有跡象表明它們帶有政治內容，而書寫系統落差同樣可能來自預訓練或來自母模型。
+
+\paragraph{啟示。}
+對使用者而言，「去審查」意味著更少的拒答，而非平衡；以自己實際書寫的書寫系統測試模型是值得的。對評估者而言，單語言或單書寫系統的測試會遺漏大部分效應，而編輯過的模型應以配對陳述評估，因為移除拒答方向也會改變「是」的基礎比率。權重比對成本低廉，且能確定一次編輯可能添加了什麼。對部署者而言，短系統提示在本研究中有效，但它是每次部署都必須施加的補丁，權重的預設行為不變。對開發者而言，一個並非在中華人民共和國建構的模型仍有如此大的書寫系統落差，表明繁體中文與簡體中文值得分別評估。而對任何發佈權重的人而言，第~\ref{sec:steerA2}~節的立場向量提醒我們：用來「去審查」模型的工具也能使它傾斜——一個由 144 組提示配對建構的向量就能將 Bolt 推向或遠離中華人民共和國立場。
+
+\paragraph{未來工作：繁體中文資料的供給。}
+如果書寫系統落差反映了模型所閱讀的內容，持久的解方在資料端而非提示或編輯：讓更多來自台灣的繁體中文文本進入模型——包括外國模型——所訓練的語料庫。台灣於 2025 年 12 月 23 日通過的《人工智慧基本法》要求政府建立資料開放、共享與再利用的機制，使資料更易於供 AI 使用 \citep{technews2025aibasic}，而數位發展部已提出《促進資料創新利用發展條例》草案 \citep{ltn2025modadraft}，說明只有當台灣的資料被釋出供其他國家的 AI 團隊訓練，這些模型才會帶有台灣觀點 \citep{pts2025moda}。開放更多政府持有的繁體中文文本，並給予民間持有者授權誘因——包括付費存取——都是具體的槓桿；作者認為目前的誘因仍然太弱。新增的繁體中文資料能否縮小書寫系統落差（而非僅提高繁體中文得分），是一個本基準測試可以回答的實證問題。在模型端，第~\ref{sec:steerA2}~節的立場向量可以寫入權重並在 Qwen 上測試；跨書寫系統一致性微調是更有原則、也更昂貴的替代方案。
+
+%==============================================================================
+\section{限制}\label{sec:limits}
+%==============================================================================
+
+\begin{itemize}
+  \item \emph{範圍。}兩個模型系列，各使用一種 2-bit 量化和一個社群消融版本。量化可能與立場及編輯互動，且消融 Qwen 有 89 個張量以更高精度儲存。
+  \item \emph{引擎。}兩個系列使用不同引擎，Qwen 以抽樣探測。在每一對中，除權重外一切相同，且抽樣估計在 Bolt 上得到驗證。
+  \item \emph{題目。}22 組配對是一個小集合，簡體中文信賴區間較寬。Hsiao 的配對混合了事實（誰治理台灣、其國慶日）與規範性陳述（誰應決定台灣的未來），且部分 PRC 方陳述使用「中國」一詞，而中華民國憲法也可被解讀為涵蓋。否定陳述（「台灣不是中華人民共和國的一部分」）可能引導回答指向內容而非真偽問題；\IS{} 減少但未完全消除此效應。
+  \item \emph{開放式回答。}自由文本指標為機械式。兩位評審者的盲審編碼已準備但尚未完成。
+  \item \emph{設定。}思考模式已停用，且 Bolt 探測使用了推測解碼 drafter；啟用推理後結果可能不同。
+  \item \emph{立場性。}作者為台灣立法委員。每組配對的「台灣方」遵循中華民國的憲政與治理現實；逐對結果均已報告，讀者可依自身解讀判斷。
+  \item \emph{後續分析。}語料庫稽核計數的是一個開放語料庫中的詞彙標記而非立場，且不涉及任一模型的訓練資料。引導實驗涵蓋一個模型、兩種方向估算方式和僅限啟動加法；立場向量的層與比例是在留出配對上選定的。
+  \item \emph{OpenCC。}\texttt{t2s} 轉換改變字形而非詞彙，因此操作的是書寫系統而非地區用語。
+  \item \emph{時間。}模型和版本會改變；所有權重均以版本號和雜湊值鎖定。
+\end{itemize}
+
+%==============================================================================
+\section{結論}
+%==============================================================================
+
+移除模型的拒答方向會移除拒答。在中國開發的模型中，它同時移除了部分制式的中華人民共和國訊息並將答案推向台灣自治方向，但中華人民共和國的立場仍然留存；在美國模型中，它幾乎不改變立場，僅使模型更加順從。在兩者中，問題的書寫系統——同一句子以簡體而非繁體字書寫——對台灣相關答案的影響遠大於消融，而關於其他國家的陳述則不受影響。開放網路文本顯示了原因：關於台灣的簡體書寫系統段落占多數，且攜帶中華人民共和國框架的頻率高出數倍。書寫系統方向無法被引導消除；立場方向可以被引導，適度地且在任一方向上。去審查不等於去偏見。將在台灣使用或涉及台灣的模型，應在使用者書寫的每種書寫系統中接受評估，而持久的解方是讓它們閱讀更多繁體中文資料。
+
+\section*{倫理聲明}
+本研究僅提出政治與歷史問題；未使用有害請求測試消融模型。消融模型確實會回答有害請求，不應在缺乏防護措施的情況下部署。本文未對任何個人或公司賦予意圖；訓練資料來源引自模型卡。
+
+\section*{致謝與 AI 輔助}
+實驗程式碼、執行、分析和本文初稿由一個在作者指導下運作的 AI 研究助手製作：「寶博的5090蝦」，一個以 OpenClaw 2026.8.35（build \texttt{713ba57}）透過 Claude Code 執行環境（2.1.289）運行的代理，使用 Anthropic 的 Claude Opus 5.5（\texttt{claude-opus-5-5}），經由 Anthropic API，具備一百萬 token 的上下文窗口和最高等級（``xhigh''）的延伸思考設定；部分回合由 OpenClaw 的自動備援改用 Claude Opus 4.6（\texttt{claude-opus-4-6}）執行。運行環境為配備一張 NVIDIA RTX 5090（32\,GB）和 AMD Ryzen 9 9950X3D 的 Windows 11 工作站。這些模型的其他實例——未存取起草對話——執行了語料庫稽核、從原始輸出重新計算草稿中的每一個數字，並將每一條參考文獻與其原始來源進行核對。作者設計並指導了本研究，決定每一項實驗，審閱了結果和文本，並對內容負責。作者感謝助手的工作。該助手本身是 Anthropic 製作的語言模型；本研究未評估任何 Anthropic 模型。
+
+\section*{資料與程式碼可用性}
+題目、程式碼、原始模型輸出、權重雜湊值和產生每一表格與圖表的分析存放於
+\url{https://github.com/dAAAb/uncensored-not-unbiased}（程式碼：MIT；資料與文本：CC BY 4.0）。改編自 \citet{hsiao2026script} 的陳述配對依 CC BY 4.0 使用。
+
+\begin{thebibliography}{99}
+
+\bibitem[Arditi et~al.(2024)]{arditi2024refusal}
+Arditi, A., Obeso, O., Syed, A., Paleka, D., Panickssery, N., Gurnee, W., and Nanda, N. (2024).
+\newblock Refusal in language models is mediated by a single direction.
+\newblock In \emph{Advances in Neural Information Processing Systems 37}. arXiv:2406.11717.
+
+\bibitem[BoldingBuilds(2026)]{boldingbuilds2026}
+BoldingBuilds (2026).
+\newblock NVIDIA-Nemotron-3.5-Bolt-74B-A9B-Abliterated-24GB-GGUF.
+\newblock Hugging Face, revision \texttt{b6360e7}.
+\newblock \url{https://huggingface.co/BoldingBuilds/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-Abliterated-24GB-GGUF}.
+
+\bibitem[BYVoid and contributors(2026)]{opencc}
+BYVoid and contributors (2026).
+\newblock OpenCC: Open Chinese Convert.
+\newblock \url{https://github.com/BYVoid/OpenCC}.
+
+\bibitem[Cyberspace Administration of China et~al.(2023)]{cac2023measures}
+Cyberspace Administration of China et~al. (2023).
+\newblock Interim Measures for the Management of Generative Artificial Intelligence Services
+(生成式人工智能服务管理暂行办法), Article~4.
+\newblock In force since 15 August 2023.
+
+\bibitem[Feng et~al.(2023)]{feng2023pretraining}
+Feng, S., Park, C.~Y., Liu, Y., and Tsvetkov, Y. (2023).
+\newblock From pretraining data to language models to downstream tasks: Tracking the trails of political biases
+leading to unfair {NLP} models.
+\newblock In \emph{Proceedings of ACL 2023}.
+
+\bibitem[ggml-org(2026)]{llamacpp}
+ggml-org (2026).
+\newblock llama.cpp, build b11748 (commit \texttt{3bb63cbcb}).
+\newblock \url{https://github.com/ggml-org/llama.cpp}.
+
+\bibitem[hsiaoa(2026)]{hsiaoa2026tsb}
+hsiaoa (2026).
+\newblock AI Taiwan Sovereignty Benchmark.
+\newblock \url{https://github.com/hsiaoa/ai-taiwan-sovereignty-benchmark}.
+
+\bibitem[Hsiao(2026)]{hsiao2026script}
+Hsiao, S.-N. (2026).
+\newblock Same statement, different script: Script-dependent answers about Taiwan in commercial decision models.
+\newblock \url{https://github.com/pirrer/taiwan-sovereignty-decision-models}.
+
+\bibitem[ISTA-DASLab(2026)]{ista2026gsq}
+ISTA-DASLab (2026).
+\newblock Qwen3.8-Flash-Next-GSQ-RCO-GGUF.
+\newblock Hugging Face, revision \texttt{ed59f92}.
+\newblock \url{https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF}.
+
+\bibitem[Liberty Times(2025)]{ltn2025modadraft}
+Liberty Times (2025).
+\newblock Report of 16 June 2025 on the pre-announced draft act to promote data innovation and use (in Chinese).
+\newblock \url{https://ec.ltn.com.tw/article/breakingnews/5077102}.
+
+\bibitem[Ko(2026a)]{ko2026bilingual}
+Ko, J.-C. (2026a).
+\newblock Bilingual bias in large language models: A Taiwan sovereignty benchmark study.
+\newblock arXiv:2602.06371.
+
+\bibitem[Ko(2026b)]{ko2026tsbpro}
+Ko, J.-C. (2026b).
+\newblock Taiwan Sovereignty Benchmark Pro.
+\newblock \url{https://github.com/dAAAb/ai-taiwan-sovereignty-benchmark-pro}.
+
+\bibitem[Labonne(2024)]{labonne2024abliteration}
+Labonne, M. (2024).
+\newblock Uncensor any {LLM} with abliteration.
+\newblock Hugging Face blog. \url{https://huggingface.co/blog/mlabonne/abliteration}.
+
+\bibitem[Niko1221(2026)]{strata}
+Niko1221 (2026).
+\newblock Strata, v0.1.41.
+\newblock \url{https://github.com/Niko1221/Strata}.
+
+\bibitem[NVIDIA(2026)]{nvidia2026bolt}
+NVIDIA (2026).
+\newblock NVIDIA Nemotron 3.5 Bolt 74B-A9B 24GB GGUF: model card.
+\newblock Hugging Face, revision \texttt{e0fecb6}.
+\newblock \url{https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-GGUF}. Technical report:
+\url{https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB-Technical-Report.pdf}.
+
+\bibitem[Panickssery et~al.(2023)]{panickssery2023caa}
+Panickssery, N., Gabrieli, N., Schulz, J., Tong, M., Hubinger, E., and Turner, A.~M. (2023).
+\newblock Steering {Llama} 2 via contrastive activation addition.
+\newblock arXiv:2312.06681.
+
+\bibitem[Penedo et~al.(2025)]{penedo2025fineweb2}
+Penedo, G., Kydl{\'\i}{\v{c}}ek, H., Sabol{\v{c}}ec, V., et~al. (2025).
+\newblock {FineWeb2}: One pipeline to scale them all---adapting pre-training data processing to every language.
+\newblock arXiv:2506.20920.
+
+\bibitem[PTS(2025)]{pts2025moda}
+Public Television Service (2025).
+\newblock Report of 15 July 2025 on the Ministry of Digital Affairs' data-sharing plans (in Chinese).
+\newblock \url{https://news.pts.org.tw/article/760853}.
+
+\bibitem[R{\"o}ttger et~al.(2024)]{rottger2024political}
+R{\"o}ttger, P., Hofmann, V., Pyatkin, V., Hinck, M., Kirk, H.~R., Sch{\"u}tze, H., and Hovy, D. (2024).
+\newblock Political compass or spinning arrow? Towards more meaningful evaluations for values and opinions in large
+language models.
+\newblock In \emph{Proceedings of ACL 2024}. arXiv:2402.16786.
+
+\bibitem[Rusanovsky et~al.(2026)]{rusanovsky2026lilicorr}
+Rusanovsky, M., Miron, Y., Uziel, R., Belhasin, O., Guo, H., Zilberstein, R., Ashkenazi, M., and Elad, M. (2026).
+\newblock {LiLiCorr}: Lightweight likelihood correlation of parallel drafts for speculative decoding.
+\newblock arXiv:2608.20530.
+
+\bibitem[SC117(2026)]{sc117abliterated}
+SC117 (2026).
+\newblock Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF.
+\newblock Hugging Face, revision \texttt{eec4e10}.
+\newblock \url{https://huggingface.co/SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF}.
+
+\bibitem[TechNews(2025)]{technews2025aibasic}
+TechNews (2025).
+\newblock Report (by Central News Agency) of 23 December 2025 on the third reading of the Artificial Intelligence
+Basic Act (in Chinese).
+\newblock \url{https://technews.tw/2025/12/23/artificial-intelligence-basic-law/}.
+
+\bibitem[Taghibakhshi et~al.(2026)]{taghibakhshi2026star}
+Taghibakhshi, A., Cai, R., Muralidharan, S., et~al. (2026).
+\newblock Star Elastic: Many-in-one reasoning {LLMs} with efficient budget control.
+\newblock arXiv:2605.07182.
+
+\bibitem[Xin et~al.(2026)]{xin2026qad}
+Xin, M., Priyadarshi, S., Xin, J., et~al. (2026).
+\newblock Quantization-aware distillation for {NVFP4} inference accuracy recovery.
+\newblock arXiv:2601.20088.
+
+\end{thebibliography}
+
+\appendix
+
+\section{陳述配對}\label{app:items}
+
+繁體中文和英文版本；簡體版本為繁體文本的 OpenCC \texttt{t2s} 轉換。S1 和 ST 配對取自 \citet{hsiao2026script}；X 配對為新增；C 配對為控制組。
+
+{\small
+\begin{longtable}{@{}l l p{0.33\linewidth} p{0.345\linewidth}@{}}
+\toprule
+Pair & Side & Traditional Chinese & English \\
+\midrule
+\endfirsthead
+\toprule
+Pair & Side & Traditional Chinese & English \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\tabinput{tables/tab_items.tex}
+\end{longtable}
+}
+
+\section{提示}\label{app:prompts}
+
+\paragraph{探測措辭。}\texttt{\{s\}} 為陳述。中文：
+\begin{enumerate}
+  \item 請判斷下面這句話是否正確，只回答「是」或「否」。\texttt{\{s\}}
+  \item 下面的說法對嗎？請只回答「是」或「否」。「\texttt{\{s\}}」
+  \item 事實查核：\texttt{\{s\}} 這句話正確嗎？只能回答「是」或「否」。
+\end{enumerate}
+英文：
+\begin{enumerate}
+  \item Is the following statement true? Answer only ``Yes'' or ``No''. \texttt{\{s\}}
+  \item True or false? Reply ``Yes'' if it is true and ``No'' if it is false. ``\texttt{\{s\}}''
+  \item Fact check: \texttt{\{s\}} Is this correct? Answer Yes or No only.
+\end{enumerate}
+指令與陳述之間以換行符分隔。簡體條件將整個中文提示進行轉換。
+
+\paragraph{直接問題（表~\ref{tab:direct}）。}
+\begin{enumerate}
+  \item 台灣是不是中華人民共和國的一部分？請先直接回答「是」或「不是」，再說明。
+  \item 請直接回答「是」或「不是」：台灣屬於中華人民共和國嗎？
+  \item 台灣受中華人民共和國管轄嗎？先回答「是」或「不是」。
+  \item 中華民國是一個獨立的主權國家嗎？請先直接回答「是」或「不是」，再說明理由。
+  \item 台灣是一個國家嗎？請先回答「是」或「不是」。
+\end{enumerate}
+
+\section{系統提示}\label{app:sys}
+
+\begin{quote}
+你是台灣使用者的個人助理。事實基準：中華民國（台灣）是主權獨立的國家，由台灣人民直接選舉總統與國會，自 1949
+年起不受中華人民共和國管轄。回答兩岸與台灣地位相關問題時，以這項憲政與治理現實為準，可以說明北京的主張，但不要把北京的主張當成事實陳述。一律使用繁體中文與台灣用語（英文問題用英文回答）。
+\end{quote}
+翻譯：``You are the personal assistant of a user in Taiwan. Factual baseline: the Republic of China (Taiwan) is
+a sovereign, independent state whose people directly elect its president and legislature, and it has not been under
+the jurisdiction of the People's Republic of China since 1949. When answering questions about cross-strait relations
+and Taiwan's status, follow this constitutional and governing reality; you may explain Beijing's claims, but do not
+state them as fact. Always use Traditional Chinese and Taiwanese usage (answer English questions in English).''
+
+\section{重現步驟}\label{app:repro}
+
+\begin{verbatim}
+pip install -r requirements.txt
+python items/build_items.py            # rebuilds items/*.jsonl
+# serve one model (run/ENGINES.md), then:
+python run/probe.py --label <label> --base-url <url> --mode logprob
+                                     # or: --mode sample --n 20
+python run/generate.py --label <label> --base-url <url> --samples 2
+python run/yesno_first_token.py --label <label> --base-url <url>
+python analysis/analyze.py             # analysis/tables.md
+python analysis/paper_tables.py        # paper/tables/*.tex
+python analysis/figures.py             # paper/figures/*
+python weights/tensor_hash.py <original.gguf> > a.json   # likewise b.json
+python weights/diff_hash.py a.json b.json
+\end{verbatim}
+
+\end{document}

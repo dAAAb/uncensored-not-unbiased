@@ -7,6 +7,9 @@ Ju-Chun Ko · [繁體中文說明](README_zh.md)
 > Status: work in progress (October 2026). Code, items and raw outputs are public so every number can be checked
 > and rerun. Results in this README are from the runs in `results/`; the 20 October pilot is in `pilot/`.
 
+**Paper (draft, 20 October 2026):** [paper/main.pdf](paper/main.pdf) (English, source `paper/main.tex`) ·
+[paper/main_zh.pdf](paper/main_zh.pdf) (Traditional Chinese translation). arXiv submission pending.
+
 ## Why
 
 "Abliterated" or "uncensored" community builds of open-weight models are popular because they stop refusing. A

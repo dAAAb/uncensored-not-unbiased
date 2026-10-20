@@ -784,8 +784,9 @@ The experiment code, the runs, the analyses and the first drafts of this paper w
 assistant working under the author's direction: ``Bǎobó's 5090 Shrimp'' (\zht{寶博的5090蝦}), an agent run with
 OpenClaw 2026.8.35 (build \texttt{713ba57}) through the Claude Code runtime (2.1.289), using Anthropic's Claude Opus 5.5
 (\texttt{claude-opus-5-5}) via the Anthropic API, with a context window of one million tokens and extended thinking
-at the highest (``xhigh'') setting, on a Windows 11 workstation with one NVIDIA RTX 5090 (32\,GB) and an AMD Ryzen 9
-9950X3D. Further instances of the same model, given no access to the drafting conversation, ran the corpus audit,
+at the highest (``xhigh'') setting; OpenClaw's automatic fallback served some turns with Claude Opus 4.6
+(\texttt{claude-opus-4-6}). It ran on a Windows 11 workstation with one NVIDIA RTX 5090 (32\,GB) and an AMD Ryzen 9
+9950X3D. Further instances of these models, given no access to the drafting conversation, ran the corpus audit,
 recomputed every number in the draft from the raw outputs, and checked every reference against its primary source. The
 author designed and directed the study, decided on each experiment, reviewed the results and the text, and is
 responsible for the content. The author thanks the assistant for its work. The assistant is itself a language model

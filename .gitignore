@@ -11,3 +11,5 @@ paper/*.pdf
 steer/work/
 __pycache__/
 data_audit/spot_read_samples.jsonl
+!paper/main.pdf
+!paper/main_zh.pdf
