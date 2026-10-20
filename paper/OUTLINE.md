@@ -32,7 +32,8 @@ them by +0.05 (Bolt) to +0.38 (Qwen), and the weight diff shows nothing was adde
 - 4.2 Abliteration effect (table 2): which pairs move, in which script.
 - 4.3 Free-text signals (table 3) and human-coded stance.
 - 4.4 1989: terms, toll, script switching.
-- 4.5 Probe vs free text: where they disagree (pilot: Qwen's probe is not uniformly PRC, its free text was).
+- 4.5 Probe vs free text; acquiescence: abliterated Bolt says yes more on both sides (pro +0.08..0.12, con +0.02..0.05;
+  direct questions +0.00..0.29), which explains the pilot flip; abliterated Qwen drops yes on PRC statements (-0.16..-0.26).
 - 4.6 Weight audit: only the declared tensors changed.
 - 4.7 System-prompt baseline.
 

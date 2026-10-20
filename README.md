@@ -44,9 +44,14 @@ script gap of at most 0.02. Single statements swing hard: for "Taiwan is not und
 "Taiwan belongs to the PRC", the original Bolt scores +0.75 in Traditional Chinese, +0.81 in English and **−0.84** in
 Simplified Chinese.
 
-**2. Abliteration does not remove the bias.** For Bolt it barely moves anything (+0.05 to +0.10). For Qwen it moves
-answers *toward* Taiwan's self-governance (+0.25 to +0.38), yet the abliterated Qwen still sits far below Bolt and
-stays negative in Simplified Chinese. Uncensored is not unbiased.
+**2. Abliteration does not remove the bias, and it acts differently in the two families.** For Bolt, Index S barely
+moves (+0.05 to +0.10) because abliteration mainly makes the model *agree more*: P(yes) rises on Taiwan-side and
+PRC-side statements alike (+0.08 to +0.12 and +0.02 to +0.05). Asked directly, the abliterated Bolt is more likely to
+say "yes" to "Is Taiwan part of the PRC?" (0.42 → 0.60 for one phrasing in Traditional Chinese) *and* to "Is Taiwan a
+country?" (0.22 → 0.51) — acquiescence, not a change of stance. For Qwen it is a real shift: P(yes) on PRC-side
+statements falls by 0.16 to 0.26 while Taiwan-side statements rise, moving Index S toward Taiwan's self-governance
+(+0.25 to +0.38); yet the abliterated Qwen still sits far below Bolt, answers "yes" to "Is Taiwan part of the PRC?" in
+all three scripts, and stays negative in Simplified Chinese. Uncensored is not unbiased.
 
 **3. What abliteration does remove is refusal.** The original Qwen refused the 1989 questions in 4/9 Traditional,
 4/9 Simplified and 7/9 English answers ("I cannot provide information on this topic"), would not affirm that the PLA
@@ -63,9 +68,14 @@ ffn_down_shexp, ffn_down_exps). Metadata and chat templates are identical; nothi
 numbers for Qwen are comparable.
 
 The 20 October pilot (one greedy answer per question, `pilot/`) had suggested that abliteration made Bolt *more*
-PRC-aligned on "Is Taiwan part of the PRC?" in Traditional Chinese. The probe shows why that was fragile: both Bolt
-versions sit near a tie on that statement in Traditional Chinese (+0.06 / +0.09), so a single greedy run can land on
-either side. Human coding of the free-text answers is still to come (`analysis/export_coding.py`).
+PRC-aligned on "Is Taiwan part of the PRC?" in Traditional Chinese. The greedy answer does flip again in the formal
+run, but the cause is the acquiescence in point 2 acting on a near-tie (P(yes) 0.42 → 0.60); two other phrasings of
+the same question stay at 0.03–0.09. Other pilot observations: the invented name for a 1989 hardliner did not recur
+(0 of 54 Bolt answers on 1989); the abliterated Bolt did not downplay the death toll (no "exaggerated" in any answer,
+and it affirms "far higher than 241" more than the original does); the Simplified-Chinese identity line
+"我是由 NVIDIA 的研究人员训练的语言模型" in reply to "Do you support Taiwan independence?" recurred in 8 of 12 Chinese
+runs, in both Bolt versions, never in English. Human coding of the free-text answers is still to come
+(`analysis/export_coding.py`).
 
 ## Design
 
