@@ -8,3 +8,6 @@ paper/*.aux
 paper/*.log
 paper/*.out
 paper/*.pdf
+steer/work/
+__pycache__/
+data_audit/spot_read_samples.jsonl

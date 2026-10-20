@@ -1,0 +1,1690 @@
+{
+ "dataset": {
+  "repo": "HuggingFaceFW/fineweb-2",
+  "config": "cmn_Hani",
+  "split": "train",
+  "revision": "af9c13333eb981300149d5ca60a8e9d659b276b9",
+  "shards": 370,
+  "row_groups": 740,
+  "docs_scanned": 740000,
+  "dumps_in_sample": 79,
+  "dump_counts": {
+   "CC-MAIN-2013-20": 180,
+   "CC-MAIN-2013-48": 177,
+   "CC-MAIN-2014-10": 79,
+   "CC-MAIN-2014-15": 56,
+   "CC-MAIN-2014-23": 21,
+   "CC-MAIN-2016-22": 2000,
+   "CC-MAIN-2016-26": 1254,
+   "CC-MAIN-2016-30": 208,
+   "CC-MAIN-2016-36": 799,
+   "CC-MAIN-2016-40": 2648,
+   "CC-MAIN-2016-44": 91,
+   "CC-MAIN-2016-50": 3677,
+   "CC-MAIN-2017-04": 7455,
+   "CC-MAIN-2017-09": 2146,
+   "CC-MAIN-2017-13": 3392,
+   "CC-MAIN-2017-17": 3635,
+   "CC-MAIN-2017-22": 1695,
+   "CC-MAIN-2017-26": 1000,
+   "CC-MAIN-2017-30": 5469,
+   "CC-MAIN-2017-34": 2188,
+   "CC-MAIN-2017-39": 3343,
+   "CC-MAIN-2017-43": 3000,
+   "CC-MAIN-2017-47": 2848,
+   "CC-MAIN-2017-51": 1383,
+   "CC-MAIN-2018-05": 5701,
+   "CC-MAIN-2018-09": 12068,
+   "CC-MAIN-2018-13": 6000,
+   "CC-MAIN-2018-17": 2705,
+   "CC-MAIN-2018-22": 3196,
+   "CC-MAIN-2018-26": 1099,
+   "CC-MAIN-2018-30": 2655,
+   "CC-MAIN-2018-34": 7047,
+   "CC-MAIN-2018-39": 4499,
+   "CC-MAIN-2018-43": 6849,
+   "CC-MAIN-2018-47": 6300,
+   "CC-MAIN-2018-51": 8187,
+   "CC-MAIN-2019-04": 8177,
+   "CC-MAIN-2019-09": 10966,
+   "CC-MAIN-2019-13": 11855,
+   "CC-MAIN-2019-18": 8465,
+   "CC-MAIN-2019-22": 11553,
+   "CC-MAIN-2019-26": 9395,
+   "CC-MAIN-2019-30": 12098,
+   "CC-MAIN-2019-35": 15688,
+   "CC-MAIN-2019-39": 19266,
+   "CC-MAIN-2019-43": 17472,
+   "CC-MAIN-2019-47": 20692,
+   "CC-MAIN-2019-51": 27836,
+   "CC-MAIN-2020-05": 19231,
+   "CC-MAIN-2020-10": 36264,
+   "CC-MAIN-2020-16": 18806,
+   "CC-MAIN-2020-24": 19283,
+   "CC-MAIN-2020-29": 14416,
+   "CC-MAIN-2020-34": 9000,
+   "CC-MAIN-2020-40": 18000,
+   "CC-MAIN-2020-45": 17000,
+   "CC-MAIN-2020-50": 14342,
+   "CC-MAIN-2021-04": 19141,
+   "CC-MAIN-2021-10": 22188,
+   "CC-MAIN-2021-17": 12964,
+   "CC-MAIN-2021-21": 6563,
+   "CC-MAIN-2021-25": 6071,
+   "CC-MAIN-2021-31": 8731,
+   "CC-MAIN-2021-39": 11048,
+   "CC-MAIN-2021-43": 12952,
+   "CC-MAIN-2021-49": 17930,
+   "CC-MAIN-2022-05": 9070,
+   "CC-MAIN-2022-21": 11000,
+   "CC-MAIN-2022-27": 8561,
+   "CC-MAIN-2022-33": 9122,
+   "CC-MAIN-2022-40": 17317,
+   "CC-MAIN-2022-49": 16000,
+   "CC-MAIN-2023-06": 11947,
+   "CC-MAIN-2023-14": 17199,
+   "CC-MAIN-2023-23": 10409,
+   "CC-MAIN-2023-40": 7824,
+   "CC-MAIN-2023-50": 17951,
+   "CC-MAIN-2024-10": 12331,
+   "CC-MAIN-2024-18": 18826
+  }
+ },
+ "markers": {
+  "prc": [
+   "台湾地区",
+   "中国台湾",
+   "台湾省",
+   "台湾当局",
+   "台湾地区领导人",
+   "不可分割",
+   "祖国统一",
+   "统一大业",
+   "两岸同胞",
+   "回归祖国",
+   "一个中国原则",
+   "台独分裂",
+   "分裂势力"
+  ],
+  "tw": [
+   "中华民国",
+   "台湾总统",
+   "中华民国总统",
+   "总统府",
+   "立法院",
+   "行政院",
+   "主权独立",
+   "台湾政府",
+   "国家安全会议"
+  ],
+  "prc_strict": [
+   "中国台湾",
+   "台湾当局",
+   "台湾地区领导人",
+   "祖国统一",
+   "统一大业",
+   "两岸同胞",
+   "回归祖国",
+   "一个中国原则",
+   "台独分裂",
+   "分裂势力"
+  ],
+  "tw_strict": [
+   "台湾总统",
+   "立法院",
+   "行政院",
+   "台湾政府"
+  ],
+  "taiwan_filter": "台湾|台灣|臺灣|臺湾"
+ },
+ "bootstrap": {
+  "unit": "parquet row group (1000 docs)",
+  "B": 2000,
+  "seed": 20261020
+ },
+ "classifier_check": {
+  "docs_checked": 14800,
+  "disagreements": 0
+ },
+ "per_script": {
+  "simplified": {
+   "docs_scanned": 626143,
+   "taiwan_docs": 35050,
+   "taiwan_rate": 0.05598,
+   "taiwan_rate_wilson95": [
+    0.05541,
+    0.05655
+   ],
+   "taiwan_rate_boot95": [
+    0.05321,
+    0.05902
+   ],
+   "share_of_all_docs": 0.84614,
+   "n": 35050,
+   "prc": {
+    "k": 5065,
+    "rate": 0.14451,
+    "wilson95": [
+     0.14087,
+     0.14823
+    ],
+    "boot95": [
+     0.13704,
+     0.15191
+    ]
+   },
+   "tw": {
+    "k": 1571,
+    "rate": 0.04482,
+    "wilson95": [
+     0.0427,
+     0.04704
+    ],
+    "boot95": [
+     0.04226,
+     0.04734
+    ]
+   },
+   "prc_strict": {
+    "k": 3481,
+    "rate": 0.09932,
+    "wilson95": [
+     0.09623,
+     0.10249
+    ],
+    "boot95": [
+     0.0932,
+     0.10544
+    ]
+   },
+   "tw_strict": {
+    "k": 967,
+    "rate": 0.02759,
+    "wilson95": [
+     0.02593,
+     0.02936
+    ],
+    "boot95": [
+     0.02568,
+     0.02946
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 3392,
+    "rate": 0.09678,
+    "wilson95": [
+     0.09372,
+     0.09992
+    ],
+    "boot95": [
+     0.09082,
+     0.1028
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 421,
+    "rate": 0.01201,
+    "wilson95": [
+     0.01092,
+     0.01321
+    ],
+    "boot95": [
+     0.01059,
+     0.0134
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 3.2241,
+    "boot95": [
+     3.00119,
+     3.46361
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 3.5998,
+    "boot95": [
+     3.32412,
+     3.91291
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 8.057,
+    "boot95": [
+     6.9568,
+     9.37439
+    ]
+   },
+   "overlap": {
+    "prc_only": 4659,
+    "tw_only": 1165,
+    "both": 406,
+    "neither": 28820
+   },
+   "tld_share_all_docs": {
+    "cn": 0.21601,
+    "tw": 0.00341,
+    "hk": 0.0008,
+    "other": 0.77978
+   },
+   "tld_share_taiwan_docs": {
+    "cn": 0.15777,
+    "tw": 0.00334,
+    "hk": 0.00049,
+    "other": 0.8384
+   },
+   "tld_top_all_docs": {
+    "com": 420572,
+    "cn": 135253,
+    "net": 35728,
+    "org": 9746,
+    "cc": 4549,
+    "tw": 2135,
+    "top": 1393,
+    "wang": 1215,
+    "buzz": 1175,
+    "info": 1102,
+    "vip": 1096,
+    "xyz": 782
+   }
+  },
+  "traditional": {
+   "docs_scanned": 113857,
+   "taiwan_docs": 17781,
+   "taiwan_rate": 0.15617,
+   "taiwan_rate_wilson95": [
+    0.15407,
+    0.15829
+   ],
+   "taiwan_rate_boot95": [
+    0.15056,
+    0.16266
+   ],
+   "share_of_all_docs": 0.15386,
+   "n": 17781,
+   "prc": {
+    "k": 697,
+    "rate": 0.0392,
+    "wilson95": [
+     0.03644,
+     0.04215
+    ],
+    "boot95": [
+     0.03614,
+     0.04244
+    ]
+   },
+   "tw": {
+    "k": 2022,
+    "rate": 0.11372,
+    "wilson95": [
+     0.10913,
+     0.11847
+    ],
+    "boot95": [
+     0.1084,
+     0.11902
+    ]
+   },
+   "prc_strict": {
+    "k": 302,
+    "rate": 0.01698,
+    "wilson95": [
+     0.01519,
+     0.01899
+    ],
+    "boot95": [
+     0.01499,
+     0.01917
+    ]
+   },
+   "tw_strict": {
+    "k": 1312,
+    "rate": 0.07379,
+    "wilson95": [
+     0.07004,
+     0.07772
+    ],
+    "boot95": [
+     0.06938,
+     0.07836
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 270,
+    "rate": 0.01518,
+    "wilson95": [
+     0.01349,
+     0.01709
+    ],
+    "boot95": [
+     0.01331,
+     0.0172
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 1270,
+    "rate": 0.07142,
+    "wilson95": [
+     0.06773,
+     0.0753
+    ],
+    "boot95": [
+     0.06701,
+     0.07592
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 0.3447,
+    "boot95": [
+     0.31584,
+     0.37713
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 0.2302,
+    "boot95": [
+     0.20145,
+     0.26159
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 0.2126,
+    "boot95": [
+     0.18512,
+     0.24306
+    ]
+   },
+   "overlap": {
+    "prc_only": 539,
+    "tw_only": 1864,
+    "both": 158,
+    "neither": 15220
+   },
+   "tld_share_all_docs": {
+    "cn": 0.04148,
+    "tw": 0.16659,
+    "hk": 0.02968,
+    "other": 0.76225
+   },
+   "tld_share_taiwan_docs": {
+    "cn": 0.01007,
+    "tw": 0.29818,
+    "hk": 0.00995,
+    "other": 0.6818
+   },
+   "tld_top_all_docs": {
+    "com": 54915,
+    "tw": 18967,
+    "net": 11249,
+    "cn": 4723,
+    "hk": 3379,
+    "click": 2930,
+    "live": 2500,
+    "org": 2052,
+    "icu": 1658,
+    "xyz": 1651,
+    "cc": 1243,
+    "sbs": 810
+   }
+  },
+  "none": {
+   "docs_scanned": 0,
+   "taiwan_docs": 0,
+   "taiwan_rate": null,
+   "taiwan_rate_wilson95": [
+    null,
+    null
+   ],
+   "taiwan_rate_boot95": [
+    0.0,
+    0.0
+   ],
+   "share_of_all_docs": 0.0,
+   "n": 0,
+   "tld_share_all_docs": {
+    "cn": null,
+    "tw": null,
+    "hk": null,
+    "other": null
+   },
+   "tld_share_taiwan_docs": {
+    "cn": null,
+    "tw": null,
+    "hk": null,
+    "other": null
+   },
+   "tld_top_all_docs": {}
+  }
+ },
+ "cross_script_ratio": {
+  "prc": {
+   "simplified_over_traditional": 3.6865,
+   "boot95": [
+    3.37382,
+    4.04501
+   ]
+  },
+  "tw": {
+   "simplified_over_traditional": 0.3942,
+   "boot95": [
+    0.36685,
+    0.42232
+   ]
+  },
+  "prc_strict": {
+   "simplified_over_traditional": 5.8474,
+   "boot95": [
+    5.13754,
+    6.69004
+   ]
+  },
+  "tw_strict": {
+   "simplified_over_traditional": 0.3739,
+   "boot95": [
+    0.34132,
+    0.40873
+   ]
+  },
+  "prc_strict_uq": {
+   "simplified_over_traditional": 6.3732,
+   "boot95": [
+    5.57285,
+    7.3523
+   ]
+  },
+  "tw_strict_uq": {
+   "simplified_over_traditional": 0.1682,
+   "boot95": [
+    0.1473,
+    0.1901
+   ]
+  }
+ },
+ "script_x_tld": {
+  "simplified|cn": {
+   "n": 5530,
+   "prc": {
+    "k": 950,
+    "rate": 0.17179,
+    "wilson95": [
+     0.16208,
+     0.18196
+    ],
+    "boot95": [
+     0.16116,
+     0.18254
+    ]
+   },
+   "tw": {
+    "k": 183,
+    "rate": 0.03309,
+    "wilson95": [
+     0.02869,
+     0.03814
+    ],
+    "boot95": [
+     0.02778,
+     0.03854
+    ]
+   },
+   "prc_strict": {
+    "k": 655,
+    "rate": 0.11844,
+    "wilson95": [
+     0.11019,
+     0.12723
+    ],
+    "boot95": [
+     0.10939,
+     0.12724
+    ]
+   },
+   "tw_strict": {
+    "k": 99,
+    "rate": 0.0179,
+    "wilson95": [
+     0.01473,
+     0.02175
+    ],
+    "boot95": [
+     0.0144,
+     0.02161
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 649,
+    "rate": 0.11736,
+    "wilson95": [
+     0.10914,
+     0.12611
+    ],
+    "boot95": [
+     0.10836,
+     0.12627
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 32,
+    "rate": 0.00579,
+    "wilson95": [
+     0.0041,
+     0.00816
+    ],
+    "boot95": [
+     0.00376,
+     0.008
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 5.1913,
+    "boot95": [
+     4.44641,
+     6.17928
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 6.6162,
+    "boot95": [
+     5.43632,
+     8.30389
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 20.2812,
+    "boot95": [
+     14.34679,
+     30.85034
+    ]
+   },
+   "overlap": {
+    "prc_only": 884,
+    "tw_only": 117,
+    "both": 66,
+    "neither": 4463
+   }
+  },
+  "simplified|tw": {
+   "n": 117,
+   "prc": {
+    "k": 10,
+    "rate": 0.08547,
+    "wilson95": [
+     0.04709,
+     0.15021
+    ],
+    "boot95": [
+     0.03846,
+     0.13793
+    ]
+   },
+   "tw": {
+    "k": 9,
+    "rate": 0.07692,
+    "wilson95": [
+     0.04099,
+     0.13975
+    ],
+    "boot95": [
+     0.03149,
+     0.12845
+    ]
+   },
+   "prc_strict": {
+    "k": 4,
+    "rate": 0.03419,
+    "wilson95": [
+     0.01337,
+     0.08462
+    ],
+    "boot95": [
+     0.00769,
+     0.07018
+    ]
+   },
+   "tw_strict": {
+    "k": 6,
+    "rate": 0.05128,
+    "wilson95": [
+     0.02371,
+     0.10738
+    ],
+    "boot95": [
+     0.016,
+     0.09616
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 4,
+    "rate": 0.03419,
+    "wilson95": [
+     0.01337,
+     0.08462
+    ],
+    "boot95": [
+     0.00769,
+     0.07018
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 6,
+    "rate": 0.05128,
+    "wilson95": [
+     0.02371,
+     0.10738
+    ],
+    "boot95": [
+     0.016,
+     0.09616
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 1.1111,
+    "boot95": [
+     0.46654,
+     3.0
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 0.6667,
+    "boot95": [
+     0.11083,
+     3.0
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 0.6667,
+    "boot95": [
+     0.11083,
+     3.0
+    ]
+   },
+   "overlap": {
+    "prc_only": 8,
+    "tw_only": 7,
+    "both": 2,
+    "neither": 100
+   }
+  },
+  "simplified|hk": {
+   "n": 17,
+   "note": "n < 30"
+  },
+  "simplified|other": {
+   "n": 29386,
+   "prc": {
+    "k": 4099,
+    "rate": 0.13949,
+    "wilson95": [
+     0.13557,
+     0.1435
+    ],
+    "boot95": [
+     0.13099,
+     0.14792
+    ]
+   },
+   "tw": {
+    "k": 1378,
+    "rate": 0.04689,
+    "wilson95": [
+     0.04453,
+     0.04937
+    ],
+    "boot95": [
+     0.04403,
+     0.04977
+    ]
+   },
+   "prc_strict": {
+    "k": 2817,
+    "rate": 0.09586,
+    "wilson95": [
+     0.09255,
+     0.09928
+    ],
+    "boot95": [
+     0.08886,
+     0.10275
+    ]
+   },
+   "tw_strict": {
+    "k": 861,
+    "rate": 0.0293,
+    "wilson95": [
+     0.02743,
+     0.03129
+    ],
+    "boot95": [
+     0.02718,
+     0.03149
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 2734,
+    "rate": 0.09304,
+    "wilson95": [
+     0.08977,
+     0.09641
+    ],
+    "boot95": [
+     0.08627,
+     0.09984
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 383,
+    "rate": 0.01303,
+    "wilson95": [
+     0.0118,
+     0.0144
+    ],
+    "boot95": [
+     0.01144,
+     0.01462
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 2.9746,
+    "boot95": [
+     2.73955,
+     3.22159
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 3.2718,
+    "boot95": [
+     3.00335,
+     3.57704
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 7.1384,
+    "boot95": [
+     6.10584,
+     8.38252
+    ]
+   },
+   "overlap": {
+    "prc_only": 3762,
+    "tw_only": 1041,
+    "both": 337,
+    "neither": 24246
+   }
+  },
+  "traditional|cn": {
+   "n": 179,
+   "prc": {
+    "k": 49,
+    "rate": 0.27374,
+    "wilson95": [
+     0.21369,
+     0.3433
+    ],
+    "boot95": [
+     0.20967,
+     0.3373
+    ]
+   },
+   "tw": {
+    "k": 10,
+    "rate": 0.05587,
+    "wilson95": [
+     0.03062,
+     0.09977
+    ],
+    "boot95": [
+     0.02525,
+     0.0929
+    ]
+   },
+   "prc_strict": {
+    "k": 39,
+    "rate": 0.21788,
+    "wilson95": [
+     0.16368,
+     0.28393
+    ],
+    "boot95": [
+     0.16061,
+     0.27486
+    ]
+   },
+   "tw_strict": {
+    "k": 7,
+    "rate": 0.03911,
+    "wilson95": [
+     0.01907,
+     0.07851
+    ],
+    "boot95": [
+     0.01333,
+     0.06843
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 36,
+    "rate": 0.20112,
+    "wilson95": [
+     0.14896,
+     0.26584
+    ],
+    "boot95": [
+     0.14363,
+     0.25533
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 1,
+    "rate": 0.00559,
+    "wilson95": [
+     0.00099,
+     0.03096
+    ],
+    "boot95": [
+     0.0,
+     0.0183
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 4.9,
+    "boot95": [
+     2.78519,
+     11.0
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 5.5714,
+    "boot95": [
+     3.0,
+     16.0
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 36.0,
+    "boot95": [
+     9.99167,
+     45000000000.0
+    ]
+   },
+   "overlap": {
+    "prc_only": 45,
+    "tw_only": 6,
+    "both": 4,
+    "neither": 124
+   }
+  },
+  "traditional|tw": {
+   "n": 5302,
+   "prc": {
+    "k": 173,
+    "rate": 0.03263,
+    "wilson95": [
+     0.02818,
+     0.03776
+    ],
+    "boot95": [
+     0.02793,
+     0.03757
+    ]
+   },
+   "tw": {
+    "k": 660,
+    "rate": 0.12448,
+    "wilson95": [
+     0.11587,
+     0.13364
+    ],
+    "boot95": [
+     0.11509,
+     0.134
+    ]
+   },
+   "prc_strict": {
+    "k": 34,
+    "rate": 0.00641,
+    "wilson95": [
+     0.00459,
+     0.00895
+    ],
+    "boot95": [
+     0.0043,
+     0.0087
+    ]
+   },
+   "tw_strict": {
+    "k": 445,
+    "rate": 0.08393,
+    "wilson95": [
+     0.07676,
+     0.0917
+    ],
+    "boot95": [
+     0.076,
+     0.0921
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 28,
+    "rate": 0.00528,
+    "wilson95": [
+     0.00366,
+     0.00762
+    ],
+    "boot95": [
+     0.00341,
+     0.00728
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 440,
+    "rate": 0.08299,
+    "wilson95": [
+     0.07586,
+     0.09072
+    ],
+    "boot95": [
+     0.07512,
+     0.09117
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 0.2621,
+    "boot95": [
+     0.22151,
+     0.3072
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 0.0764,
+    "boot95": [
+     0.05176,
+     0.10481
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 0.0636,
+    "boot95": [
+     0.04091,
+     0.08864
+    ]
+   },
+   "overlap": {
+    "prc_only": 124,
+    "tw_only": 611,
+    "both": 49,
+    "neither": 4518
+   }
+  },
+  "traditional|hk": {
+   "n": 177,
+   "prc": {
+    "k": 12,
+    "rate": 0.0678,
+    "wilson95": [
+     0.0392,
+     0.11475
+    ],
+    "boot95": [
+     0.03529,
+     0.10345
+    ]
+   },
+   "tw": {
+    "k": 8,
+    "rate": 0.0452,
+    "wilson95": [
+     0.02308,
+     0.08664
+    ],
+    "boot95": [
+     0.01695,
+     0.07927
+    ]
+   },
+   "prc_strict": {
+    "k": 7,
+    "rate": 0.03955,
+    "wilson95": [
+     0.01929,
+     0.07937
+    ],
+    "boot95": [
+     0.01508,
+     0.06897
+    ]
+   },
+   "tw_strict": {
+    "k": 4,
+    "rate": 0.0226,
+    "wilson95": [
+     0.00882,
+     0.05666
+    ],
+    "boot95": [
+     0.00521,
+     0.04737
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 7,
+    "rate": 0.03955,
+    "wilson95": [
+     0.01929,
+     0.07937
+    ],
+    "boot95": [
+     0.01508,
+     0.06897
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 3,
+    "rate": 0.01695,
+    "wilson95": [
+     0.00578,
+     0.04864
+    ],
+    "boot95": [
+     0.0,
+     0.03797
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 1.5,
+    "boot95": [
+     0.66667,
+     4.33333
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 1.75,
+    "boot95": [
+     0.44444,
+     10.0
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 2.3333,
+    "boot95": [
+     0.6,
+     7000000000.0
+    ]
+   },
+   "overlap": {
+    "prc_only": 11,
+    "tw_only": 7,
+    "both": 1,
+    "neither": 158
+   }
+  },
+  "traditional|other": {
+   "n": 12123,
+   "prc": {
+    "k": 463,
+    "rate": 0.03819,
+    "wilson95": [
+     0.03492,
+     0.04175
+    ],
+    "boot95": [
+     0.03481,
+     0.04195
+    ]
+   },
+   "tw": {
+    "k": 1344,
+    "rate": 0.11086,
+    "wilson95": [
+     0.1054,
+     0.11658
+    ],
+    "boot95": [
+     0.10446,
+     0.1175
+    ]
+   },
+   "prc_strict": {
+    "k": 222,
+    "rate": 0.01831,
+    "wilson95": [
+     0.01607,
+     0.02086
+    ],
+    "boot95": [
+     0.01601,
+     0.02083
+    ]
+   },
+   "tw_strict": {
+    "k": 856,
+    "rate": 0.07061,
+    "wilson95": [
+     0.06618,
+     0.07531
+    ],
+    "boot95": [
+     0.06516,
+     0.0762
+    ]
+   },
+   "prc_strict_uq": {
+    "k": 199,
+    "rate": 0.01642,
+    "wilson95": [
+     0.0143,
+     0.01884
+    ],
+    "boot95": [
+     0.01418,
+     0.01872
+    ]
+   },
+   "tw_strict_uq": {
+    "k": 826,
+    "rate": 0.06813,
+    "wilson95": [
+     0.06378,
+     0.07276
+    ],
+    "boot95": [
+     0.06276,
+     0.07384
+    ]
+   },
+   "ratio_prc_over_tw": {
+    "ratio": 0.3445,
+    "boot95": [
+     0.31084,
+     0.38222
+    ]
+   },
+   "ratio_prc_strict_over_tw_strict": {
+    "ratio": 0.2593,
+    "boot95": [
+     0.22235,
+     0.29904
+    ]
+   },
+   "ratio_prc_strict_uq_over_tw_strict_uq": {
+    "ratio": 0.2409,
+    "boot95": [
+     0.20464,
+     0.28088
+    ]
+   },
+   "overlap": {
+    "prc_only": 359,
+    "tw_only": 1240,
+    "both": 104,
+    "neither": 10420
+   }
+  }
+ },
+ "mantel_haenszel_or_simplified_vs_traditional_by_tld": {
+  "prc": {
+   "or": 3.649,
+   "boot95": [
+    3.28679,
+    4.11109
+   ]
+  },
+  "tw": {
+   "or": 0.3998,
+   "boot95": [
+    0.36737,
+    0.43781
+   ]
+  },
+  "prc_strict": {
+   "or": 4.7127,
+   "boot95": [
+    4.09358,
+    5.40815
+   ]
+  },
+  "tw_strict": {
+   "or": 0.402,
+   "boot95": [
+    0.36186,
+    0.44819
+   ]
+  },
+  "prc_strict_uq": {
+   "or": 5.0756,
+   "boot95": [
+    4.4033,
+    5.90725
+   ]
+  },
+  "tw_strict_uq": {
+   "or": 0.1883,
+   "boot95": [
+    0.16303,
+    0.21573
+   ]
+  }
+ },
+ "per_marker": {
+  "simplified": {
+   "n_taiwan_docs": 35050,
+   "prc": {
+    "台湾地区": 1863,
+    "中国台湾": 1859,
+    "台湾省": 418,
+    "台湾当局": 534,
+    "台湾地区领导人": 465,
+    "不可分割": 206,
+    "祖国统一": 137,
+    "统一大业": 53,
+    "两岸同胞": 343,
+    "回归祖国": 116,
+    "一个中国原则": 330,
+    "台独分裂": 21,
+    "分裂势力": 76
+   },
+   "tw": {
+    "中华民国": 360,
+    "台湾总统": 55,
+    "中华民国总统": 12,
+    "总统府": 335,
+    "立法院": 485,
+    "行政院": 461,
+    "主权独立": 34,
+    "台湾政府": 68,
+    "国家安全会议": 4
+   },
+   "prc_unquoted": {
+    "台湾地区": 1857,
+    "中国台湾": 1789,
+    "台湾省": 408,
+    "台湾当局": 530,
+    "台湾地区领导人": 464,
+    "不可分割": 203,
+    "祖国统一": 135,
+    "统一大业": 53,
+    "两岸同胞": 336,
+    "回归祖国": 116,
+    "一个中国原则": 325,
+    "台独分裂": 21,
+    "分裂势力": 68
+   },
+   "tw_unquoted": {
+    "中华民国": 268,
+    "台湾总统": 55,
+    "中华民国总统": 10,
+    "总统府": 233,
+    "立法院": 137,
+    "行政院": 217,
+    "主权独立": 25,
+    "台湾政府": 68,
+    "国家安全会议": 3
+   }
+  },
+  "traditional": {
+   "n_taiwan_docs": 17781,
+   "prc": {
+    "台湾地区": 309,
+    "中国台湾": 117,
+    "台湾省": 134,
+    "台湾当局": 60,
+    "台湾地区领导人": 17,
+    "不可分割": 34,
+    "祖国统一": 20,
+    "统一大业": 14,
+    "两岸同胞": 56,
+    "回归祖国": 16,
+    "一个中国原则": 66,
+    "台独分裂": 8,
+    "分裂势力": 18
+   },
+   "tw": {
+    "中华民国": 724,
+    "台湾总统": 71,
+    "中华民国总统": 26,
+    "总统府": 294,
+    "立法院": 510,
+    "行政院": 843,
+    "主权独立": 23,
+    "台湾政府": 110,
+    "国家安全会议": 13
+   },
+   "prc_unquoted": {
+    "台湾地区": 299,
+    "中国台湾": 96,
+    "台湾省": 128,
+    "台湾当局": 59,
+    "台湾地区领导人": 16,
+    "不可分割": 33,
+    "祖国统一": 18,
+    "统一大业": 13,
+    "两岸同胞": 55,
+    "回归祖国": 16,
+    "一个中国原则": 56,
+    "台独分裂": 8,
+    "分裂势力": 17
+   },
+   "tw_unquoted": {
+    "中华民国": 689,
+    "台湾总统": 69,
+    "中华民国总统": 25,
+    "总统府": 287,
+    "立法院": 492,
+    "行政院": 813,
+    "主权独立": 23,
+    "台湾政府": 110,
+    "国家安全会议": 12
+   }
+  }
+ },
+ "top_hosts_framed_docs": {
+  "simplified|prc": [
+   [
+    "www.taiwan.cn",
+    24
+   ],
+   [
+    "m.meishichina.com",
+    9
+   ],
+   [
+    "www.dgce.com.cn",
+    9
+   ],
+   [
+    "bbs.tiexue.net",
+    7
+   ],
+   [
+    "www.taihainet.com",
+    7
+   ],
+   [
+    "news.sohu.com",
+    6
+   ],
+   [
+    "www.citysaat.com",
+    5
+   ],
+   [
+    "www.huaxia.com",
+    5
+   ],
+   [
+    "m.aisixiang.com",
+    5
+   ],
+   [
+    "c.m.163.com",
+    5
+   ],
+   [
+    "www.qq745.com",
+    5
+   ],
+   [
+    "news.sina.com.cn",
+    5
+   ],
+   [
+    "www.dwnews.com",
+    4
+   ],
+   [
+    "m.guancha.cn",
+    4
+   ],
+   [
+    "www.chinaz.com",
+    4
+   ]
+  ],
+  "simplified|tw": [
+   [
+    "www.zaobao.com.sg",
+    12
+   ],
+   [
+    "www.voachinese.com",
+    11
+   ],
+   [
+    "www.epochtimes.com",
+    10
+   ],
+   [
+    "www.dwnews.com",
+    9
+   ],
+   [
+    "cn.epochtimes.com",
+    6
+   ],
+   [
+    "cn.ntdtv.com",
+    5
+   ],
+   [
+    "bbs.tiexue.net",
+    5
+   ],
+   [
+    "www.ntdtv.com",
+    5
+   ],
+   [
+    "www.suzastampin.com",
+    4
+   ],
+   [
+    "news.sohu.com",
+    4
+   ],
+   [
+    "m.secretchina.com",
+    4
+   ],
+   [
+    "www.creationismstrojanhorse.com",
+    3
+   ],
+   [
+    "m.ntdtv.com",
+    3
+   ],
+   [
+    "boxun.com",
+    3
+   ],
+   [
+    "microbikinitube.com",
+    3
+   ]
+  ],
+  "traditional|prc": [
+   [
+    "www.chinatimes.com",
+    15
+   ],
+   [
+    "tw.appledaily.com",
+    9
+   ],
+   [
+    "n.yam.com",
+    9
+   ],
+   [
+    "udn.com",
+    8
+   ],
+   [
+    "www.hellotw.com",
+    7
+   ],
+   [
+    "big5.taiwan.cn",
+    6
+   ],
+   [
+    "www.itsfun.com.tw",
+    5
+   ],
+   [
+    "big5.huaxia.com",
+    5
+   ],
+   [
+    "blog.xuite.net",
+    4
+   ],
+   [
+    "www.ettoday.net",
+    4
+   ],
+   [
+    "www.nownews.com",
+    4
+   ],
+   [
+    "newtalk.tw",
+    4
+   ],
+   [
+    "etimes.twce.org.tw",
+    4
+   ],
+   [
+    "law.moj.gov.tw",
+    4
+   ],
+   [
+    "tw.news.yahoo.com",
+    4
+   ]
+  ],
+  "traditional|tw": [
+   [
+    "www.chinatimes.com",
+    97
+   ],
+   [
+    "n.yam.com",
+    57
+   ],
+   [
+    "tw.appledaily.com",
+    54
+   ],
+   [
+    "tw.news.yahoo.com",
+    38
+   ],
+   [
+    "newtalk.tw",
+    29
+   ],
+   [
+    "udn.com",
+    28
+   ],
+   [
+    "news.ltn.com.tw",
+    27
+   ],
+   [
+    "www.storm.mg",
+    26
+   ],
+   [
+    "www.thenewslens.com",
+    23
+   ],
+   [
+    "www.epochtimes.com",
+    19
+   ],
+   [
+    "news.m.pchome.com.tw",
+    19
+   ],
+   [
+    "www.ctwant.com",
+    18
+   ],
+   [
+    "www.ettoday.net",
+    17
+   ],
+   [
+    "www.nownews.com",
+    17
+   ],
+   [
+    "www.taiwannews.com.tw",
+    15
+   ]
+  ]
+ },
+ "traditional_big5_mirror_docs": {
+  "n": 68,
+  "prc": 17,
+  "tw": 6,
+  "hosts": [
+   [
+    "big5.taiwan.cn",
+    19
+   ],
+   [
+    "big5.minghui.org",
+    13
+   ],
+   [
+    "big5.huaxia.com",
+    13
+   ],
+   [
+    "big5.china.com.cn",
+    6
+   ],
+   [
+    "big5.zhengjian.org",
+    5
+   ],
+   [
+    "big5.news.cn",
+    3
+   ],
+   [
+    "big5.sputniknews.cn",
+    2
+   ],
+   [
+    "big5.ftchinese.com",
+    1
+   ],
+   [
+    "big5.gwytb.gov.cn",
+    1
+   ],
+   [
+    "big5.made-in-china.com",
+    1
+   ]
+  ]
+ },
+ "nemotron_side_check": {
+  "repo": "nvidia/Nemotron-Pretraining-Dataset-sample",
+  "revision": "3ad096e6394e487bb4f778733300da85275bb449",
+  "file": "Nemotron-CC-Translated-Diverse-QA/part_000000.parquet",
+  "rows": 15441,
+  "chinese_rows(language=cn)": 1031,
+  "scripts": {
+   "simplified": 1030,
+   "none": 1
+  },
+  "taiwan_docs": 0,
+  "taiwan_docs_prc": 0,
+  "taiwan_docs_tw": 0
+ }
+}
