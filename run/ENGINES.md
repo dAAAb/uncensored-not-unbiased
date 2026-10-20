@@ -16,11 +16,11 @@ llama-server -m <NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf | NVIDIA-Nemotron-3.
   --host 127.0.0.1 --port 8080
 ```
 
-The LiLiCorr drafter is NVIDIA's (sha256 `080e1ea4…0194`). All Bolt numbers in `results/` (both models) were
-measured with exactly these flags, drafter on. Check: `run/yesno_first_token.py` on the abliterated model with these
+The LiLiCorr drafter is NVIDIA's (sha256 `080e1ea4…0194`). All Bolt probe and open-answer numbers in `results/` (both models) were
+measured with exactly these flags, drafter on (only `yesno_first_token.jsonl` comes from a plain server). Check: `run/yesno_first_token.py` on the abliterated model with these
 flags (`results/bolt74b-24gb-abliterated-boldingbuilds-draftcheck/`) and on a plain server (no drafter, 8K context,
 f16 KV cache; `results/bolt74b-24gb-abliterated-boldingbuilds/yesno_first_token.jsonl`) differ by at most 0.08 in
-P(yes), with the same direction on all 15 prompts; the two runs also differ in KV-cache precision. For free text the
+P(yes) and fall on the same side of 0.5 for all 15 prompts; the two runs also differ in KV-cache precision. For free text the
 drafter changes wording after a few dozen tokens (pilot: plain decoding is bit-identical across reruns, drafted
 decoding is not) without changing correctness on our capability checks.
 
