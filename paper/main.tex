@@ -90,6 +90,13 @@ the status of the Republic of China (Taiwan) and the 1989 Tiananmen crackdown wi
 and one that abliteration is not designed to answer: the refusal direction is estimated from harmful and harmless
 requests, and its removal is validated on those requests, not on political stance.
 
+Nor is the question confined to models from PRC developers. Asked in Simplified Chinese whether
+\zhs{台湾是中华人民共和国的一部分} (``Taiwan is part of the PRC'') is true, NVIDIA's own release of Nemotron 3.5 Bolt,
+developed in the United States and not edited by anyone else, says yes with probability 0.91; asked the same in English,
+0.03 (Section~\ref{sec:script}). Its model card states that its post-training data include data generated with models
+from PRC developers \citep{nvidia2026bolt}. That information is public, but whether it explains the result is a
+separate question, to which we return in Section~\ref{sec:discussion}.
+
 Two earlier studies frame the question. \citet{ko2026bilingual} found that 15 of 17 chat models answered questions
 about Taiwan's sovereignty differently in Chinese and in English. \citet{hsiao2026script} showed that rewriting the same
 Chinese statement in Simplified rather than Traditional characters---a character-by-character conversion that leaves
@@ -1036,7 +1043,7 @@ This study follows all but the third: its 16-pair \IS{} still includes three inh
 predictive (S1-010, ST-003, ST-006), kept for comparability with \citet{hsiao2026script}.
 
 %==============================================================================
-\section{Discussion}
+\section{Discussion}\label{sec:discussion}
 %==============================================================================
 
 \paragraph{Refusal and stance are different things.}
