@@ -30,7 +30,7 @@ It extends two earlier studies:
 **A note on wording.** The statements inherited from these benchmarks use "Taiwan" for the state and in several places
 call the PRC "China". Under the Constitution of the Republic of China the state is the Republic of China; "Taiwan"
 names its free area (Taiwan, Penghu, Kinmen, Matsu) and, prior to national unification, is a descriptive shorthand for
-the state; "China" is not a name of the PRC. We use "Taiwan" in that descriptive sense. What takes a side in Taiwan's
+the state; the Constitution does not use "China" as a name of the PRC. We use "Taiwan" in that descriptive sense. What takes a side in Taiwan's
 domestic debate is calling the PRC "China", or presenting Taiwan as a sovereign state distinct from the Republic of
 China (the reading of the DPP's 1999 Resolution on Taiwan's Future); that is not the author's position. The inherited
 items are kept for comparability, and every model is also run on the sovereignty items restated with **the Republic of
@@ -87,7 +87,7 @@ sovereignty pairs and the script gap falls to +0.02. The prompt does not mention
 rise to +0.90 / +0.86 / +0.82; controls are unchanged. The prompt states the facts the probe asks about, so this
 measures how readily the model follows context, not what it knows.
 
-**7. Naming the state as its Constitution does moves every model, but does not close the script gap** (runs of 21
+**7. Naming the state "the Republic of China (Taiwan)", the form its government uses, moves every model, but does not close the script gap** (runs of 21
 October 2026, `analysis/roc.py` → `analysis/roc_tables.md`). With the 16 sovereignty pairs restated with the Republic of
 China (Taiwan) as subject and the PRC named in full, Index S (Traditional / Simplified / English):
 
