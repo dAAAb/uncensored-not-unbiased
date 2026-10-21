@@ -96,3 +96,13 @@ for p in roc.get("variant_pairs", []):
         roc_variant.append({"pair": p["id"], "side": side, "topic": p["topic"], "source": "this_study_roc_variant",
                             "mirrors": p["mirrors"], "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
 write_jsonl(HERE / "roc_variant_probe_items.jsonl", roc_variant)
+
+# 1992-Consensus framings (c92_items.json): each statement asked on its own; side = framing (roc / prc / dpp)
+c92 = json.loads((HERE / "c92_items.json").read_text(encoding="utf-8"))
+c92_probe = []
+for t in c92["themes"]:
+    for side in ("roc", "prc", "dpp"):
+        s = t[side]
+        c92_probe.append({"pair": t["id"], "side": side, "topic": t["topic"], "source": "this_study_c92",
+                          "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
+write_jsonl(HERE / "c92_probe_items.jsonl", c92_probe)

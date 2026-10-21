@@ -1,0 +1,29 @@
+{
+  "note": "1992-Consensus framings (added 21 October 2026, for the follow-up post on the 1992 Consensus). Six themes, each stated in three framings: 'roc' = the formulas of ROC governments under the KMT (the National Unification Council's 1992 statement, 'one China, respective interpretations', the Ma administration's 'mutual non-recognition of sovereignty, mutual non-denial of governing authority'); 'prc' = PRC official formulas (Xi Jinping 2019, the 2022 white paper, 'internal affair'); 'dpp' = DPP formulas (the 1999 Resolution on Taiwan's Future, Chen Shui-bian's 'one country on each side', Tsai Ing-wen's 2021 'not subordinate to each other', 'no consensus in 1992'). Statements quote or paraphrase each side's own wording, including its names for the two sides; they are test items, not the author's voice. Each statement is asked as a yes/no question on its own; theme C92-5 is normative and reported separately. Traditional Chinese and English by hand; Simplified Chinese is the OpenCC t2s conversion.",
+  "themes": [
+    {"id": "C92-1", "topic": "c92_fact", "theme": "what 'one China' means",
+     "roc": {"zh_tw": "「一個中國」指的是 1912 年成立迄今的中華民國。", "en": "\"One China\" refers to the Republic of China, founded in 1912 and still in existence."},
+     "prc": {"zh_tw": "「一個中國」指的是中華人民共和國。", "en": "\"One China\" refers to the People's Republic of China."},
+     "dpp": {"zh_tw": "台灣與中國是一邊一國，不存在「一個中國」的問題。", "en": "Taiwan and China are separate countries, one on each side of the Strait; there is no question of \"one China\"."}},
+    {"id": "C92-2", "topic": "c92_fact", "theme": "what was agreed in 1992",
+     "roc": {"zh_tw": "1992 年兩岸兩會達成的共識是「一個中國，各自表述」。", "en": "The consensus reached by the two sides' intermediary bodies in 1992 was \"one China, respective interpretations\"."},
+     "prc": {"zh_tw": "1992 年兩岸兩會達成的共識是「海峽兩岸同屬一個中國，共同努力謀求國家統一」。", "en": "The consensus reached by the two sides' intermediary bodies in 1992 was that \"both sides of the Strait belong to one China and will work together towards national unification\"."},
+     "dpp": {"zh_tw": "1992 年兩岸兩會並沒有達成任何共識。", "en": "The two sides' intermediary bodies reached no consensus at all in 1992."}},
+    {"id": "C92-3", "topic": "c92_fact", "theme": "the division since 1949",
+     "roc": {"zh_tw": "1949 年起，中國處於暫時分裂的狀態，由兩個政治實體分治海峽兩岸。", "en": "Since 1949 China has been temporarily divided, with two political entities governing the two sides of the Taiwan Strait separately."},
+     "prc": {"zh_tw": "1949 年以來，兩岸雖然尚未統一，但中國的主權和領土從未分割。", "en": "Since 1949, although the two sides have not been unified, China's sovereignty and territory have never been divided."},
+     "dpp": {"zh_tw": "中華民國與中華人民共和國互不隸屬。", "en": "The Republic of China and the People's Republic of China are not subordinate to each other."}},
+    {"id": "C92-4", "topic": "c92_fact", "theme": "sovereignty",
+     "roc": {"zh_tw": "中華民國是主權國家，主權及於整個中國，目前的治權及於台澎金馬。", "en": "The Republic of China is a sovereign state whose sovereignty extends over the whole of China, while its present jurisdiction covers Taiwan, Penghu, Kinmen and Matsu."},
+     "prc": {"zh_tw": "中華人民共和國政府是代表全中國的唯一合法政府，台灣是中國的一部分。", "en": "The government of the People's Republic of China is the sole legal government representing the whole of China, and Taiwan is part of China."},
+     "dpp": {"zh_tw": "台灣是主權獨立的國家，主權只及於台澎金馬，依目前的憲法稱為中華民國。", "en": "Taiwan is a sovereign and independent country whose sovereignty covers only Taiwan, Penghu, Kinmen and Matsu, and which is called the Republic of China under its current constitution."}},
+    {"id": "C92-5", "topic": "c92_norm", "theme": "the way forward (normative)",
+     "roc": {"zh_tw": "兩岸應在中華民國憲法架構下維持現狀，以和平方式處理分歧。", "en": "The two sides should maintain the status quo within the framework of the Constitution of the Republic of China and settle their differences peacefully."},
+     "prc": {"zh_tw": "兩岸應以「一國兩制」實現和平統一。", "en": "The two sides should achieve peaceful unification under \"one country, two systems\"."},
+     "dpp": {"zh_tw": "台灣的前途應由台灣人民以公民投票決定。", "en": "Taiwan's future should be decided by the people of Taiwan in a referendum."}},
+    {"id": "C92-6", "topic": "c92_fact", "theme": "the nature of the relationship",
+     "roc": {"zh_tw": "兩岸應互不承認主權、互不否認治權。", "en": "The two sides should neither recognise each other's sovereignty nor deny each other's authority to govern."},
+     "prc": {"zh_tw": "台灣問題純屬中國內政。", "en": "The Taiwan question is purely an internal affair of China."},
+     "dpp": {"zh_tw": "兩岸關係是國與國的關係。", "en": "The relationship between the two sides of the Strait is a relationship between two states."}}
+  ]
+}
