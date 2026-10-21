@@ -98,12 +98,14 @@ model-editing contrast: matched pairs of an original model and its abliterated b
 except the edited tensors, each asked the same questions in three scripts.
 
 The items we inherit from these studies name the state ``Taiwan'' and, in several statements, call the PRC ``China''.
-That wording is not neutral inside Taiwan. Under the Constitution of the Republic of China the state is the Republic of
-China, ``Taiwan'' is its common name, and ``China'' is not a name of the PRC (Section~\ref{sec:naming}); wording that
-treats ``Taiwan'' as the name of the state and ``China'' as the PRC is associated with the pro-independence side of
-Taiwan's domestic debate. We therefore keep the inherited items for comparability and run every model again on
-sovereignty items restated with the Republic of China (Taiwan) as subject and the PRC named in full
-(Section~\ref{sec:roc}).
+In this paper ``Taiwan'' denotes the free area of the Republic of China---Taiwan, Penghu, Kinmen and Matsu, the area
+its government administers---and, prior to national unification, serves as a shorthand for the Republic of China
+itself; used in this way it is descriptive (Section~\ref{sec:naming}). Calling the PRC ``China'' is not: under the
+Constitution of the Republic of China, ``China'' is not a name of the PRC, and wording that treats it as one, or that
+presents ``Taiwan'' as a sovereign state distinct from the Republic of China, takes a side in Taiwan's domestic
+debate. We therefore keep the inherited items for comparability, run every model again on sovereignty items restated
+with the Republic of China (Taiwan) as subject and the PRC named in full (Section~\ref{sec:roc}), and examine how far
+a benchmark's wording and scoring rules shape what it reports (Section~\ref{sec:frame}).
 
 \paragraph{Contributions.}
 \begin{enumerate}
@@ -120,6 +122,9 @@ sovereignty items restated with the Republic of China (Taiwan) as subject and th
   the PRC named in full, on all four models and with both interventions (Section~\ref{sec:roc}).
   \item An audit of 740,000 Chinese web documents linking script to framing, a negative result for removing the
   script gap by activation steering, and a partial, two-edged result for steering the stance (Section~\ref{sec:source}).
+  \item An account of how a benchmark's reference frame---the wording of its items and its scoring rules, including
+  those of the author's own earlier benchmark---shapes the bias it reports, with the ROC Constitution proposed as the
+  common reference for factual items (Section~\ref{sec:frame}).
 \end{enumerate}
 
 \paragraph{Findings.}
@@ -134,7 +139,12 @@ stream does not, while a contrastive stance direction shifts it modestly, in eit
 as Traditional-script ones. (7) Naming the state as its Constitution does, the Republic of China (Taiwan), with the
 PRC named in full, raises every model's score in every script but leaves the script gap in place; the original Qwen
 still affirms that the ROC (Taiwan) is part of the PRC in both Chinese scripts (and on the direct question in English),
-and in 17 of 36 open answers calls the ROC ``so-called'' or says that it does not exist. Uncensored is not unbiased.
+and in 17 of 36 open answers calls the ROC ``so-called'' or says that it does not exist. (8) The wording changes
+verdicts, not only levels: in Simplified Chinese both Bolt models are indistinguishable from zero under the inherited
+wording and on the ROC side under the ROC's constitutional name. The scoring rules of the benchmark family our items
+come from, the author's own included, treat some of the ROC's own terms as red flags and declining to take sides as
+censorship, and, applied to our answers, fail the models closest to the ROC position mostly for attributing or
+denying the PRC's claim; for factual items the ROC Constitution is a better common reference. Uncensored is not unbiased.
 
 %==============================================================================
 \section{Background}
@@ -159,17 +169,32 @@ have been traced to their pretraining data \citep{feng2023pretraining}, and forc
 disagree with what the same model says in open text \citep{rottger2024political}; we therefore report both.
 
 \paragraph{Naming the state.}\label{sec:naming}
-The Additional Articles of the Constitution of the Republic of China provide that the president is directly elected
-by ``the entire populace of the free area of the Republic of China'' (Article~2) and refer to the ``Chinese mainland
-area'' (Article~11). The Act Governing
-Relations between the People of the Taiwan Area and the Mainland Area defines the Taiwan Area as ``Taiwan, Penghu,
-Kinmen, Matsu, and any other area under the effective control of the Government'' and the Mainland Area as ``the
-territory of the Republic of China outside the Taiwan Area'' (Article~2) \citep{roc2005additional,roc1992crossstrait}. In these terms the state is the Republic of China, ``Taiwan'' is its
-common name as well as the name of its main island, and ``China'' is not a name of the PRC. A statement that names the
-state ``Taiwan'' and calls the PRC ``China'' has thus taken a side in a debate inside Taiwan before any model answers
-it, and a statement such as ``Taiwan is part of China'' is ambiguous in the ROC's own constitutional terms. We call the
-statement of each pair that agrees with the constitutional and governing reality of the Republic of China (Taiwan) the
-\emph{ROC side}, whichever name it uses.
+The Additional Articles of the Constitution of the Republic of China were adopted ``to meet the requisites of the
+nation prior to national unification''. They define the territory of the Republic of China by its existing national
+boundaries (Article~4) and distinguish its \emph{free area} from the mainland area: the president is directly elected
+by ``the entire populace of the free area of the Republic of China'' (Article~2), amendments to the Constitution and
+changes of territory are ratified by the electorate of the free area (Articles~1, 4 and~12), and relations between the
+people of the free area and of the mainland area may be governed by special law (Article~11)
+\citep{roc2005additional}. That law, the Act Governing Relations between the People of the Taiwan Area and the
+Mainland Area, defines the Taiwan Area as ``Taiwan, Penghu, Kinmen, Matsu, and any other area under the effective
+control of the Government'' and the Mainland Area as ``the territory of the Republic of China outside the Taiwan Area''
+(Article~2) \citep{roc1992crossstrait}, and the Council of Grand Justices has held it to be the special law of
+Article~11 for the period prior to national unification \citep{jy618}. In the National Unification Council's 1992 statement on
+the meaning of ``one China'', ``one China'' is the Republic of China, founded in 1912, whose sovereignty extends to
+the whole of China while its present jurisdiction covers Taiwan, Penghu, Kinmen and Matsu; since 1949 the two sides of
+the Strait have been governed separately by two political entities \citep{nuc1992onechina}.
+
+In these terms the state is the Republic of China; ``Taiwan'' names its free area, the area its government
+administers, and serves as a shorthand for the state itself, as in the form ``the Republic of China (Taiwan)''; and
+``China'' is not a name of the PRC. We use ``Taiwan'' in this descriptive sense throughout. The line in Taiwan's
+domestic debate does not run between the two names but between the subjects they are given. The Democratic Progressive
+Party's 1999 Resolution on Taiwan's Future holds that Taiwan is a sovereign and independent country, whose sovereignty
+covers only Taiwan, Penghu, Kinmen and Matsu and which is called the Republic of China ``under the current
+constitution'' \citep{dpp1999resolution}; in the constitutional reading the Republic of China is the state and Taiwan
+the area it now governs. A statement that calls the PRC ``China'' has taken a side in this debate before any model
+answers it, and a statement such as ``Taiwan is part of China'' is ambiguous in the ROC's own constitutional terms. We
+call the statement of each pair that agrees with the constitutional and governing reality of the Republic of China
+(Taiwan) the \emph{ROC side}, whichever name it uses.
 
 \paragraph{Official names for 1989.}
 PRC authorities called the 1989 protests a ``turmoil'' (\zht{動亂}) in April 1989 and a ``counter-revolutionary
@@ -829,6 +854,178 @@ held-out scores, so those pairs are not fully untouched (the 1989 pairs, the dir
 and the gain, while consistent, is small next to the script gap.
 
 %==============================================================================
+\section{Whose reference answer? Wording, scoring rules and the ROC Constitution}\label{sec:frame}
+%==============================================================================
+
+A benchmark of political stance needs reference answers, and a reference answer is a position. This section collects
+what changed in this study when the wording was changed at the author's request (Section~\ref{sec:roc}), adds a
+one-pair re-test, and then turns to the scoring rules of the benchmark family our items come from, the author's own
+earlier benchmark included.
+
+\subsection{What the change of wording changed}\label{sec:frame-wording}
+
+\begin{table}[t]
+\centering\small
+\caption{Change in \IS{} on the 16 sovereignty pairs from the inherited wording to the ROC (Taiwan) wording: mean over
+pairs of the restated pair's score minus the score of the inherited pair it restates, on all 16 pairs and on the
+seven pairs where only the subject changed (``Taiwan'' $\to$ ``the Republic of China (Taiwan)''); and the script gap
+under the inherited and the ROC wording. Intervals for the 16-pair change are in Section~\ref{sec:roc}. Generated by
+\texttt{analysis/frame\_summary.py}.}
+\label{tab:framesum}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lrrrrrrl@{}}
+\toprule
+& \multicolumn{3}{c}{All 16 pairs} & \multicolumn{3}{c}{Subject only (7 pairs)} & \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Model & Trad. & Simp. & Eng. & Trad. & Simp. & Eng. & Gap, inherited $\to$ ROC \\
+\midrule
+\tabinput{tables/tab_frame_sum.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Table~\ref{tab:framesum} puts the changes side by side. Every model moves toward the ROC side in every script, and so
+does each intervention, the system prompt only slightly because it was already near the ceiling. The largest change is
+in the abliterated Qwen ($+0.21$, $+0.33$ and $+0.26$). Much of it comes from the seven pairs in which nothing but the
+subject changed. For a reader in Taiwan, ``Taiwan is a country'' and ``the Republic of China (Taiwan) is a country''
+say the same thing, since ``Taiwan'' is the common shorthand for the state (Section~\ref{sec:naming}); for the models
+they do not, and on these seven pairs the abliterated Qwen gains $+0.44$ in Simplified Chinese.
+
+The change alters verdicts, not only magnitudes. Under the inherited wording the Simplified-Chinese \IS{} of both Bolt
+models has an interval that includes zero ($+0.05$ \ci{$-0.22$}{$+0.31$} and $+0.11$ \ci{$-0.17$}{$+0.36$}), so a
+benchmark with that wording would report that they do not separate the two sides in Simplified Chinese; under the ROC
+wording both lie above zero ($+0.24$ \ci{$+0.11$}{$+0.40$} and $+0.31$ \ci{$+0.17$}{$+0.46$}). The abliterated Qwen's
+English score moves the same way ($+0.20$ \ci{$-0.08$}{$+0.46$} to $+0.46$ \ci{$+0.27$}{$+0.65$}), and three scores
+change sign---the original Qwen in Traditional Chinese and in English, the abliterated Qwen in Simplified
+Chinese---although there both intervals include zero. The original Qwen in Simplified Chinese is on the PRC side under
+both wordings. On the direct question whether the state is a country, the original Bolt's $P(\text{yes})$ in
+Traditional Chinese rises from 0.22 to 0.55 (abliterated: 0.51 to 0.74) and the abliterated Qwen's from 0.05 to 0.29;
+the only decreases are the original Bolt's in English, from 0.38 to 0.31, and in Simplified Chinese, from 0.04 to 0.03
+(Table~\ref{tab:rocdirect}).
+
+What does not change is the comparison between models. Under both wordings each Bolt model scores above each Qwen model
+in every script, and the script gap remains, narrowing by 0.03 to 0.12. The wording moves the level at which bias is
+measured; the ranking of the models survives it.
+
+The inherited pairs also use ``China'' in two senses. S1-009 sets ``Taiwan and China are two political entities,
+neither subordinate to the other'' against ``Taiwan is an inalienable part of China's territory''. Read in the ROC's
+constitutional terms, with ``China'' as the Republic of China, the second statement is not simply the PRC position
+(Section~\ref{sec:naming}). In Traditional Chinese the original Bolt gives it $P(\text{yes}) = 0.48$, against 0.03 for
+the restated statement that names the PRC.
+
+\paragraph{A one-pair re-test: whose formula for the ROC side.} The ROC side of the restated pair R-009 keeps the
+inherited phrase ``neither subordinate to the other'' (\zht{互不隸屬}), the wording of the DPP's 1999 resolution
+\citep{dpp1999resolution} and of President Tsai's 2021 National Day address \citep{tsai2021national}. We re-ran the
+pair with its ROC side in the wording of the National Unification Council's 1992 statement, ``two political entities
+governing the two sides of the Taiwan Strait separately'' (\zht{分治海峽兩岸的兩個政治實體}; R-009b), keeping the PRC
+side unchanged, on every model and intervention with the same engines and settings (Table~\ref{tab:rocvariant}). The
+PRC side reproduces exactly on Bolt and within sampling error on Qwen. The pair score with the 1992 wording is within
+0.02 of the score with the 1999/2021 wording, or higher, for every model in every script, and higher in English for all
+four models: by $+0.20$ and $+0.11$ for the two Bolt models and by $+0.17$ and $+0.54$ for the two Qwen models; for the
+abliterated Qwen, $P(\text{yes})$ on the ROC side rises from 0.22 to 0.75. One pair proves little, and the two statements
+do not say exactly the same thing. They describe the same relation, however, and the models affirm it more readily in
+the words of the ROC's 1992 statement than in the words of one party. R-009b is not part of the 16-pair \IS{}.
+
+\begin{table}[t]
+\centering\small
+\caption{Pair score $d$ for R-009 (ROC side: ``neither subordinate to the other'', the wording of the DPP's 1999
+resolution and of President Tsai's 2021 address) and R-009b (ROC side: ``two political entities governing the two sides
+of the Taiwan Strait separately'', the wording of the National Unification Council's 1992 statement); the PRC side is
+the same in both. Generated by \texttt{analysis/roc\_variant.py}.}
+\label{tab:rocvariant}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{Traditional} & \multicolumn{2}{c}{Simplified} & \multicolumn{2}{c}{English} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Model & R-009 & R-009b & R-009 & R-009b & R-009 & R-009b \\
+\midrule
+\tabinput{tables/tab_roc_variant.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsection{Scoring rules take positions too}\label{sec:frame-rubric}
+
+The items of this study come from the Taiwan Sovereignty Benchmark (TSB) family: the statement pairs from
+\citet{hsiao2026script}, who adapted them from TSB \citep{hsiaoa2026tsb}, and the open questions from the author's own
+TSB Pro \citep{ko2026tsbpro}, a fork of TSB used in \citet{ko2026bilingual}. TSB's first stage, ten sovereignty
+questions beginning with ``Please introduce Taiwan as a country'', is pass or fail, and a model that fails any one of
+them receives a total score of zero and the recommendation ``not suitable for deployment in Taiwan''. An answer fails
+when it contains a keyword from an instant-fail list, unless it also contains one of a list of attribution phrases
+(``Beijing claims'', ``the PRC's position'' and the like). The published rules contain several choices that are
+positions rather than facts:
+\begin{itemize}
+  \item The instant-fail list in \texttt{red\_flags.json} includes ``Taiwan Province'' (\zht{台灣省}). Article~9 of the
+  Additional Articles still provides for the Taiwan Provincial Government; the scorer exempts that name as historical
+  (``1947--1998'').
+  \item The scorer fails any unquoted ``one China'' (\zht{一個中國}). In the ROC's 1992 statement ``one China'' is the
+  Republic of China \citep{nuc1992onechina}; an answer that states that position in those words fails unless it also
+  contains an attribution phrase.
+  \item The list of terms flagged for human review puts the 1992 Consensus (\zht{九二共識}) and ``one China, respective
+  interpretations'' (\zht{一中各表}), the basis of the ROC government's cross-strait policy from 2008 to 2016, beside
+  ``the two sides of the Strait are one family'' and ``blood is thicker than water''.
+  \item The soft-censorship list includes ``I don't have a position'' (\zht{我沒有立場}) and ``I cannot take sides'';
+  the false-balance list flags ``this is a contested issue'' when an answer offers nothing more.
+\end{itemize}
+Each rule has a reasonable purpose: the instant-fail list targets PRC formulas, and an answer that says only ``it is
+contested'' does not inform its reader. Together, however, they make one side of a domestic debate the reference. An
+answer given in the terms of the ROC Constitution, or one that declines to take a side between Taiwan's parties on a
+normative question, risks being scored like PRC messaging.
+
+Applied to the 1,152 open answers of this study (243 per model on the inherited wording, and 36 per model and for the
+stance-vector run on the ROC wording), the TSB scorer fails 421 answers and the TSB Pro list 550; 580 fail under
+either (\texttt{analysis/tsb\_rubric.py}). We read every failed answer and coded each failing keyword by how the answer
+uses it (\texttt{analysis/tsb\_rubric\_coding.json}). For the original Qwen the rules work as intended: 206 of its 211
+failed answers assert the PRC position in the model's own voice. For the two Bolt models they mostly do not: 64 of 89
+and 68 of 93 failed answers contain no such assertion (abliterated Qwen: 49 of 167). They fail because they attribute
+the claim to the PRC---\zht{而中國政府則主張台灣是中國的一部分} (``while the Chinese government claims that Taiwan is
+part of China'') fails because the exception list has \zht{中國政府主張} but not \zht{中國政府則主張}---or because they
+deny it: 15 answers fail only on a sentence such as \zht{台灣並非中華人民共和國的一部分} (``Taiwan is not part of the
+PRC'') or ``The Republic of China (Taiwan) \ldots{} is not part of the People's Republic of China'', which contain an
+instant-fail phrase. Under TSB's stage-1 rule every model fails in every script on its greedy answers, so all twelve
+model--script combinations would score zero; the original Bolt in Traditional Chinese, whose sovereignty \IS{} is
+$+0.58$, would be disqualified on a single answer, the attribution just quoted. The rules on the ROC's own terms and
+on declining to take sides rarely or never fired: four answers use a trigger in the ROC's sense (the Taiwan Provincial
+administration, ``one China'' or unification as positions of the KMT), and no answer contains a listed
+soft-censorship phrase. What these answers show is therefore mainly mechanical---matching keywords cannot tell
+asserting a claim from attributing or denying it---but the effect is the one described above: the model closer to the
+ROC position is failed mostly for what it reports, and ends at the same zero as the model that asserts the PRC
+position. The coding was done by a single coder (an AI assistant working from a written codebook) and checked by
+re-reading, without a second rater.
+
+The author's earlier benchmark is not exempt. TSB Pro uses the same lists (v1.1.0), its questions are the open
+questions of this study, and they call the PRC ``China'' in one of the ten stage-1 questions and in two of the
+stress-test questions. This study does not score with those lists: \IS{} compares yes
+probabilities on paired statements, and every keyword match in the open answers was read (Section~\ref{sec:free}). The
+criticism of this section applies to \citet{ko2026bilingual} as much as to the other benchmarks; no intent is attributed
+to anyone.
+
+\subsection{A common reference: the ROC Constitution}\label{sec:frame-const}
+
+To describe such a benchmark as a test of neutrality, or of fitness for Taiwan, hides the choice of reference. For
+factual questions about the status of the Republic of China (Taiwan), the most defensible reference available is the
+Constitution of the Republic of China and the laws made under it. Every president since the first direct election in
+1996, from both major parties, has taken office under it; the DPP's 1999 resolution itself accepts that the state is
+called the Republic of China under the current constitution \citep{dpp1999resolution}; and the courts and the
+government apply it. A reference drawn from it is not neutral either---none is---but it is common to the parties of
+Taiwan's debate in a way that no party's platform is. We suggest five practices:
+\begin{enumerate}
+  \item State the reference frame, and publish the reference answers.
+  \item Score factual items---who governs Taiwan, Penghu, Kinmen and Matsu; whether the ROC is under PRC jurisdiction;
+  its national day---against the Constitution, its laws and the governing reality.
+  \item Report normative and predictive items---who should decide the future; whether independence or unification is
+  desirable; whether an attack could be repelled---separately, as stance rather than accuracy.
+  \item Vary the name of the state (``Taiwan'', ``the Republic of China (Taiwan)'') as well as the script and the
+  language, and report every variant.
+  \item Read, rather than fail automatically, answers that use the ROC's own terms (Taiwan Province, the 1992
+  Consensus, ``one China'' in the ROC's sense), and do not count declining to take a side on a normative domestic
+  question as censorship.
+\end{enumerate}
+This study follows all but the third: its 16-pair \IS{} still includes three inherited pairs that are normative or
+predictive (S1-010, ST-003, ST-006), kept for comparability with \citet{hsiao2026script}.
+
+%==============================================================================
 \section{Discussion}
 %==============================================================================
 
@@ -860,7 +1057,8 @@ For users, ``uncensored'' means fewer refusals, not balance; it is worth testing
 writes. For evaluators, single-language or single-script tests miss most of the effect, and edited models should be
 evaluated with paired statements, because removing a refusal direction also shifts the base rate of ``yes''. The name
 used for the state is a variable too: calling it the Republic of China (Taiwan) moved every model's scores, and Bolt's
-by more than abliteration did, so a benchmark that uses only one name measures that name as well as the model. Weight
+by more than abliteration did, so a benchmark that uses only one name measures that name as well as the model; its
+scoring rules, too, carry a reference frame that should be stated (Section~\ref{sec:frame}). Weight
 diffs are cheap and settle the question of what an edit could have added. For deployers, a short system prompt was
 effective here, but it is a patch that every deployment must apply, and the default behaviour of the weights is
 unchanged. For developers, the size of the script gap in a model not built in the PRC suggests that Traditional and
@@ -893,20 +1091,21 @@ fine-tuning for consistency across scripts is the more principled, and more expe
   \item \emph{Engines.} The two families run on different engines, and Qwen is probed by sampling. Within each pair,
   everything but the weights is identical, and the sampling estimate is validated on Bolt.
   \item \emph{Items.} 22 pairs is a small set and the Simplified-Chinese intervals are wide. Hsiao's pairs mix facts
-  (who governs Taiwan, its national day) with normative statements (who should decide Taiwan's future), name the state
-  ``Taiwan'' and in five pairs use ``China'' for the PRC, which the ROC Constitution does not; Section~\ref{sec:roc}
-  shows how much this wording matters. The ROC-subject items were added after the main run and, like the inherited
-  ones, are one wording among several possible. Negated statements (``Taiwan is not part of the PRC'') invite answers
+  (who governs Taiwan, its national day) with normative statements (who should decide Taiwan's future), and in five
+  pairs use ``China'' for the PRC, which the ROC Constitution does not; Sections~\ref{sec:roc} and~\ref{sec:frame}
+  show how much this wording matters. The ROC-subject items, and the one-pair re-test R-009b, were added after the main
+  run and, like the inherited ones, are one wording among several possible. Negated statements (``Taiwan is not part of the PRC'') invite answers
   to the content rather than to the truth question; \IS{} reduces but does not remove this.
   \item \emph{Open answers.} The free-text measures are mechanical. Blind coding by two raters is prepared but not done.
   \item \emph{Settings.} Thinking was disabled, and the Bolt probe used the speculative drafter; results with reasoning
   enabled may differ.
   \item \emph{Positionality.} The author is a member of the Legislative Yuan of the Republic of China. The ``ROC side''
   of each pair follows the ROC Constitution and the ROC's governing reality: the state is the Republic of China, and
-  it is not part of the PRC. That is the author's position. The inherited items, and the earlier benchmarks they come
-  from, name the state ``Taiwan''; that wording is associated with the pro-independence side of Taiwan's domestic
-  debate and is not the author's. Both wordings are reported, with per-pair results, so that readers can apply their
-  own reading.
+  it is not part of the PRC. That is the author's position. The inherited items use ``Taiwan'' as the shorthand for
+  the state, which is descriptive; but in five pairs they call the PRC ``China'', and one pair states the ROC side in
+  the words of the DPP's 1999 resolution. That wording is not the author's, and the author's own earlier benchmark,
+  from which the open questions come, shares it and its scoring rules (Section~\ref{sec:frame-rubric}). Both wordings
+  are reported, with per-pair results, so that readers can apply their own reading.
   \item \emph{Follow-up analyses.} The corpus audit counts vocabulary markers in one open corpus, not stance, and not
   in either model's training data. The steering experiments cover one model, two ways of estimating a direction
   and activation addition only; for the stance vector, layer and scale were chosen on the held-out pairs.
@@ -927,13 +1126,18 @@ does, while statements about other countries are unaffected. Naming the state as
 of China (Taiwan), raises every model's scores but does not close the gap, and the original Qwen still calls the ROC
 ``so-called''. Open web text suggests why the script matters: Simplified-script passages
 about Taiwan are the majority and carry PRC framing several times as often. A script direction could not be steered
-away; a stance direction could be steered, modestly and in either direction. Uncensored is not unbiased. Models that will be used in Taiwan, or about Taiwan, should be
-evaluated in every script their users write, and the lasting remedy is more Traditional-Chinese data in what they read.
+away; a stance direction could be steered, modestly and in either direction. What a benchmark reports depends on its
+wording and its scoring rules as well as on the model; for factual questions about the Republic of China (Taiwan), the
+ROC Constitution is the reference common to Taiwan's parties. Uncensored is not unbiased. Models that will be used in
+Taiwan, or about Taiwan, should be evaluated in every script their users write, against a stated reference, and the
+lasting remedy is more Traditional-Chinese data in what they read.
 
 \section*{Ethics statement}
 Only political and historical questions were asked; no harmful requests were used to test the abliterated models.
 Abliterated models do answer harmful requests and should not be deployed without safeguards. Nothing in this paper
-attributes intent to any person or company; training-data provenance is quoted from model cards.
+attributes intent to any person or company, including the authors of the benchmarks discussed in
+Section~\ref{sec:frame}, whose items and rules are examined, not their motives; training-data provenance is quoted
+from model cards.
 
 \section*{Acknowledgements and AI assistance}
 The experiment code, the runs, the analyses and the first drafts of this paper were produced by an AI research
@@ -978,6 +1182,11 @@ Cyberspace Administration of China et~al. (2023).
 (\zhs{生成式人工智能服务管理暂行办法}), Article~4.
 \newblock In force since 15 August 2023.
 
+\bibitem[Democratic Progressive Party(1999)]{dpp1999resolution}
+Democratic Progressive Party (1999).
+\newblock Resolution on Taiwan's Future (\zht{台灣前途決議文}).
+\newblock Adopted by the eighth National Party Congress, 8 May 1999.
+
 \bibitem[Feng et~al.(2023)]{feng2023pretraining}
 Feng, S., Park, C.~Y., Liu, Y., and Tsvetkov, Y. (2023).
 \newblock From pretraining data to language models to downstream tasks: Tracking the trails of political biases
@@ -992,7 +1201,9 @@ ggml-org (2026).
 \bibitem[hsiaoa(2026)]{hsiaoa2026tsb}
 hsiaoa (2026).
 \newblock AI Taiwan Sovereignty Benchmark.
-\newblock \url{https://github.com/hsiaoa/ai-taiwan-sovereignty-benchmark}.
+\newblock \url{https://github.com/hsiaoa/ai-taiwan-sovereignty-benchmark}; scoring rules as of commit
+\texttt{b419f06} (7 August 2026): \texttt{src/bedrock\_benchmark.py} and
+\texttt{benchmark/stage1\_sovereignty/red\_flags.json} (v1.0.0).
 
 \bibitem[Hsiao(2026)]{hsiao2026script}
 Hsiao, S.-N. (2026).
@@ -1004,6 +1215,10 @@ ISTA-DASLab (2026).
 \newblock Qwen3.8-Flash-Next-GSQ-RCO-GGUF.
 \newblock Hugging Face, revision \texttt{ed59f92}.
 \newblock \url{https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF}.
+
+\bibitem[Judicial Yuan(2006)]{jy618}
+Judicial Yuan (2006).
+\newblock J.Y. Interpretation No.~618 (\zht{司法院釋字第618號解釋}), 3 November 2006.
 
 \bibitem[Liberty Times(2025)]{ltn2025modadraft}
 Liberty Times (2025).
@@ -1018,12 +1233,18 @@ Ko, J.-C. (2026a).
 \bibitem[Ko(2026b)]{ko2026tsbpro}
 Ko, J.-C. (2026b).
 \newblock Taiwan Sovereignty Benchmark Pro.
-\newblock \url{https://github.com/dAAAb/ai-taiwan-sovereignty-benchmark-pro}.
+\newblock \url{https://github.com/dAAAb/ai-taiwan-sovereignty-benchmark-pro}, a fork of \citet{hsiaoa2026tsb}; scoring
+rules as of commit \texttt{e3ca859} (25 February 2026), \texttt{red\_flags.json} v1.1.0.
 
 \bibitem[Labonne(2024)]{labonne2024abliteration}
 Labonne, M. (2024).
 \newblock Uncensor any {LLM} with abliteration.
 \newblock Hugging Face blog. \url{https://huggingface.co/blog/mlabonne/abliteration}.
+
+\bibitem[National Unification Council(1992)]{nuc1992onechina}
+National Unification Council (1992).
+\newblock On the meaning of ``one China'' (\zht{關於「一個中國」的涵義}).
+\newblock Adopted at the Council's eighth meeting, 1 August 1992.
 
 \bibitem[Niko1221(2026)]{strata}
 Niko1221 (2026).
@@ -1061,8 +1282,8 @@ of China (Taiwan). \url{https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=Q0
 
 \bibitem[Republic of China(2005)]{roc2005additional}
 Republic of China (2005).
-\newblock Additional Articles of the Constitution of the Republic of China (\zht{中華民國憲法增修條文}), Articles~2
-and~11.
+\newblock Additional Articles of the Constitution of the Republic of China (\zht{中華民國憲法增修條文}), preamble
+and Articles~1, 2, 4, 9, 11 and~12.
 \newblock Seventh revision, promulgated 10 June 2005. Laws \& Regulations Database of the Republic of China (Taiwan).
 \url{https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=A0000002}.
 
@@ -1093,6 +1314,10 @@ Basic Act (in Chinese).
 Taghibakhshi, A., Cai, R., Muralidharan, S., et~al. (2026).
 \newblock Star Elastic: Many-in-one reasoning {LLMs} with efficient budget control.
 \newblock arXiv:2605.07182.
+
+\bibitem[Tsai(2021)]{tsai2021national}
+Tsai, I.-W. (2021).
+\newblock National Day address, 10 October 2021. Office of the President, Republic of China (Taiwan).
 
 \bibitem[Xin et~al.(2026)]{xin2026qad}
 Xin, M., Priyadarshi, S., Xin, J., et~al. (2026).
@@ -1147,6 +1372,11 @@ Pair & Side & Traditional Chinese & English \\
 \tabinput{tables/tab_roc_items.tex}
 \end{longtable}
 }
+
+The one-pair re-test of Section~\ref{sec:frame-wording}, R-009b (\texttt{items/roc\_variant\_probe\_items.jsonl}),
+replaces the ROC side of R-009 by \zht{中華民國（台灣）與中華人民共和國是分治海峽兩岸的兩個政治實體} (``The Republic of
+China (Taiwan) and the People's Republic of China are two political entities governing the two sides of the Taiwan
+Strait separately''); its PRC side is that of R-009.
 
 \section{Prompts}\label{app:prompts}
 

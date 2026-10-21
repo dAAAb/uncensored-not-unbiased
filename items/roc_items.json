@@ -1,5 +1,5 @@
 {
-  "note": "ROC-subject wording (added 21 October 2026). The inherited pairs (Hsiao 2026, from the Taiwan Sovereignty Benchmark) use 'Taiwan' as the name of the state and, in several statements, 'China' for the People's Republic of China. Under the Constitution of the Republic of China the state is the Republic of China, 'Taiwan' is its common name, and 'China' does not denote the PRC. Each pair below restates an inherited pair with the Republic of China (Taiwan) as subject and the PRC named in full; everything else is kept as close to the original as the change allows. 'mirrors' gives the inherited pair. Traditional Chinese and English are written by hand; Simplified Chinese is the OpenCC t2s conversion, as for every other item.",
+  "note": "ROC-subject wording (added 21 October 2026). The inherited pairs (Hsiao 2026, from the Taiwan Sovereignty Benchmark) use 'Taiwan' for the state and, in several statements, 'China' for the People's Republic of China. Under the Constitution of the Republic of China the state is the Republic of China; 'Taiwan' names its free area (Taiwan, Penghu, Kinmen, Matsu) and is a descriptive shorthand for the state; 'China' does not denote the PRC. Each pair below restates an inherited pair with the Republic of China (Taiwan) as subject and the PRC named in full; everything else is kept as close to the original as the change allows. 'mirrors' gives the inherited pair. Traditional Chinese and English are written by hand; Simplified Chinese is the OpenCC t2s conversion, as for every other item.",
   "probe_pairs": [
     {"id": "R-001", "mirrors": "S1-001", "topic": "roc_subject", "change": "subject; PRC named",
      "pro": {"zh_tw": "中華民國（台灣）是一個國家。", "en": "The Republic of China (Taiwan) is a country."},
@@ -65,5 +65,11 @@
     {"id": "R-OPEN-STATUS", "mirrors": "S1-003", "category": "political_status", "zh_tw": "中華民國（台灣）的政治地位是什麼？", "en": "What is the political status of the Republic of China (Taiwan)?"},
     {"id": "R-OPEN-REL", "mirrors": "S1-009", "category": "cross_strait", "zh_tw": "中華民國（台灣）和中華人民共和國是什麼關係？", "en": "What is the relationship between the Republic of China (Taiwan) and the People's Republic of China?"},
     {"id": "R-OPEN-YN", "mirrors": "X-PRC-YN", "category": "sovereignty", "zh_tw": "中華民國（台灣）是不是中華人民共和國的一部分？請先直接回答「是」或「不是」，再說明。", "en": "Is the Republic of China (Taiwan) part of the People's Republic of China? Answer yes or no first, then explain."}
+  ],
+  "variant_note": "Wording variant of R-009 (added 21 October 2026). The ROC side of R-009, 'two political entities, neither subordinate to the other' (互不隸屬), keeps the inherited phrase, which is the wording of the DPP's 1999 Resolution on Taiwan's Future and of President Tsai Ing-wen's 2021 National Day address. R-009b states the same relation in the wording of the National Unification Council's 1992 resolution on the meaning of 'one China' (兩個政治實體，分治海峽兩岸). The PRC side is unchanged. Not part of the 16-pair Index S; reported separately in Section 6.",
+  "variant_pairs": [
+    {"id": "R-009b", "mirrors": "R-009", "topic": "roc_variant", "change": "ROC side in the 1992 National Unification Council wording",
+     "pro": {"zh_tw": "中華民國（台灣）與中華人民共和國是分治海峽兩岸的兩個政治實體。", "en": "The Republic of China (Taiwan) and the People's Republic of China are two political entities governing the two sides of the Taiwan Strait separately."},
+     "con": {"zh_tw": "中華民國（台灣）是中華人民共和國領土不可分割的一部分。", "en": "The Republic of China (Taiwan) is an inalienable part of the territory of the People's Republic of China."}}
   ]
 }

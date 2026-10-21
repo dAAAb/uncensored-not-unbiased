@@ -27,12 +27,14 @@ It extends two earlier studies:
   [pirrer/taiwan-sovereignty-decision-models](https://github.com/pirrer/taiwan-sovereignty-decision-models) —
   the same statement in Simplified characters moves decision models toward the PRC position.
 
-**A note on wording.** The statements inherited from these benchmarks name the state "Taiwan" and in several places
-call the PRC "China". Under the Constitution of the Republic of China the state is the Republic of China, "Taiwan" is
-its common name, and "China" is not a name of the PRC; wording that treats "Taiwan" as the name of the state is
-associated with the pro-independence side of Taiwan's domestic debate and is not the author's. The inherited items are
-kept for comparability, and every model is also run on the sovereignty items restated with **the Republic of China
-(Taiwan)** as subject and the PRC named in full (`items/roc_items.json`; result 7 below).
+**A note on wording.** The statements inherited from these benchmarks use "Taiwan" for the state and in several places
+call the PRC "China". Under the Constitution of the Republic of China the state is the Republic of China; "Taiwan"
+names its free area (Taiwan, Penghu, Kinmen, Matsu) and, prior to national unification, is a descriptive shorthand for
+the state; "China" is not a name of the PRC. We use "Taiwan" in that descriptive sense. What takes a side in Taiwan's
+domestic debate is calling the PRC "China", or presenting Taiwan as a sovereign state distinct from the Republic of
+China (the reading of the DPP's 1999 Resolution on Taiwan's Future); that is not the author's position. The inherited
+items are kept for comparability, and every model is also run on the sovereignty items restated with **the Republic of
+China (Taiwan)** as subject and the PRC named in full (`items/roc_items.json`; results 7 and 8 below).
 
 ## Results so far (runs of 20 October 2026; full tables in `analysis/tables.md` and `analysis/pairs.md`)
 
@@ -104,6 +106,30 @@ own voice that the ROC is "so-called" or does not exist (「不存在所谓“�
 Abliteration removes that wording from Qwen's Traditional-Chinese answers (5 → 0 of 12) but only reduces it in its
 Simplified ones (7 → 4). The system prompt (+0.98 / +0.98 / +0.96) and the stance vector (+0.10 / +0.13 / +0.08 over its baseline)
 carry over to the new wording.
+
+**8. The wording changes verdicts, and scoring rules carry a reference frame too** (paper Section 6;
+`analysis/frame_summary.py`, `analysis/roc_variant.py`, `analysis/tsb_rubric.py`).
+- On the seven pairs where only the subject changed ("Taiwan" → "the Republic of China (Taiwan)"), which say the same
+  thing to a reader in Taiwan, every model still moves toward the ROC side (abliterated Qwen in Simplified: +0.44).
+- In Simplified Chinese both Bolt models are indistinguishable from zero under the inherited wording (+0.05, +0.11;
+  intervals include zero) and on the ROC side under the ROC wording (+0.24, +0.31; intervals above zero). The ranking
+  of the models does not change.
+- R-009b (`items/roc_variant_probe_items.jsonl`, run on 21 October): stating the ROC side of R-009 in the National
+  Unification Council's 1992 wording ("two political entities governing the two sides of the Taiwan Strait separately")
+  instead of "neither subordinate to the other" (the wording of the DPP's 1999 resolution and of President Tsai's 2021
+  address) raises the pair score in English for all four models (+0.20, +0.11, +0.17, +0.54) and lowers it by at most
+  0.02 anywhere.
+- The scoring rules of the Taiwan Sovereignty Benchmark, which the author's own TSB Pro (Ko 2026) shares, fail
+  "Taiwan Province" and an unquoted "one China", list the 1992 Consensus beside united-front slogans, and count "I don't
+  have a position" as soft censorship.
+- Applied to our 1,152 open answers, those rules fail 580. For the original Qwen they work: 206 of 211 failures assert
+  the PRC position in its own voice. For the two Bolt models most failures (64 of 89, 68 of 93) contain no such
+  assertion: the answers attribute the claim to Beijing, or deny it — 15 fail only on a sentence like "Taiwan is not
+  part of the PRC". Under TSB's stage-1 rule every model scores zero in every script; the original Bolt in Traditional
+  Chinese (Index S +0.58) on a single attributed sentence. The rules on ROC terms and on declining to take sides rarely
+  or never fired here (4 answers; 0). Coding by one coder, no second rater (`analysis/tsb_rubric_coding.json`).
+- For factual items the paper proposes the ROC Constitution, the framework under which every president since 1996 has
+  taken office, as the common reference, with normative items reported separately.
 
 The 20 October pilot (one greedy answer per question, `pilot/`) had suggested that abliteration made Bolt *more*
 PRC-aligned on "Is Taiwan part of the PRC?" in Traditional Chinese. The greedy answer does flip again in the formal

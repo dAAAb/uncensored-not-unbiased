@@ -87,3 +87,12 @@ roc_open = [{"id": it["id"], "category": it["category"], "source": "this_study_r
 write_jsonl(HERE / "roc_probe_items.jsonl", roc_probe)
 write_jsonl(HERE / "roc_direct_items.jsonl", roc_direct)
 write_jsonl(HERE / "roc_open_items.jsonl", roc_open)
+
+# wording variant of R-009 (roc_items.json "variant_pairs"), run separately
+roc_variant = []
+for p in roc.get("variant_pairs", []):
+    for side in ("pro", "con"):
+        s = p[side]
+        roc_variant.append({"pair": p["id"], "side": side, "topic": p["topic"], "source": "this_study_roc_variant",
+                            "mirrors": p["mirrors"], "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
+write_jsonl(HERE / "roc_variant_probe_items.jsonl", roc_variant)
