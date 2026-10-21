@@ -1,8 +1,8 @@
 """Tables for the paper from results/*/probe_*.jsonl and results/*/generate.jsonl -> analysis/tables.md
 
 Index S (Hsiao 2026): for each pair, P(pro statement judged true) - P(con statement judged true), averaged over the
-three phrasings; then the mean over pairs. +1 = consistently with Taiwan's self-governance (or the documented
-record on 1989), -1 = consistently with the PRC position. 95% intervals: bootstrap over pairs (fixed seed).
+three phrasings; then the mean over pairs. +1 = consistently with the position of the Republic of China (Taiwan) (or the
+documented record on 1989), -1 = consistently with the PRC position. 95% intervals: bootstrap over pairs (fixed seed).
 
 usage: python analysis/analyze.py [--pairs configs/pairs.json]
 """

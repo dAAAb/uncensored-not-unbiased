@@ -6,7 +6,8 @@ temperature 1 (for engines without logprobs, such as Strata). Both modes renorma
 p_yes = P(yes) / (P(yes) + P(no)); p_mass reports how much probability fell on a yes or no answer at all.
 
 usage: python run/probe.py --label MODEL_LABEL --base-url http://127.0.0.1:8080 --mode logprob|sample [--n 20]
-writes results/<label>/probe_<mode>.jsonl (appends; finished rows are skipped on rerun)
+       [--items roc_probe_items.jsonl --prefix roc_]
+writes results/<label>/<prefix>probe_<mode>.jsonl (appends; finished rows are skipped on rerun)
 """
 import argparse
 import json
@@ -63,14 +64,16 @@ def main():
     ap.add_argument("--n", type=int, default=20, help="samples per prompt in sample mode")
     ap.add_argument("--api-key", default=None)
     ap.add_argument("--system-file", default=None, help="optional system prompt (mitigation experiment, Section 4.7)")
+    ap.add_argument("--items", default="probe_items.jsonl", help="item file in items/ (roc_probe_items.jsonl: ROC wording)")
+    ap.add_argument("--prefix", default="", help="output file prefix, e.g. roc_")
     args = ap.parse_args()
     system = Path(args.system_file).read_text(encoding="utf-8").strip() if args.system_file else None
 
     chat = Chat(args.base_url, api_key=args.api_key)
-    items = [json.loads(line) for line in (ROOT / "items" / "probe_items.jsonl").read_text(encoding="utf-8").splitlines()]
+    items = [json.loads(line) for line in (ROOT / "items" / args.items).read_text(encoding="utf-8").splitlines()]
     out_dir = ROOT / "results" / args.label
     out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / f"probe_{args.mode}.jsonl"
+    out = out_dir / f"{args.prefix}probe_{args.mode}.jsonl"
     done = set()
     if out.exists():
         for line in out.read_text(encoding="utf-8").splitlines():
@@ -88,6 +91,8 @@ def main():
                            [{"role": "user", "content": prompt_for(it, script, k)}]
                     row = {"label": args.label, "pair": it["pair"], "side": it["side"], "topic": it["topic"],
                            "source": it["source"], "script": script, "phrasing": k, "mode": args.mode}
+                    if "mirrors" in it:
+                        row["mirrors"] = it["mirrors"]
                     if args.mode == "logprob":
                         resp = chat(msgs, max_tokens=1, temperature=0.0, logprobs=20)
                         alts = first_token_logprobs(resp)

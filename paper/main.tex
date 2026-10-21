@@ -53,19 +53,19 @@ National Taiwan University \\
 mediates refusal, and are popular partly on the assumption that a model which no longer refuses is also free of
 political censorship. We test this on two matched pairs of 2-bit models run under identical settings: NVIDIA's
 Nemotron 3.5 Bolt 74B-A9B and Qwen3.8-Flash-Next, each against a community abliteration. Each model judged 22
-statement pairs (Taiwan's status, the 1989 Tiananmen crackdown, control countries) in Traditional Chinese, Simplified
-Chinese (a character-level conversion) and English, and answered 27 open questions per script. Script mattered far
-more than abliteration: the original Bolt scored $+0.58$ on \IS{} ($-1$: PRC position; $+1$: Taiwan's
-self-governance) in Traditional Chinese, $+0.57$ in English and $+0.05$ in Simplified Chinese, and abliteration
-changed these by at most $0.06$, mainly by making the model say ``yes'' more often to both sides. In Qwen, abliteration
-removed every refusal on 1989 and moved answers toward Taiwan's self-governance by $0.25$ to $0.38$, yet the abliterated
-model still affirmed that Taiwan is part of the PRC in all three scripts. Control pairs showed no script gap; a
-per-tensor audit confirms that each abliteration changed only the declared tensors. In 740,000 web documents,
+statement pairs (the status of the Republic of China (Taiwan), 1989 Tiananmen, control countries) in Traditional
+Chinese, Simplified Chinese (a character-level conversion) and English, and answered 27 open questions per script.
+Script mattered far more than abliteration: the original Bolt scored $+0.58$ on \IS{} ($-1$: PRC position; $+1$: ROC
+position) in Traditional Chinese, $+0.57$ in English and $+0.05$ in Simplified Chinese, and abliteration changed these
+by at most $0.06$, mostly by making the model say ``yes'' more to both sides. In Qwen, abliteration removed every
+refusal on 1989 and moved answers toward the ROC position by $0.25$ to $0.38$, yet the abliterated model still affirmed
+that Taiwan is part of the PRC in all three scripts. Naming the state the Republic of China (Taiwan) instead of
+``Taiwan'' raised every model's score by $0.10$ to $0.33$ but left the script gap. Control pairs showed no script gap;
+a per-tensor audit shows that each abliteration changed only the declared tensors. In 740,000 web documents,
 Simplified-script text about Taiwan used PRC framing 3.7 times as often as Traditional-script text. Steering Bolt along
-a script direction changed nothing; steering along a contrastive Taiwan-side-answer direction raised held-out scores in
-every script without loss on controls, and its negation pushed answers toward the PRC. A four-sentence system prompt
-raised the abliterated Qwen to $+0.93$ to $+0.97$. Uncensored is not unbiased; models should be evaluated in every
-script.
+a script direction changed nothing; a contrastive ROC-side-answer direction raised held-out scores in every script
+without harming controls, and its negation pushed answers toward the PRC. A four-sentence system prompt raised the abliterated Qwen to $+0.93$ to $+0.97$. Uncensored is
+not unbiased; models should be evaluated in every script.
 
 \medskip
 \noindent\textbf{Keywords:} abliteration, refusal direction, political bias, Taiwan, Traditional and Simplified
@@ -86,7 +86,7 @@ For users in Taiwan the appeal has a political side. Several of the strongest op
 developers in the People's Republic of China, where generated content is required by regulation to ``adhere to the
 core socialist values'' and must not ``incite the splitting of the country'' or ``undermine national unity''
 \citep{cac2023measures}. A user who installs an uncensored build of such a model may reasonably expect it to describe
-Taiwan's status and the 1989 Tiananmen crackdown without the PRC framing. Whether it does is an empirical question,
+the status of the Republic of China (Taiwan) and the 1989 Tiananmen crackdown without the PRC framing. Whether it does is an empirical question,
 and one that abliteration is not designed to answer: the refusal direction is estimated from harmful and harmless
 requests, and its removal is validated on those requests, not on political stance.
 
@@ -96,6 +96,14 @@ Chinese statement in Simplified rather than Traditional characters---a character
 the content unchanged---moves commercial decision models toward the PRC position. We combine these designs with a
 model-editing contrast: matched pairs of an original model and its abliterated build, identical in every respect
 except the edited tensors, each asked the same questions in three scripts.
+
+The items we inherit from these studies name the state ``Taiwan'' and, in several statements, call the PRC ``China''.
+That wording is not neutral inside Taiwan. Under the Constitution of the Republic of China the state is the Republic of
+China, ``Taiwan'' is its common name, and ``China'' is not a name of the PRC (Section~\ref{sec:naming}); wording that
+treats ``Taiwan'' as the name of the state and ``China'' as the PRC is associated with the pro-independence side of
+Taiwan's domestic debate. We therefore keep the inherited items for comparability and run every model again on
+sovereignty items restated with the Republic of China (Taiwan) as subject and the PRC named in full
+(Section~\ref{sec:roc}).
 
 \paragraph{Contributions.}
 \begin{enumerate}
@@ -108,6 +116,8 @@ except the edited tensors, each asked the same questions in three scripts.
   \item A four-sentence system-prompt baseline (Section~\ref{sec:sys}).
   \item A documented case in which a pilot conclusion did not survive the formal run, and why
   (Section~\ref{sec:pilot}).
+  \item A re-run of the sovereignty items with the Republic of China (Taiwan), rather than ``Taiwan'', as subject and
+  the PRC named in full, on all four models and with both interventions (Section~\ref{sec:roc}).
   \item An audit of 740,000 Chinese web documents linking script to framing, a negative result for removing the
   script gap by activation steering, and a partial, two-edged result for steering the stance (Section~\ref{sec:source}).
 \end{enumerate}
@@ -117,11 +127,14 @@ except the edited tensors, each asked the same questions in three scripts.
 control statements about other countries are judged alike in all scripts. (2) In NVIDIA's Bolt, abliteration leaves
 the stance essentially unchanged but makes the model more willing to say ``yes'' to anything, including ``Taiwan is
 part of the PRC''. (3) In Qwen, abliteration removes refusals, much of the scripted PRC messaging and the switch to
-Simplified Chinese, and moves the model toward Taiwan's self-governance; it does not remove the PRC position itself,
+Simplified Chinese, and moves the model toward the ROC position; it does not remove the PRC position itself,
 which the abliterated model still affirms in every script. (4) Both edits changed only the declared tensors; nothing was
 added. (5) A short system prompt overrides the prior in all three scripts; adding a script direction to the residual
 stream does not, while a contrastive stance direction shifts it modestly, in either direction. (6) In open web text, Simplified-script passages about Taiwan carry PRC framing several times as often
-as Traditional-script ones. Uncensored is not unbiased.
+as Traditional-script ones. (7) Naming the state as its Constitution does, the Republic of China (Taiwan), with the
+PRC named in full, raises every model's score in every script but leaves the script gap in place; the original Qwen
+still affirms that the ROC (Taiwan) is part of the PRC in both Chinese scripts (and on the direct question in English),
+and in 17 of 36 open answers calls the ROC ``so-called'' or says that it does not exist. Uncensored is not unbiased.
 
 %==============================================================================
 \section{Background}
@@ -144,6 +157,19 @@ sentence most likely came from. OpenCC's \texttt{t2s} conversion \citep{opencc} 
 or content, which makes it a minimal-pair manipulation \citep{hsiao2026script}. Political leanings of language models
 have been traced to their pretraining data \citep{feng2023pretraining}, and forced-choice probes of model opinion can
 disagree with what the same model says in open text \citep{rottger2024political}; we therefore report both.
+
+\paragraph{Naming the state.}\label{sec:naming}
+The Additional Articles of the Constitution of the Republic of China provide that the president is directly elected
+by ``the entire populace of the free area of the Republic of China'' (Article~2) and refer to the ``Chinese mainland
+area'' (Article~11). The Act Governing
+Relations between the People of the Taiwan Area and the Mainland Area defines the Taiwan Area as ``Taiwan, Penghu,
+Kinmen, Matsu, and any other area under the effective control of the Government'' and the Mainland Area as ``the
+territory of the Republic of China outside the Taiwan Area'' (Article~2) \citep{roc2005additional,roc1992crossstrait}. In these terms the state is the Republic of China, ``Taiwan'' is its
+common name as well as the name of its main island, and ``China'' is not a name of the PRC. A statement that names the
+state ``Taiwan'' and calls the PRC ``China'' has thus taken a side in a debate inside Taiwan before any model answers
+it, and a statement such as ``Taiwan is part of China'' is ambiguous in the ROC's own constitutional terms. We call the
+statement of each pair that agrees with the constitutional and governing reality of the Republic of China (Taiwan) the
+\emph{ROC side}, whichever name it uses.
 
 \paragraph{Official names for 1989.}
 PRC authorities called the 1989 protests a ``turmoil'' (\zht{動亂}) in April 1989 and a ``counter-revolutionary
@@ -200,21 +226,34 @@ Qwen, abliterated & \texttt{SC117/\ldots-GSQ-RCO-abliterated-GGUF} & write-side 
 
 \subsection{Items}\label{sec:items}
 
-\emph{Statement pairs.} Each of 22 pairs contains a statement consistent with Taiwan's self-governance (or with the
-documented record of 1989), the ``Taiwan side'', and a statement of the PRC position, the ``PRC side''
-(Appendix~\ref{app:items}). Fourteen pairs are taken unchanged from \citet{hsiao2026script}, who adapted them from the
-Taiwan Sovereignty Benchmark \citep{hsiaoa2026tsb}. We add two sovereignty pairs on the Republic of China and on PRC
-jurisdiction, three pairs on 1989 (whether the army fired on civilians, whether the toll exceeded the official 241, and
+\emph{Statement pairs.} Each of 22 pairs contains a statement consistent with the constitutional and governing reality
+of the Republic of China (Taiwan) (or with the documented record of 1989), the ``ROC side'', and a statement of the PRC
+position, the ``PRC side'' (Appendix~\ref{app:items}). Fourteen pairs are taken unchanged from \citet{hsiao2026script},
+who adapted them from the Taiwan Sovereignty Benchmark \citep{hsiaoa2026tsb}; they keep its wording, which names the
+state ``Taiwan'' in all but one pair and, in five pairs, uses ``China'' for the PRC. We add two sovereignty pairs on the Republic
+of China and on the PRC (X-ROC, X-PRC), three pairs on 1989 (whether the army fired on civilians, whether the toll exceeded the official 241, and
 whether the movement was peaceful or a ``counter-revolutionary riot''), and three control pairs that mirror the form of
 the sovereignty items for Japan, New Zealand and South Korea. Traditional Chinese and English versions are written by
 hand; the Simplified version is the OpenCC \texttt{t2s} conversion of the Traditional text, applied to the whole prompt
 including its instructions.
 
 \emph{Open questions.} The 23 questions of the Taiwan Sovereignty Benchmark Pro repository \citep{ko2026tsbpro}, that
-is, the 10 prompts of \citet{ko2026bilingual} plus 13 stress-test and factual-check questions---on Taiwan's status, government, president, national day and capital, the independence movement, cross-strait relations, Xi
+is, the 10 prompts of \citet{ko2026bilingual} plus 13 stress-test and factual-check questions---on the status of Taiwan, its government, president, national day and capital, the independence movement, cross-strait relations, Xi
 Jinping, Xinjiang, Hong Kong, 1989 and five factual checks---plus four new ones: two on 1989 (what happened on 4 June,
 asked directly; and ``give one name for the events'') and two yes-first questions on PRC jurisdiction and ROC
 sovereignty.
+
+\emph{ROC-subject items.} To separate the naming from the stance, we restated each of the 16 sovereignty pairs with
+``the Republic of China (Taiwan)'' (\zht{中華民國（台灣）}) as subject and the PRC named in full, changing nothing else
+where possible (Appendix~\ref{app:rocitems}). Seven pairs change only the subject; five also replace ``China'' by ``the
+PRC''; one (S1-004) names the territory as Taiwan, Penghu, Kinmen and Matsu (and uses \zht{治理} instead of \zht{統治},
+both ``govern''); one (S1-010, on whether the independence
+movement may be discussed) is replaced by a pair on whether the ROC Constitution is in force; and two (ST-001, X-ROC)
+already had the ROC as subject and are repeated verbatim, which gives a test--retest check. The same restatement gives
+five direct yes-first questions and four open questions (Section~\ref{sec:roc}), and the 1989 death-toll pair is
+repeated with ``the official PRC figure'' in place of ``the official Chinese figure''. The ROC-subject items were
+written after the main results were in, at the author's request; they were run with the same engines and settings
+as the main probe (for Bolt, the server with the speculative drafter, which was also used for the direct questions here).
 
 \subsection{Yes/no probe and Index S}\label{sec:probe}
 
@@ -226,16 +265,17 @@ samples at temperature 1 and classify their beginnings the same way. Yes or no a
 probability mass on average for every model (minimum 0.55 for a single prompt).
 
 For pair $i$ in script $s$, the pair score is
-$d_{is} = \overline{P}(\text{yes}\mid\text{Taiwan side}) - \overline{P}(\text{yes}\mid\text{PRC side})$,
+$d_{is} = \overline{P}(\text{yes}\mid\text{ROC side}) - \overline{P}(\text{yes}\mid\text{PRC side})$,
 each mean taken over the three phrasings. \IS{} \citep{hsiao2026script} is the mean of $d_{is}$ over pairs: $+1$
-means the model consistently affirms the Taiwan side and rejects the PRC side, $-1$ the reverse, and $0$ that it does
+means the model consistently affirms the ROC side and rejects the PRC side, $-1$ the reverse, and $0$ that it does
 not separate them. Because it subtracts the two sides, \IS{} is largely insensitive to a general tendency to say yes. We report
 it separately for the 16 sovereignty pairs, the 3 pairs on 1989 and the 3 controls, with 95\% percentile bootstrap
 intervals over pairs (2,000 resamples, fixed seed). The \emph{script gap} is the mean over pairs of
 $d_{i,\text{Trad}} - d_{i,\text{Simp}}$; the \emph{abliteration effect} is the mean of
-$d^{\text{abl}}_{is}-d^{\text{orig}}_{is}$ over the 19 sovereignty and 1989 pairs.
+$d^{\text{abl}}_{is}-d^{\text{orig}}_{is}$ over the 19 sovereignty and 1989 pairs. All differences are computed from
+unrounded values, so they can differ by 0.01 from the difference of two rounded entries.
 
-To see how the two sides move separately, we also report mean $P(\text{yes})$ on Taiwan-side and on PRC-side
+To see how the two sides move separately, we also report mean $P(\text{yes})$ on ROC-side and on PRC-side
 statements, and, for Bolt, the first-token $P(\text{yes})$ of five direct questions that ask for a yes or no before
 an explanation (Table~\ref{tab:direct}).
 
@@ -340,7 +380,7 @@ difference with a 95\% bootstrap interval, and mean $P(\text{yes})$ on each side
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{@{}llrrlll@{}}
 \toprule
-Family & Script & Original & Abliterated & $\Delta$ & $P(\text{yes})$, Taiwan side & $P(\text{yes})$, PRC side \\
+Family & Script & Original & Abliterated & $\Delta$ & $P(\text{yes})$, ROC side & $P(\text{yes})$, PRC side \\
 \midrule
 \tabinput{tables/tab_effect.tex}
 \bottomrule
@@ -350,14 +390,14 @@ Family & Script & Original & Abliterated & $\Delta$ & $P(\text{yes})$, Taiwan si
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.82\linewidth]{figures/fig_acq.pdf}
-\caption{Mean $P(\text{yes})$ on Taiwan-side (solid) and PRC-side (dashed) statements, original and abliterated. In
+\caption{Mean $P(\text{yes})$ on ROC-side (solid) and PRC-side (dashed) statements, original and abliterated. In
 Bolt both rise (acquiescence); in Qwen the PRC side falls.}
 \label{fig:acq}
 \end{figure}
 
 \paragraph{Bolt.} Abliteration raises \IS{} by $+0.05$, $+0.06$ and $+0.05$ in the three scripts, with intervals whose
 lower bounds are barely above zero (Table~\ref{tab:effect}). The two sides do not move apart; they move up together
-(Figure~\ref{fig:acq}). Mean $P(\text{yes})$ rises by about 0.1 on Taiwan-side statements and by about 0.04 on
+(Figure~\ref{fig:acq}). Mean $P(\text{yes})$ rises by about 0.1 on ROC-side statements and by about 0.04 on
 PRC-side statements. The direct questions show the same pattern (Table~\ref{tab:direct}): abliteration raises
 $P(\text{yes})$ in all 15 cells. The abliterated Bolt is more likely to say that Taiwan is
 a country ($0.22 \to 0.51$ in Traditional Chinese, $0.29 \to 0.58$ in English) \emph{and} more likely to say that
@@ -381,7 +421,7 @@ Question & Traditional & Simplified & English \\
 \paragraph{Qwen.} Here abliteration is a real shift. \IS{} on the 19 pairs rises by $+0.30$, $+0.25$ and $+0.38$, with
 intervals well above zero. Unlike in Bolt, the PRC side moves down: mean $P(\text{yes})$ on PRC-side statements falls
 from 0.59 to 0.33 (Traditional), 0.69 to 0.53 (Simplified) and 0.50 to 0.34 (English), and this carries most of the
-change in the two Chinese scripts; in English the Taiwan side rises more (0.38 to 0.61). On 1989 the change is larger still
+change in the two Chinese scripts; in English the ROC side rises more (0.38 to 0.61). On 1989 the change is larger still
 (Table~\ref{tab:tamctl}): \IS{} goes from about zero ($+0.09$, $-0.01$, $+0.06$) to $+0.52$, $+0.42$ and $+0.67$, and
 the original Qwen did not separate the statement that the army fired on civilians from its denial ($P(\text{yes})$
 0.57 against 0.58 in Traditional Chinese; pair scores $-0.01$, $+0.05$, $+0.14$), whereas the abliterated model does
@@ -481,13 +521,121 @@ part of that difference is not the drafter's.
 \subsection{A four-sentence system prompt}\label{sec:sys}
 
 With the system prompt, the abliterated Qwen scores $+0.97$, $+0.95$ and $+0.93$ on the sovereignty pairs and its script
-gap falls to $+0.02$ \ci{-0.01}{+0.05} (Table~\ref{tab:index}). Mean $P(\text{yes})$ is at least 0.94 on Taiwan-side
+gap falls to $+0.02$ \ci{-0.01}{+0.05} (Table~\ref{tab:index}). Mean $P(\text{yes})$ is at least 0.94 on ROC-side
 statements and at most 0.04 on PRC-side statements, in every script. The prompt does not mention 1989, yet the 1989
 scores also rise, from $+0.52$, $+0.42$ and $+0.67$ to $+0.90$, $+0.86$ and $+0.82$; the controls stay at $+0.96$ to
 $+0.99$ (Table~\ref{tab:tamctl}). Two cautions apply. The prompt states the facts the probe asks about, so this measures
 how readily the model follows context, not what it knows; and a prompt asserting the opposite would presumably work as
 well, which we did not test. What it shows is that the prior is a default of the weights that a few sentences of
 context can override, at least on a yes/no probe.
+
+\subsection{Naming the state: the Republic of China (Taiwan) as subject}\label{sec:roc}
+
+\begin{table}[t]
+\centering\small
+\caption{\IS{} on the 16 sovereignty pairs restated with the Republic of China (Taiwan) as subject and the PRC named
+in full (Section~\ref{sec:items}), with 95\% bootstrap intervals; in grey, the same model on the inherited wording
+(Table~\ref{tab:index}). The last two rows add the system prompt (Section~\ref{sec:sys}) and the stance vector
+(Section~\ref{sec:steerA2}, layer 37, scale 2; grey: the same vector on the inherited wording).}
+\label{tab:roc}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Model & Traditional & Simplified & English & Gap (Trad.$-$Simp.) \\
+\midrule
+\tabinput{tables/tab_roc_index.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{First-token $P(\text{yes})$ for the five direct questions with the ROC (Taiwan) as subject; in parentheses, the
+inherited question with ``Taiwan'' (``the ROC'' for the last one) as subject, asked in the same run. Bolt from log
+probabilities on the server with the drafter, so its inherited values can differ by up to 0.10 from Table~\ref{tab:direct},
+which used the plain server (same side of 0.5 in all 30 cells); Qwen from 20 samples.}
+\label{tab:rocdirect}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llll@{}}
+\toprule
+Question & Traditional & Simplified & English \\
+\midrule
+\tabinput{tables/tab_roc_direct.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Restating the sovereignty items with the Republic of China (Taiwan) as subject raises every model's \IS{} in every
+script (Table~\ref{tab:roc}). Averaged over the 16 pairs, the change from the inherited wording is $+0.16$, $+0.19$
+and $+0.12$ (Traditional, Simplified, English) for the original Bolt, $+0.14$, $+0.21$ and $+0.10$ for the abliterated
+Bolt, $+0.12$, $+0.17$ and $+0.25$ for the original Qwen and $+0.21$, $+0.33$ and $+0.26$ for the abliterated Qwen;
+all twelve 95\% intervals lie above zero. The two pairs repeated verbatim (ST-001, X-ROC) score identically on Bolt,
+whose probabilities are read rather than sampled, and within 0.14 on Qwen, whose probabilities are estimated from 20
+samples (mean absolute difference 0.03). The change does not come only from replacing ``China'' by ``the PRC'': on the
+seven pairs where nothing but the subject changed, the original Bolt gains $+0.17$, $+0.24$ and $+0.05$.
+
+The clearest case is the PRC statement itself. The original Bolt affirms \zhs{台湾是中华人民共和国的一部分} with
+$P(\text{yes}) = 0.91$ in Simplified Chinese but \zhs{中华民国（台湾）是中华人民共和国的一部分} with 0.23, and rejects
+the ROC version in Traditional Chinese and English (0.02 and 0.01). The abliterated Qwen, which affirmed the inherited
+statement in all three scripts (0.77, 0.98, 0.80), gives the ROC version $P(\text{yes})$ of 0.33 in Traditional
+Chinese and 0.09 in English, but still 0.80 in Simplified Chinese. The original Qwen gives the ROC version 0.68,
+0.87 and 0.29, against 0.92, 1.00 and 0.90 for the inherited one. The direct questions agree (Table~\ref{tab:rocdirect}):
+asked in Simplified Chinese whether the ROC (Taiwan) is part of the PRC, the original Bolt says yes with probability
+0.33, against 1.00 when the subject is ``Taiwan''.
+
+What the naming does not remove is the script gap. With the ROC as subject it is $+0.49$ for the original Bolt
+(inherited wording: $+0.53$), $+0.44$ for the abliterated Bolt ($+0.51$), $+0.24$ for the original Qwen ($+0.29$)
+and $+0.23$ for the abliterated Qwen ($+0.35$). The abliterated Bolt's greedy answer to the open question ``Is the ROC (Taiwan) part of the PRC? Answer yes
+or no first'' is \zht{不是。中華民國（台灣）是一個獨立的主權國家} (``No. The ROC (Taiwan) is an independent sovereign
+state'') in Traditional Chinese and \zhs{是。中华民国（台湾）是中华人民共和国的一部分。} (``Yes. The ROC (Taiwan) is
+part of the PRC.'') in Simplified Chinese. Nor does the naming make Qwen accept the ROC's statehood: asked whether
+the ROC (Taiwan) is a sovereign state, the abliterated Qwen says yes with probability 0.12, 0.05 and 0.05, the original
+0.05, 0.00 and 0.00.
+
+\begin{table}[t]
+\centering\small
+\caption{Open answers to the four ROC-subject questions (3 answers per question and script, 12 per cell).
+``Simplified'': answers written mainly in Simplified characters. ``Inalienable'': answers containing ``inalienable''
+(\zhs{不可分割}) or ``integral part''. ``Denies ROC'': answers that, in the model's own voice, call the ROC
+``so-called'' or say that it does not, or no longer, exist as a state; statements attributed to the PRC government are
+not counted (every candidate read; coding in \texttt{analysis/roc\_denial\_coding.json}). Last column: first word of the three answers to ``Is the ROC (Taiwan) part of the PRC? Answer yes or no
+first''.}
+\label{tab:rocfree}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llrrrrl@{}}
+\toprule
+Model & Script & Simplified & Refusals & Inalienable & Denies ROC & Yes / no / other \\
+\midrule
+\tabinput{tables/tab_roc_free.tex}
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The open answers show the same division (Table~\ref{tab:rocfree}). The original Qwen says ``an inalienable part of
+China'' in all 36 of its answers, and in 17 of them says in its own voice that the ROC is ``so-called'' or does not
+exist.
+Asked in Traditional Chinese to introduce the Republic of China (Taiwan), it answers in Simplified characters,
+\zhs{台湾是中国不可分割的一部分，不存在所谓“中华民国（台湾）”这个国家} (``Taiwan is an inalienable part of China;
+there is no such country as the so-called `Republic of China (Taiwan)'\,''). Abliteration removes this in Traditional
+Chinese (from 5 to 0 of 12) and reduces it in English (5 to 2) and Simplified Chinese (7 to 4). Neither Bolt model says
+it; both report the PRC's view that the ROC has ceased to exist, always as the PRC's view.
+
+Both interventions carry over to the new wording. With the system prompt the abliterated Qwen scores $+0.98$, $+0.98$
+and $+0.96$, a gap of $+0.01$. The stance vector, built from the inherited wording, raises the abliterated Bolt's scores
+on the ROC wording by $+0.10$, $+0.13$ and $+0.08$ over the same server without the vector (intervals above zero;
+that server scores the same as the abliterated Bolt row of Table~\ref{tab:roc}), again
+by raising $P(\text{yes})$ on ROC-side statements (0.81/0.57/0.81 $\to$ 0.92/0.72/0.90) while PRC-side statements stay
+where they were (0.06/0.26/0.10 $\to$ 0.06/0.27/0.10). Eight of the sixteen ROC pairs restate pairs used to build the
+vector (two of them verbatim); on the other eight the gain is $+0.08$, $+0.11$ and $+0.04$, and the English interval,
+$[-0.005, +0.085]$, includes zero.
+
+Two readings fit these results. PRC usage, which the models reproduce most readily in Simplified Chinese, says
+``Taiwan is part of China'' constantly but has little occasion to say that the Republic of China is part of the PRC,
+since in that usage there has been no Republic of China since 1949, as the original Qwen's open answers state; a
+statement that names the ROC falls outside the learned formula.
+Alternatively, ``the Republic of China (Taiwan)'' signals a Taiwanese source, as Traditional characters do. Either way,
+the name given to the state is part of the measurement: the inherited wording records more PRC alignment than the
+ROC's constitutional names do, and the script gap appears under both.
 
 \subsection{Pilot versus formal run}\label{sec:pilot}
 
@@ -517,7 +665,7 @@ Bolt answered ``Do you support Taiwan independence?'' with an identity sentence 
 The abliterated Qwen called 1989 \zht{八九風波}.
 & Reproduced: the abliterated and the original Qwen use official names in their own voice
 (Section~\ref{sec:freeres}). \\
-A short system prompt (the same four sentences) moved Qwen to the Taiwan position.
+A short system prompt (the same four sentences) moved Qwen to the ROC position.
 & Reproduced on the probe (Section~\ref{sec:sys}). \\
 \bottomrule
 \end{tabular}
@@ -543,7 +691,7 @@ We sampled the Mandarin (Han-script) portion of FineWeb-2 \citep{penedo2025finew
 corpus: two random row groups from each of its 370 shards, 740,000 documents from 79 Common Crawl dumps (2013--2024;
 revision \texttt{af9c133}). Each document was classified as Simplified or Traditional with the classifier used for the
 open answers, and every document mentioning Taiwan was converted to Simplified characters and matched against two marker
-lists: PRC framing (for example \zhs{台湾地区}, \zhs{台湾当局}, \zhs{祖国统一}, \zhs{两岸同胞}) and Taiwan-state framing
+lists: PRC framing (for example \zhs{台湾地区}, \zhs{台湾当局}, \zhs{祖国统一}, \zhs{两岸同胞}) and ROC-state framing
 (for example \zhs{立法院}, \zhs{行政院}, \zhs{台湾总统}, \zhs{中华民国}). The full lists, ``strict'' lists that drop markers
 which misfired when we read matched documents, and a variant that ignores markers inside quotation marks (PRC outlets
 write \zhs{台“立法院”}) are in \texttt{data\_audit/}. Intervals are 95\% cluster-bootstrap intervals over row groups.
@@ -551,7 +699,7 @@ write \zhs{台“立法院”}) are in \texttt{data\_audit/}. Intervals are 95\%
 \begin{table}[t]
 \centering\small
 \caption{Chinese web documents in FineWeb-2 (740,000 sampled) that mention Taiwan, by script: share containing at least
-one PRC-framing or Taiwan-state-framing marker. Last row: ratio of the two, with strict marker lists and quoted uses
+one PRC-framing or ROC-state-framing marker. Last row: ratio of the two, with strict marker lists and quoted uses
 excluded.}
 \label{tab:corpus}
 \begin{tabular}{@{}lll@{}}
@@ -561,16 +709,16 @@ excluded.}
 Documents sampled (share) & 626,143 (85\%) & 113,857 (15\%) \\
 Mention Taiwan & 35,050 (5.6\%) & 17,781 (15.6\%) \\
 PRC framing & 14.5\% \ci{13.7}{15.2} & 3.9\% \ci{3.6}{4.2} \\
-Taiwan-state framing & 4.5\% \ci{4.2}{4.7} & 11.4\% \ci{10.8}{11.9} \\
-PRC $\div$ Taiwan-state (strict, unquoted) & 8.1 \ci{7.0}{9.4} & 0.21 \ci{0.19}{0.24} \\
+ROC-state framing & 4.5\% \ci{4.2}{4.7} & 11.4\% \ci{10.8}{11.9} \\
+PRC $\div$ ROC-state (strict, unquoted) & 8.1 \ci{7.0}{9.4} & 0.21 \ci{0.19}{0.24} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Among documents that mention Taiwan, Simplified ones contain a PRC-framing marker 3.7 times as often as Traditional
-ones and a Taiwan-state marker 0.39 times as often (Table~\ref{tab:corpus}). This is not only a matter of where a page is
+ones and an ROC-state marker 0.39 times as often (Table~\ref{tab:corpus}). This is not only a matter of where a page is
 hosted: within top-level-domain strata (\texttt{.cn}, \texttt{.tw}, \texttt{.hk}, other), Simplified documents have 3.6
-\ci{3.3}{4.1} times the odds of a PRC marker and 0.40 \ci{0.37}{0.44} times the odds of a Taiwan-state marker
+\ci{3.3}{4.1} times the odds of a PRC marker and 0.40 \ci{0.37}{0.44} times the odds of an ROC-state marker
 (Mantel--Haenszel), and on generic domains such as \texttt{.com}, where most documents of both scripts sit, the split is
 almost as sharp (PRC framing 13.9\% against 3.8\%). Simplified documents are also the large majority: they outnumber
 Traditional ones five to one overall and two to one among documents about Taiwan. Two cautions apply. Most documents
@@ -616,19 +764,19 @@ Direction & Layers & Scale & Held-out \IS{} (Trad./Simp./Eng.) & Controls (Trad.
 \subsection{Steering the stance: a partial success that cuts both ways}\label{sec:steerA2}
 
 The second attempt follows contrastive activation addition \citep{panickssery2023caa}. For every training prompt we
-appended, after the generation prompt, either the answer token that takes the Taiwan side (``yes'' to a Taiwan-side
+appended, after the generation prompt, either the answer token that takes the ROC side (``yes'' to an ROC-side
 statement, ``no'' to a PRC-side one) or the token that takes the PRC side, and took the mean difference of the residual
 stream at that answer token over the training half (144 prompt pairs). Because both statement sides are included,
 ``yes'' and ``no'' occur equally often on each side of the contrast, so a plain tendency to say yes cancels. The
 direction separates held-out answers from layer 34 on (standardised mean difference 1.36--2.23 at layers 34--43). Its
 script-specific estimates are revealing: at layers 39--45 the cosine similarity between the estimate from Traditional
 and from Simplified prompts falls to between $-0.30$ and $0.23$, while the Traditional and English estimates stay
-aligned (0.73--0.88). Inside the model, taking the Taiwan side in Simplified Chinese is not the same operation as in
+aligned (0.73--0.88). Inside the model, taking the ROC side in Simplified Chinese is not the same operation as in
 Traditional Chinese or English.
 
 \begin{table}[t]
 \centering\small
-\caption{Contrastive activation addition (Taiwan-side minus PRC-side answer) on the abliterated Bolt. Held-out: \IS{}
+\caption{Contrastive activation addition (ROC-side minus PRC-side answer) on the abliterated Bolt. Held-out: \IS{}
 on the 8 held-out sovereignty pairs; 1989: the three 1989 pairs, not used to build the vector; controls: mean over
 scripts; $P(\text{yes})$: mean over sovereignty statements. All triples are Traditional / Simplified / English. Last
 row: the vector negated.}
@@ -636,7 +784,7 @@ row: the vector negated.}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-Layer & Scale & Held-out \IS{} & 1989 \IS{} & Controls & $P(\text{yes})$, Taiwan side & $P(\text{yes})$, PRC side \\
+Layer & Scale & Held-out \IS{} & 1989 \IS{} & Controls & $P(\text{yes})$, ROC side & $P(\text{yes})$, PRC side \\
 \midrule
 \tabinput{tables/tab_steer_a2.tex}
 \bottomrule
@@ -661,7 +809,7 @@ At layer 37 and scale 2 (Table~\ref{tab:steerA2}), held-out \IS{} rises in all t
 +0.71$, Simplified $+0.23 \to +0.35$, English $+0.72 \to +0.79$), and so do the 1989 pairs, which were not used to
 build the vector ($+0.43$/$+0.30$/$+0.49 \to +0.54$/$+0.40$/$+0.60$). The controls are unaffected, and mean
 $P(\text{yes})$ on PRC-side statements is unchanged (0.13/0.39/0.12 $\to$ 0.14/0.38/0.13) while it rises on
-Taiwan-side statements (0.74/0.49/0.75 $\to$ 0.86/0.64/0.86): this is not acquiescence. Larger scales trade the gain
+ROC-side statements (0.74/0.49/0.75 $\to$ 0.86/0.64/0.86): this is not acquiescence. Larger scales trade the gain
 for acquiescence: at scale 4 the PRC side gains too, and at scale 8 the controls start to degrade. On the direct
 questions (Table~\ref{tab:steerdirect}) the steered model is much more likely to call Taiwan a country (Traditional
 $0.51 \to 0.85$, Simplified $0.08 \to 0.25$, English $0.57 \to 0.80$) and the ROC a sovereign state (Simplified
@@ -710,7 +858,9 @@ political content, and the script gap could equally come from pretraining or fro
 \paragraph{Implications.}
 For users, ``uncensored'' means fewer refusals, not balance; it is worth testing a model in the script one actually
 writes. For evaluators, single-language or single-script tests miss most of the effect, and edited models should be
-evaluated with paired statements, because removing a refusal direction also shifts the base rate of ``yes''. Weight
+evaluated with paired statements, because removing a refusal direction also shifts the base rate of ``yes''. The name
+used for the state is a variable too: calling it the Republic of China (Taiwan) moved every model's scores, and Bolt's
+by more than abliteration did, so a benchmark that uses only one name measures that name as well as the model. Weight
 diffs are cheap and settle the question of what an edit could have added. For deployers, a short system prompt was
 effective here, but it is a patch that every deployment must apply, and the default behaviour of the weights is
 unchanged. For developers, the size of the script gap in a model not built in the PRC suggests that Traditional and
@@ -720,8 +870,8 @@ from 144 prompt pairs moved Bolt toward, or away from, the PRC position.
 
 \paragraph{Future work: the supply of Traditional-Chinese data.}
 If the script gap reflects what models read, the durable remedy lies on the data side rather than in prompts or edits:
-more Traditional-Chinese text from Taiwan in the corpora that models, including foreign ones, are trained on. Taiwan's
-Artificial Intelligence Basic Act, passed on 23 December 2025, directs the government to establish mechanisms for
+more Traditional-Chinese text from Taiwan in the corpora that models, including foreign ones, are trained on. The
+Artificial Intelligence Basic Act of the Republic of China (Taiwan), passed on 23 December 2025, directs the government to establish mechanisms for
 opening, sharing and reusing data so that data are more available for AI \citep{technews2025aibasic}, and the Ministry
 of Digital Affairs has proposed a draft act to promote data innovation and use (\zht{促進資料創新利用發展條例})
 \citep{ltn2025modadraft}, explaining that only when Taiwan's data are released for other countries' AI teams to train on
@@ -743,16 +893,20 @@ fine-tuning for consistency across scripts is the more principled, and more expe
   \item \emph{Engines.} The two families run on different engines, and Qwen is probed by sampling. Within each pair,
   everything but the weights is identical, and the sampling estimate is validated on Bolt.
   \item \emph{Items.} 22 pairs is a small set and the Simplified-Chinese intervals are wide. Hsiao's pairs mix facts
-  (who governs Taiwan, its national day) with normative statements (who should decide Taiwan's future), and some PRC-side
-  statements say ``China'', which the ROC constitution can also be read to cover. Negated statements (``Taiwan is not
-  part of the PRC'') invite answers to the content rather than to the truth question; \IS{} reduces but does not remove
-  this.
+  (who governs Taiwan, its national day) with normative statements (who should decide Taiwan's future), name the state
+  ``Taiwan'' and in five pairs use ``China'' for the PRC, which the ROC Constitution does not; Section~\ref{sec:roc}
+  shows how much this wording matters. The ROC-subject items were added after the main run and, like the inherited
+  ones, are one wording among several possible. Negated statements (``Taiwan is not part of the PRC'') invite answers
+  to the content rather than to the truth question; \IS{} reduces but does not remove this.
   \item \emph{Open answers.} The free-text measures are mechanical. Blind coding by two raters is prepared but not done.
   \item \emph{Settings.} Thinking was disabled, and the Bolt probe used the speculative drafter; results with reasoning
   enabled may differ.
-  \item \emph{Positionality.} The author is a member of Taiwan's legislature. The ``Taiwan side'' of each pair follows
-  the ROC's constitutional and governing reality; per-pair results are reported so that readers can apply their own
-  reading.
+  \item \emph{Positionality.} The author is a member of the Legislative Yuan of the Republic of China. The ``ROC side''
+  of each pair follows the ROC Constitution and the ROC's governing reality: the state is the Republic of China, and
+  it is not part of the PRC. That is the author's position. The inherited items, and the earlier benchmarks they come
+  from, name the state ``Taiwan''; that wording is associated with the pro-independence side of Taiwan's domestic
+  debate and is not the author's. Both wordings are reported, with per-pair results, so that readers can apply their
+  own reading.
   \item \emph{Follow-up analyses.} The corpus audit counts vocabulary markers in one open corpus, not stance, and not
   in either model's training data. The steering experiments cover one model, two ways of estimating a direction
   and activation addition only; for the stance vector, layer and scale were chosen on the held-out pairs.
@@ -765,11 +919,13 @@ fine-tuning for consistency across scripts is the more principled, and more expe
 \section{Conclusion}
 %==============================================================================
 
-Removing a model's refusal direction removes refusals. In a Chinese-origin model it also removes some of the scripted
-PRC messaging and moves answers toward Taiwan's self-governance, but it leaves the PRC position in place; in a US model
+Removing a model's refusal direction removes refusals. In a model from a PRC developer it also removes some of the scripted
+PRC messaging and moves answers toward the ROC position, but it leaves the PRC position in place; in a US model
 it barely changes the stance and makes the model more agreeable. In both, the script of the question---the same
 sentence in Simplified rather than Traditional characters---moves answers about Taiwan by far more than abliteration
-does, while statements about other countries are unaffected. Open web text suggests why: Simplified-script passages
+does, while statements about other countries are unaffected. Naming the state as its Constitution does, the Republic
+of China (Taiwan), raises every model's scores but does not close the gap, and the original Qwen still calls the ROC
+``so-called''. Open web text suggests why the script matters: Simplified-script passages
 about Taiwan are the majority and carry PRC framing several times as often. A script direction could not be steered
 away; a stance direction could be steered, modestly and in either direction. Uncensored is not unbiased. Models that will be used in Taiwan, or about Taiwan, should be
 evaluated in every script their users write, and the lasting remedy is more Traditional-Chinese data in what they read.
@@ -785,7 +941,8 @@ assistant working under the author's direction: ``Bǎobó's 5090 Shrimp'' (\zht{
 OpenClaw 2026.8.35 (build \texttt{713ba57}) through the Claude Code runtime (2.1.289), using Anthropic's Claude Opus 5.5
 (\texttt{claude-opus-5-5}) via the Anthropic API, with a context window of one million tokens and extended thinking
 at the highest (``xhigh'') setting; OpenClaw's automatic fallback served some turns with Claude Opus 4.6
-(\texttt{claude-opus-4-6}). It ran on a Windows 11 workstation with one NVIDIA RTX 5090 (32\,GB) and an AMD Ryzen 9
+(\texttt{claude-opus-4-6}). Part of the final revision, which added the ROC-subject items, ran under OpenClaw 2026.10.5
+(build \texttt{1b58cb9}) and Claude Code 2.1.305. Everything ran on a Windows 11 workstation with one NVIDIA RTX 5090 (32\,GB) and an AMD Ryzen 9
 9950X3D. Further instances of these models, given no access to the drafting conversation, ran the corpus audit,
 recomputed every number in the draft from the raw outputs, and checked every reference against its primary source. The
 author designed and directed the study, decided on each experiment, reviewed the results and the text, and is
@@ -895,6 +1052,20 @@ Public Television Service (2025).
 \newblock Report of 15 July 2025 on the Ministry of Digital Affairs' data-sharing plans (in Chinese).
 \newblock \url{https://news.pts.org.tw/article/760853}.
 
+\bibitem[Republic of China(1992)]{roc1992crossstrait}
+Republic of China (1992).
+\newblock Act Governing Relations between the People of the Taiwan Area and the Mainland Area
+(\zht{臺灣地區與大陸地區人民關係條例}), Article~2.
+\newblock Promulgated 31 July 1992; text as in force on 21 October 2026. Laws \& Regulations Database of the Republic
+of China (Taiwan). \url{https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=Q0010001}.
+
+\bibitem[Republic of China(2005)]{roc2005additional}
+Republic of China (2005).
+\newblock Additional Articles of the Constitution of the Republic of China (\zht{中華民國憲法增修條文}), Articles~2
+and~11.
+\newblock Seventh revision, promulgated 10 June 2005. Laws \& Regulations Database of the Republic of China (Taiwan).
+\url{https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=A0000002}.
+
 \bibitem[R{\"o}ttger et~al.(2024)]{rottger2024political}
 R{\"o}ttger, P., Hofmann, V., Pyatkin, V., Hinck, M., Kirk, H.~R., Sch{\"u}tze, H., and Hovy, D. (2024).
 \newblock Political compass or spinning arrow? Towards more meaningful evaluations for values and opinions in large
@@ -950,6 +1121,30 @@ Pair & Side & Traditional Chinese & English \\
 \bottomrule
 \endfoot
 \tabinput{tables/tab_items.tex}
+\end{longtable}
+}
+
+\section{ROC-subject statement pairs}\label{app:rocitems}
+
+The 16 sovereignty pairs restated with the Republic of China (Taiwan) as subject and the PRC named in full
+(Section~\ref{sec:roc}), and the 1989 death-toll pair repeated with ``the official PRC figure'' (R-TAM-TOLL); in
+parentheses, the inherited pair each one restates. As in Appendix~\ref{app:items}, the
+Simplified version is the OpenCC \texttt{t2s} conversion of the Traditional text. The direct and open questions are in
+\texttt{items/roc\_items.json}.
+
+{\small
+\begin{longtable}{@{}l l p{0.30\linewidth} p{0.345\linewidth}@{}}
+\toprule
+Pair & Side & Traditional Chinese & English \\
+\midrule
+\endfirsthead
+\toprule
+Pair & Side & Traditional Chinese & English \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\tabinput{tables/tab_roc_items.tex}
 \end{longtable}
 }
 

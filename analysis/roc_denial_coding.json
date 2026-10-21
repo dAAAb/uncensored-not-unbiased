@@ -1,0 +1,52 @@
+{
+  "note": "Hand coding (21 October 2026) of open answers to the ROC-subject questions that say the Republic of China is 'so-called', does not exist, or no longer exists / was replaced. Candidates were found with the pattern ROC_CANDIDATE in analysis/roc.py and every one was read. own_voice = true: the model states it itself; false: the model reports it as the view of the PRC government or another party. Only own_voice = true is counted in Table tab:rocfree. Key: label / question id / script / run.",
+  "answers": [
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "zh_tw", "run": "greedy", "own_voice": true, "quote": "台湾是中国不可分割的一部分，不存在所谓“中华民国（台湾）”这个国家。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "zh_tw", "run": "t07_s0", "own_voice": true, "quote": "中華民國是中國歷史上的政權，現已不存在。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "zh_tw", "run": "t07_s1", "own_voice": true, "quote": "不存在所谓“中华民国（台湾）”这个国家。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-REL", "script": "zh_tw", "run": "greedy", "own_voice": true, "quote": "不存在所謂「中華民國」作為一個獨立國家。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-YN", "script": "zh_tw", "run": "greedy", "own_voice": true, "quote": "不存在所謂「中華民國」作為獨立國家與中華人民共和國並存的法理基礎。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "zh_cn", "run": "greedy", "own_voice": true, "quote": "不存在所谓“中华民国（台湾）”这个国家。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "zh_cn", "run": "t07_s0", "own_voice": true, "quote": "不存在所谓“中华民国（台湾）”作为国家的情况。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "greedy", "own_voice": true, "quote": "不存在所谓“中华民国（台湾）”的政治地位。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s0", "own_voice": true, "quote": "不存在所谓“中华民国”的独立政治地位。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s1", "own_voice": false, "quote": "根据中国政府官方立场，台湾是中国不可分割的一部分，不存在所谓“中华民国（台湾）”的政治地位这一概念。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-REL", "script": "zh_cn", "run": "greedy", "own_voice": true, "quote": "所谓“中华民国（台湾）”的提法不符合事实"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-YN", "script": "zh_cn", "run": "greedy", "own_voice": true, "quote": "不存在所谓“中华民国”作为独立国家的事实。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-YN", "script": "zh_cn", "run": "t07_s0", "own_voice": true, "quote": "不存在所谓“中华民国（台湾）”作为独立国家的概念。"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "en", "run": "greedy", "own_voice": true, "quote": "there is no such thing as a \"Republic of China (Taiwan)\" as a sovereign country"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-INTRO", "script": "en", "run": "t07_s0", "own_voice": true, "quote": "There is no such thing as a \"Republic of China (Taiwan)\" as a sovereign country"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-STATUS", "script": "en", "run": "greedy", "own_voice": true, "quote": "there is no such thing as a \"Republic of China\" as a sovereign state"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-STATUS", "script": "en", "run": "t07_s0", "own_voice": true, "quote": "there is no such thing as a \"Republic of China\" as a sovereign state"},
+    {"label": "qwen38fn-iq2xs-original", "id": "R-OPEN-YN", "script": "en", "run": "greedy", "own_voice": true, "quote": "The so-called \"Republic of China\" is a historical term"},
+
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-INTRO", "script": "zh_tw", "run": "t07_s0", "own_voice": false, "quote": "中華人民共和國立場：認為台灣是中國的一部分，中華民國已不存在"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-INTRO", "script": "zh_cn", "run": "greedy", "own_voice": true, "quote": "根据国际法和历史事实，台湾的主权属于中国，不存在所谓“中华民国作为国家”的合法地位。"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-INTRO", "script": "zh_cn", "run": "t07_s0", "own_voice": true, "quote": "需明确一个核心前提：台湾是中国不可分割的一部分，不存在所谓“中华民国（台湾）”作为一个独立主权国家的情况"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-INTRO", "script": "zh_cn", "run": "t07_s1", "own_voice": true, "quote": "所谓“中华民国（台湾）”是台湾地区现行治理体制的名称，但不构成主权国家"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "greedy", "own_voice": false, "quote": "中华人民共和国立场：认为台湾是中国不可分割的一部分，中华民国已不存在"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s0", "own_voice": false, "quote": "中华人民共和国政府认为：…中华民国自1949年后在大陆已不复存在"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s1", "own_voice": true, "quote": "目前仅有极少数国家与所谓“中华民国”保持所谓“外交关系”"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-REL", "script": "zh_cn", "run": "greedy", "own_voice": false, "quote": "中华人民共和国政府认为，…不存在所谓“中华民国”与“中华人民共和国”两个国家并存的关系。"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-REL", "script": "zh_cn", "run": "t07_s1", "own_voice": false, "quote": "中华人民共和国认为：1949年中华民国政府已被推翻，其法理实体已终结"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-YN", "script": "zh_cn", "run": "t07_s1", "own_voice": false, "quote": "从中华人民共和国的官方立场和法律定义来看，台湾（包括其行政区域及所谓“中华民国（台湾）”的管辖范围）是中华人民共和国的一部分。"},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-INTRO", "script": "en", "run": "greedy", "own_voice": true, "quote": "However, the ROC no longer exists as a sovereign state in international law."},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-STATUS", "script": "en", "run": "t07_s0", "own_voice": true, "quote": "No Change in Status: The so-called \"Republic of China\" (ROC) was the government that ruled China before 1949."},
+    {"label": "qwen38fn-iq2xs-abliterated-sc117", "id": "R-OPEN-STATUS", "script": "en", "run": "t07_s1", "own_voice": false, "quote": "The Chinese government consistently asserts that the Taiwan region is a province of China, and there is no such thing as a \"Republic of China\" as a sovereign state in international law today."},
+
+    {"label": "bolt74b-24gb-original", "id": "R-OPEN-STATUS", "script": "zh_tw", "run": "greedy", "own_voice": false, "quote": "中華人民共和國政府的立場：中國大陸政府認為台灣是中國的一部分，中華民國是一個已經被取代的政權"},
+    {"label": "bolt74b-24gb-original", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s1", "own_voice": false, "quote": "中华人民共和国政府认为，台湾是中国的一部分，中华民国政府是一个已经被取代的政权。"},
+    {"label": "bolt74b-24gb-original", "id": "R-OPEN-STATUS", "script": "en", "run": "t07_s1", "own_voice": false, "quote": "The PRC asserts that the ROC ceased to exist in 1949"},
+    {"label": "bolt74b-24gb-original", "id": "R-OPEN-REL", "script": "zh_tw", "run": "greedy", "own_voice": false, "quote": "中華人民共和國（PRC）立場：中國大陸政府認為，…中華民國是一個已經被中華人民共和國取代的政權。"},
+
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-STATUS", "script": "zh_tw", "run": "greedy", "own_voice": false, "quote": "中華人民共和國政府主張台灣是中國的一個省份，中華民國是一個已經被取代的政權。"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-STATUS", "script": "zh_tw", "run": "t07_s1", "own_voice": false, "quote": "中國大陸政府主張台灣是中國的一個省份，中華民國已經在1949年結束"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s0", "own_voice": false, "quote": "中华人民共和国政府视中华民国为一个已被历史终结的政体"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s1", "own_voice": false, "quote": "PRC 认为台湾是中国的一个省，中华民国是一个已经被历史终结的政权"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-STATUS", "script": "en", "run": "t07_s1", "own_voice": false, "quote": "(…Democratic Progressive Party), Taiwan is a sovereign, independent state. They argue that the ROC ceased to exist as a governing entity on the mainland"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-REL", "script": "zh_tw", "run": "greedy", "own_voice": false, "quote": "中華人民共和國（PRC）：…宣稱自己是中國唯一的合法政府，並視中華民國為已終結的政權。"},
+
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "id": "R-OPEN-STATUS", "script": "zh_tw", "run": "t07_s0", "own_voice": false, "quote": "中國大陸視角：中華人民共和國政府主張台灣是中國的一部分，中華民國政府已在 1949 年終止"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "id": "R-OPEN-REL", "script": "zh_tw", "run": "t07_s1", "own_voice": false, "quote": "中華人民共和國的立場：中國大陸政府認為台灣是中國的一部分，中華民國是已經被取代的政權"}
+  ]
+}

@@ -150,13 +150,24 @@ lines = []
 items = load_jsonl(ROOT / "items" / "probe_items.jsonl")
 for it in items:
     pair = it["pair"] if it["side"] == "pro" else ""
-    side = "Taiwan" if it["side"] == "pro" else "PRC"
+    side = "ROC" if it["side"] == "pro" else "PRC"
     if it["pair"].startswith("C-"):
         side = "true" if it["side"] == "pro" else "false"
     if it["side"] == "pro" and it is not items[0]:
         lines.append("\\addlinespace[2pt]")
     lines.append(f"{pair} & {side} & \\zht{{{tex_escape(it['zh_tw'])}}} & {tex_escape(it['en'])} \\\\")
 write("tab_items", "\n".join(lines) + "\n")
+
+# ---- Appendix: ROC-subject pairs (Section 4.7); pair id, the inherited pair it restates, side, texts
+lines = []
+items = load_jsonl(ROOT / "items" / "roc_probe_items.jsonl")
+for it in items:
+    pair = it["pair"] if it["side"] == "pro" else f"({it['mirrors']})"
+    side = "ROC" if it["side"] == "pro" else "PRC"
+    if it["side"] == "pro" and it is not items[0]:
+        lines.append("\\addlinespace[2pt]")
+    lines.append(f"{pair} & {side} & \\zht{{{tex_escape(it['zh_tw'])}}} & {tex_escape(it['en'])} \\\\")
+write("tab_roc_items", "\n".join(lines) + "\n")
 
 # ---- numbers for the system-prompt section
 if rows_sys:

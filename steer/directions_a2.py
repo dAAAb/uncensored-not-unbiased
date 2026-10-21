@@ -1,4 +1,4 @@
-"""A2 direction: mean over train items of h_l(prompt + Taiwan-side answer) - h_l(prompt + PRC-side answer), at the
+"""A2 direction: mean over train items of h_l(prompt + ROC-side answer) - h_l(prompt + PRC-side answer), at the
 answer token. Reports held-out separation on the test pairs and writes a control-vector GGUF.
 
 usage: python steer/directions_a2.py steer/work/hidden_a2_<model>.bin --name <name>

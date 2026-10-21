@@ -2,7 +2,7 @@
 
 fig_index_s: Index S on the 16 sovereignty pairs, by model and script, with 95% bootstrap intervals.
 fig_pairs:   per-pair score by script for the four models (sovereignty + 1989 pairs).
-fig_acq:     mean P(yes) on Taiwan-side vs PRC-side statements, original -> abliterated.
+fig_acq:     mean P(yes) on ROC-side vs PRC-side statements, original -> abliterated.
 """
 import json
 import random
@@ -101,7 +101,7 @@ for ax, (label, mode, disp) in zip(axes, MODELS):
 axes[0].set_yticks(range(len(pairs_order)))
 axes[0].set_yticklabels(pairs_order, fontsize=7)
 axes[0].invert_yaxis()
-fig.supxlabel("P(Taiwan-side statement true) − P(PRC-side statement true)", fontsize=9)
+fig.supxlabel("P(ROC-side statement true) − P(PRC-side statement true)", fontsize=9)
 axes[0].legend(frameon=False, fontsize=7, loc="lower left", bbox_to_anchor=(0, 1.04), ncol=3)
 save(fig, "fig_pairs")
 
@@ -124,7 +124,7 @@ for ax, (name, lo_, la_, mode) in zip(axes, fams):
     ax.set_xlim(-0.3, 1.3)
     ax.set_title(name, fontsize=9)
 axes[0].set_ylabel("mean P(yes)")
-handles = [plt.Line2D([], [], color="gray", linestyle="-", marker="o", markersize=4, label="Taiwan-side statements"),
+handles = [plt.Line2D([], [], color="gray", linestyle="-", marker="o", markersize=4, label="ROC-side statements"),
            plt.Line2D([], [], color="gray", linestyle="--", marker="s", markersize=4, label="PRC-side statements")] + \
           [plt.Line2D([], [], color=COLORS[s], label=SCRIPT_NAME[s]) for s in SCRIPTS]
 fig.legend(handles=handles, frameon=False, fontsize=7, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.12))

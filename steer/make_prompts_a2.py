@@ -1,7 +1,7 @@
 """Prompts for A2 (contrastive activation addition, Panickssery et al. 2023): each probe prompt twice, once followed by
-the answer token that takes the Taiwan side and once by the token that takes the PRC side.
+the answer token that takes the ROC side and once by the token that takes the PRC side.
 
-For a Taiwan-side statement the Taiwan-side answer is yes; for a PRC-side statement it is no. Because both statement
+For a ROC-side statement the ROC-side answer is yes; for a PRC-side statement it is no. Because both statement
 sides are included, "yes" and "no" appear equally often on each side of the contrast, so a plain yes-bias cancels.
 
 usage: python steer/make_prompts_a2.py -> steer/work/prompts_a2.txt, steer/work/index_a2.jsonl (train + test pairs)

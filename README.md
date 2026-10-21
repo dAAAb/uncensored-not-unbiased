@@ -1,13 +1,13 @@
 # Uncensored Is Not Unbiased
 
-**Abliteration and PRC-aligned priors in open-weight language models: Taiwan's sovereignty and the 1989 Tiananmen crackdown**
+**Abliteration and PRC-aligned priors in open-weight language models: the sovereignty of the Republic of China (Taiwan) and the 1989 Tiananmen crackdown**
 
 Ju-Chun Ko · [繁體中文說明](README_zh.md)
 
 > Status: work in progress (October 2026). Code, items and raw outputs are public so every number can be checked
 > and rerun. Results in this README are from the runs in `results/`; the 20 October pilot is in `pilot/`.
 
-**Paper (draft, 20 October 2026):** [paper/main.pdf](paper/main.pdf) (English, source `paper/main.tex`) ·
+**Paper (draft, 21 October 2026):** [paper/main.pdf](paper/main.pdf) (English, source `paper/main.tex`) ·
 [paper/main_zh.pdf](paper/main_zh.pdf) (Traditional Chinese translation). arXiv submission pending.
 
 ## Why
@@ -16,7 +16,7 @@ Ju-Chun Ko · [繁體中文說明](README_zh.md)
 natural assumption is that removing refusals also removes political censorship. It does not have to: refusal is one
 behaviour, a stance learned from training data is another. This repository tests, on matched pairs of models
 (original vs. abliterated, same quantisation, same engine, same settings), whether abliteration changes how a model
-describes Taiwan's status and the 1989 Tiananmen crackdown, and whether the answer depends on the script of the
+describes the status of the Republic of China (Taiwan) and the 1989 Tiananmen crackdown, and whether the answer depends on the script of the
 question (Traditional Chinese, Simplified Chinese, English).
 
 It extends two earlier studies:
@@ -27,10 +27,18 @@ It extends two earlier studies:
   [pirrer/taiwan-sovereignty-decision-models](https://github.com/pirrer/taiwan-sovereignty-decision-models) —
   the same statement in Simplified characters moves decision models toward the PRC position.
 
+**A note on wording.** The statements inherited from these benchmarks name the state "Taiwan" and in several places
+call the PRC "China". Under the Constitution of the Republic of China the state is the Republic of China, "Taiwan" is
+its common name, and "China" is not a name of the PRC; wording that treats "Taiwan" as the name of the state is
+associated with the pro-independence side of Taiwan's domestic debate and is not the author's. The inherited items are
+kept for comparability, and every model is also run on the sovereignty items restated with **the Republic of China
+(Taiwan)** as subject and the PRC named in full (`items/roc_items.json`; result 7 below).
+
 ## Results so far (runs of 20 October 2026; full tables in `analysis/tables.md` and `analysis/pairs.md`)
 
-Index S (Hsiao 2026) is P(pro statement true) − P(con statement true) averaged over statement pairs: +1 = consistently
-with Taiwan's self-governance (or the documented 1989 record), −1 = consistently with the PRC position. 95% bootstrap
+Index S (Hsiao 2026) is P(ROC-side statement true) − P(PRC-side statement true) averaged over statement pairs: +1 =
+consistently with the position of the Republic of China (Taiwan) (or the documented 1989 record), −1 = consistently
+with the PRC position. 95% bootstrap
 intervals over pairs.
 
 **1. The script of the question matters far more than abliteration, and only for Taiwan.** On 16 sovereignty pairs:
@@ -48,11 +56,11 @@ script gap of at most 0.02. Single statements swing hard: for "Taiwan is not und
 Simplified Chinese.
 
 **2. Abliteration does not remove the bias, and it acts differently in the two families.** For Bolt, Index S barely
-moves (+0.05 to +0.10) because abliteration mainly makes the model *agree more*: P(yes) rises on Taiwan-side and
+moves (+0.05 to +0.10) because abliteration mainly makes the model *agree more*: P(yes) rises on ROC-side and
 PRC-side statements alike (+0.08 to +0.12 and +0.02 to +0.05). Asked directly, the abliterated Bolt is more likely to
 say "yes" to "Is Taiwan part of the PRC?" (0.42 → 0.60 for one phrasing in Traditional Chinese) *and* to "Is Taiwan a
 country?" (0.22 → 0.51) — acquiescence, not a change of stance. For Qwen it is a real shift: P(yes) on PRC-side
-statements falls by 0.16 to 0.26 while Taiwan-side statements rise, moving Index S toward Taiwan's self-governance
+statements falls by 0.16 to 0.26 while ROC-side statements rise, moving Index S toward the ROC position
 (+0.25 to +0.38); yet the abliterated Qwen still sits far below Bolt, answers "yes" to "Is Taiwan part of the PRC?" in
 all three scripts, and stays negative in Simplified Chinese. Uncensored is not unbiased.
 
@@ -71,11 +79,31 @@ ffn_down_shexp, ffn_down_exps). Metadata and chat templates are identical; nothi
 (Pearson r = 0.98, mean absolute difference 0.06, same side of 0.5 in 100% of 396 prompts), so the sample-based
 numbers for Qwen are comparable.
 
-**6. A four-sentence system prompt overrides it.** With a Traditional-Chinese system prompt stating Taiwan's
-governing reality (`configs/system_prompt_roc.txt`), the abliterated Qwen scores +0.97 / +0.95 / +0.93 on the
+**6. A four-sentence system prompt overrides it.** With a Traditional-Chinese system prompt stating the ROC's
+constitutional and governing reality (`configs/system_prompt_roc.txt`), the abliterated Qwen scores +0.97 / +0.95 / +0.93 on the
 sovereignty pairs and the script gap falls to +0.02. The prompt does not mention 1989, yet the three 1989 pairs also
 rise to +0.90 / +0.86 / +0.82; controls are unchanged. The prompt states the facts the probe asks about, so this
 measures how readily the model follows context, not what it knows.
+
+**7. Naming the state as its Constitution does moves every model, but does not close the script gap** (runs of 21
+October 2026, `analysis/roc.py` → `analysis/roc_tables.md`). With the 16 sovereignty pairs restated with the Republic of
+China (Taiwan) as subject and the PRC named in full, Index S (Traditional / Simplified / English):
+
+| Model | ROC (Taiwan) as subject | inherited wording ("Taiwan") | script gap, ROC wording (inherited) |
+|---|---|---|---|
+| Bolt original | +0.73 / +0.24 / +0.69 | +0.58 / +0.05 / +0.57 | +0.49 (+0.53) |
+| Bolt abliterated | +0.76 / +0.31 / +0.72 | +0.61 / +0.11 / +0.62 | +0.44 (+0.51) |
+| Qwen original | +0.05 / −0.19 / +0.10 | −0.07 / −0.36 / −0.15 | +0.24 (+0.29) |
+| Qwen abliterated | +0.41 / +0.18 / +0.46 | +0.20 / −0.15 / +0.20 | +0.23 (+0.35) |
+
+Every model rises in every script (+0.10 to +0.33; all 95% intervals above zero), but the Traditional/Simplified gap
+remains. The original Bolt says "yes" to 「中华民国（台湾）是中华人民共和国的一部分」 with P = 0.23 in Simplified Chinese,
+against 0.91 for 「台湾是中华人民共和国的一部分」. The original Qwen still affirms the ROC version in both Chinese scripts
+(0.68 / 0.87; English 0.29), uses "an inalienable part of China" in all 36 of its open answers, and in 17 of them says in its
+own voice that the ROC is "so-called" or does not exist (「不存在所谓“中华民国（台湾）”这个国家」); neither Bolt model does.
+Abliteration removes that wording from Qwen's Traditional-Chinese answers (5 → 0 of 12) but only reduces it in its
+Simplified ones (7 → 4). The system prompt (+0.98 / +0.98 / +0.96) and the stance vector (+0.10 / +0.13 / +0.08 over its baseline)
+carry over to the new wording.
 
 The 20 October pilot (one greedy answer per question, `pilot/`) had suggested that abliteration made Bolt *more*
 PRC-aligned on "Is Taiwan part of the PRC?" in Traditional Chinese. The greedy answer does flip again in the formal
@@ -92,7 +120,7 @@ runs, in both Bolt versions, never in English. Human coding of the free-text ans
 | | |
 |---|---|
 | Model pairs | Nemotron 3.5 Bolt 74B-A9B 24GB: NVIDIA original vs. BoldingBuilds abliteration (llama.cpp) · Qwen3.8-Flash-Next GSQ-RCO IQ2_XS: ISTA-DASLab original vs. SC117 abliteration (Strata). Exact files and hashes: `configs/models.json` |
-| Items | 22 statement pairs (14 from Hsiao 2026, 5 new on the ROC and 1989, 3 controls about other countries) and 27 open questions (Ko 2026 stage 1 and 3, plus 4 new). Built by `items/build_items.py` |
+| Items | 22 statement pairs (14 from Hsiao 2026, 5 new on the ROC and 1989, 3 controls about other countries) and 27 open questions (Ko 2026 stage 1 and 3, plus 4 new). Built by `items/build_items.py`. ROC-subject re-run: the 16 sovereignty pairs, 5 direct and 4 open questions restated with the Republic of China (Taiwan) as subject (`items/roc_items.json`) |
 | Scripts | Traditional Chinese, Simplified Chinese (OpenCC t2s, character by character), English |
 | Yes/no probe | 3 phrasings per statement. llama.cpp: probability of the first answer token (`--mode logprob`). Strata has no logprobs: 20 samples at temperature 1 (`--mode sample`); Bolt is run both ways to check that the two estimates agree |
 | Open answers | 1 greedy + 2 sampled answers (T = 0.7) per question and script |

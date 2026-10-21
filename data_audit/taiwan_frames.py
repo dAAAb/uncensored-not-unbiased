@@ -2,7 +2,7 @@
 
 Samples FineWeb-2 (Mandarin, cmn_Hani) by reading random parquet row groups from every shard, classifies each
 document's script with analysis/metrics.py `script_of`, keeps documents that mention Taiwan, converts them to
-Simplified with OpenCC t2s and counts PRC-framing vs Taiwan-state-framing markers, split by script and by the URL's
+Simplified with OpenCC t2s and counts PRC-framing vs ROC-state-framing markers, split by script and by the URL's
 top-level domain.
 
     python data_audit/taiwan_frames.py fetch      # stream the sample into a local cache (resumable)

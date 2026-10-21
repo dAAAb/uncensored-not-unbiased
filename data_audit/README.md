@@ -1,7 +1,7 @@
 # Data audit (part B): script as a cue to how web text frames Taiwan
 
 Question: in open web pretraining text, does the script of a Chinese document (Simplified vs Traditional) predict
-whether it talks about Taiwan in PRC terms or in Taiwan-state terms? If it does, a model can learn "Simplified ->
+whether it talks about Taiwan in PRC terms or in ROC-state terms? If it does, a model can learn "Simplified ->
 PRC framing" from pretraining data alone, which would explain script-dependent answers.
 
 Run of 20 October 2026. Code: `taiwan_frames.py`; numbers: `results.json`.
@@ -42,9 +42,9 @@ Run of 20 October 2026. Code: `taiwan_frames.py`; numbers: `results.json`.
 | list | markers |
 |---|---|
 | PRC framing | 台湾地区, 中国台湾, 台湾省, 台湾当局, 台湾地区领导人, 不可分割, 祖国统一, 统一大业, 两岸同胞, 回归祖国, 一个中国原则, 台独分裂, 分裂势力 |
-| Taiwan-state framing | 中华民国, 台湾总统, 中华民国总统, 总统府, 立法院, 行政院, 主权独立, 台湾政府, 国家安全会议 |
+| ROC-state framing | 中华民国, 台湾总统, 中华民国总统, 总统府, 立法院, 行政院, 主权独立, 台湾政府, 国家安全会议 |
 | PRC strict | PRC list without 台湾地区, 台湾省, 不可分割 |
-| Taiwan-state strict | 台湾总统, 立法院, 行政院, 台湾政府 |
+| ROC-state strict | 台湾总统, 立法院, 行政院, 台湾政府 |
 
 Strict lists drop the markers the spot-read showed misfiring systematically (below). The **unquoted** variant
 additionally counts a marker only if at least one occurrence is not directly preceded by an opening quotation mark
@@ -60,13 +60,13 @@ Traditional documents mention Taiwan**.
 |---|---|---|---|
 | Taiwan-mention rate | 5.60% [5.32, 5.90] | 15.62% [15.06, 16.27] | |
 | P(PRC marker \| Taiwan doc) | **14.5%** [13.7, 15.2] | 3.9% [3.6, 4.2] | 3.69 [3.37, 4.05] |
-| P(Taiwan-state marker \| Taiwan doc) | 4.5% [4.2, 4.7] | **11.4%** [10.8, 11.9] | 0.39 [0.37, 0.42] |
-| PRC / Taiwan-state, within script | 3.22 [3.00, 3.46] | 0.34 [0.32, 0.38] | |
+| P(ROC-state marker \| Taiwan doc) | 4.5% [4.2, 4.7] | **11.4%** [10.8, 11.9] | 0.39 [0.37, 0.42] |
+| PRC / ROC-state, within script | 3.22 [3.00, 3.46] | 0.34 [0.32, 0.38] | |
 | PRC strict | 9.9% [9.3, 10.5] | 1.7% [1.5, 1.9] | 5.85 [5.14, 6.69] |
-| Taiwan-state strict | 2.8% [2.6, 2.9] | 7.4% [6.9, 7.8] | 0.37 [0.34, 0.41] |
+| ROC-state strict | 2.8% [2.6, 2.9] | 7.4% [6.9, 7.8] | 0.37 [0.34, 0.41] |
 | PRC strict, unquoted | 9.7% [9.1, 10.3] | 1.5% [1.3, 1.7] | 6.37 [5.57, 7.35] |
-| Taiwan-state strict, unquoted | 1.2% [1.1, 1.3] | 7.1% [6.7, 7.6] | 0.17 [0.15, 0.19] |
-| PRC / Taiwan-state, strict unquoted | 8.06 [6.96, 9.37] | 0.21 [0.19, 0.24] | |
+| ROC-state strict, unquoted | 1.2% [1.1, 1.3] | 7.1% [6.7, 7.6] | 0.17 [0.15, 0.19] |
+| PRC / ROC-state, strict unquoted | 8.06 [6.96, 9.37] | 0.21 [0.19, 0.24] | |
 
 Both markers in one document: 406 Simplified (1.2%), 158 Traditional (0.9%).
 
@@ -77,9 +77,9 @@ Both markers in one document: 406 Simplified (1.2%), 158 Traditional (0.9%).
 | Simplified | 21.6% / 15.8% | 0.3% / 0.3% | 0.1% / 0.05% | 78.0% / 83.8% |
 | Traditional | 4.1% / 1.0% | 16.7% / 29.8% | 3.0% / 1.0% | 76.2% / 68.2% |
 
-**Script × TLD** (Taiwan documents; PRC / Taiwan-state rate, full lists, then strict unquoted):
+**Script × TLD** (Taiwan documents; PRC / ROC-state rate, full lists, then strict unquoted):
 
-| cell | n | PRC | Taiwan-state | PRC strict-uq | Taiwan-state strict-uq |
+| cell | n | PRC | ROC-state | PRC strict-uq | ROC-state strict-uq |
 |---|---|---|---|---|---|
 | Simplified .cn | 5,530 | 17.2% [16.1, 18.3] | 3.3% [2.8, 3.9] | 11.7% | 0.6% |
 | Simplified .tw | 117 | 8.5% [3.8, 13.8] | 7.7% [3.1, 12.8] | 3.4% | 5.1% |
@@ -90,11 +90,11 @@ Both markers in one document: 406 Simplified (1.2%), 158 Traditional (0.9%).
 | Traditional other | 12,123 | 3.8% [3.5, 4.2] | 11.1% [10.4, 11.8] | 1.6% | 6.8% |
 
 (Simplified .hk: n = 17, not reported.) Mantel-Haenszel odds ratio, Simplified vs Traditional, within TLD:
-PRC marker **3.65** [3.29, 4.11], Taiwan-state marker **0.40** [0.37, 0.44]; strict unquoted 5.08 [4.40, 5.91] and
+PRC marker **3.65** [3.29, 4.11], ROC-state marker **0.40** [0.37, 0.44]; strict unquoted 5.08 [4.40, 5.91] and
 0.19 [0.16, 0.22].
 
 Reading: most documents in both scripts sit on generic TLDs (.com etc.), and within that stratum the script alone
-separates the framings almost as sharply as overall (13.9% vs 3.8% PRC; 4.7% vs 11.1% Taiwan-state). The script is
+separates the framings almost as sharply as overall (13.9% vs 3.8% PRC; 4.7% vs 11.1% ROC-state). The script is
 therefore a cue to framing beyond what the site's country domain says. The TLD carries information too: the small
 group of Traditional pages on .cn is the most PRC-framed cell of all (it includes Big5 mirrors of PRC outlets,
 big5.taiwan.cn, big5.china.com.cn, big5.news.cn: 32 of 179, the rest mostly .cn spam and commercial sites), and
@@ -115,9 +115,9 @@ is a proxy for where the text comes from, not a property of the characters thems
   主权独立 refers to other states (Singapore); 国家安全会议 is usually the US NSC.
 - **Scare quotes**: in Simplified Taiwan documents 72% of documents with 立法院 have it only in quotation marks
   (485 → 137 unquoted), 53% for 行政院, 30% for 总统府: these are PRC-voice reports, which is why the unquoted
-  Taiwan-state rate for Simplified falls from 2.8% to 1.2%. Traditional documents barely change (7.4% → 7.1%).
+  ROC-state rate for Simplified falls from 2.8% to 1.2%. Traditional documents barely change (7.4% → 7.1%).
 - Remaining known noise: 行政院 in Simplified still catches pre-1949 and Wang Jingwei-regime history (it inflates
-  the Simplified Taiwan-state rate, i.e. works against the hypothesis); Traditional 中国台湾 / 一个中国原则 / 两岸同胞
+  the Simplified ROC-state rate, i.e. works against the hypothesis); Traditional 中国台湾 / 一个中国原则 / 两岸同胞
   hits include Taiwanese or Hong Kong media quoting PRC officials (reported speech is not fully removed by the quote
   filter); some Traditional PRC-voice text is PRC content republished in Traditional characters.
 

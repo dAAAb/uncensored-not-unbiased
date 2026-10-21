@@ -2,6 +2,7 @@
 
 probe_items.jsonl  one line per (pair, side): a statement asked as a yes/no question (Section 3.2 of the paper)
 open_items.jsonl   one line per open question, answered in free text
+roc_*.jsonl        the same three kinds of item with the Republic of China (Taiwan) as subject (roc_items.json)
 
 Every item is given in Traditional Chinese (zh_tw), Simplified Chinese (zh_cn) and English (en). zh_cn is produced
 from zh_tw with OpenCC t2s, character by character, so the two scripts differ only in the writing system; where a
@@ -70,3 +71,19 @@ for it in extra["open_items"]:
 
 write_jsonl(HERE / "probe_items.jsonl", probe)
 write_jsonl(HERE / "open_items.jsonl", opened)
+
+# ROC-subject wording: the inherited pairs restated with the Republic of China (Taiwan) as subject
+roc = json.loads((HERE / "roc_items.json").read_text(encoding="utf-8"))
+roc_probe = []
+for p in roc["probe_pairs"]:
+    for side in ("pro", "con"):
+        s = p[side]
+        roc_probe.append({"pair": p["id"], "side": side, "topic": p["topic"], "source": "this_study_roc",
+                          "mirrors": p["mirrors"], "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
+roc_direct = [{"question": q["id"], "mirrors": q["mirrors"], "zh_tw": q["zh_tw"], "zh_cn": zh_cn(q["zh_tw"]),
+               "en": q["en"]} for q in roc["direct_questions"]]
+roc_open = [{"id": it["id"], "category": it["category"], "source": "this_study_roc", "mirrors": it["mirrors"],
+             "zh_tw": it["zh_tw"], "zh_cn": zh_cn(it["zh_tw"]), "en": it["en"]} for it in roc["open_items"]]
+write_jsonl(HERE / "roc_probe_items.jsonl", roc_probe)
+write_jsonl(HERE / "roc_direct_items.jsonl", roc_direct)
+write_jsonl(HERE / "roc_open_items.jsonl", roc_open)
