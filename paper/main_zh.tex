@@ -509,6 +509,8 @@ Question & Traditional & Simplified & English \\
 
 \paragraph{單一配對重測：中華民國方採用誰的說法。}改寫後配對 R-009 的中華民國方保留了沿用的用語「互不隸屬」，這是民進黨 1999 年決議文 \citep{dpp1999resolution} 與蔡英文總統 2021 年國慶演說 \citep{tsai2021national} 的措辭。我們將該配對的中華民國方改為國家統一委員會 1992 年聲明的措辭「分治海峽兩岸的兩個政治實體」（R-009b），PRC 方不變，以相同的引擎與設定在每個模型與介入措施上重新執行（表~\ref{tab:rocvariant}）。PRC 方在 Bolt 上完全重現，在 Qwen 上則在抽樣誤差範圍內重現。在每個模型與每種書寫系統中，使用 1992 年措辭的配對分數與使用 1999／2021 年措辭的分數相差不超過 0.02，或者更高；在英文中，四個模型都更高：兩個 Bolt 模型分別高出 $+0.20$ 與 $+0.11$，兩個 Qwen 模型分別高出 $+0.17$ 與 $+0.54$；消融 Qwen 對中華民國方的 $P(\text{yes})$ 從 0.22 升至 0.75。單一配對證明不了多少，兩句陳述說的也不完全相同。但它們描述的是同一種關係，而以中華民國 1992 年聲明的用語表述時，模型比以單一政黨的用語表述時更願意肯定它。R-009b 不計入 16 組配對的 \IS{}。
 
+國統會 1992 年的這份聲明，是中華民國為同年 10 月海基會與海協會香港會談所定的立場；那次會談的結果，後來被稱為「九二共識」，這個名詞是時任陸委會主委蘇起在 2000 年提出的。R-009b 只取用其中對兩岸的描述：原文中，兩個政治實體分治的是自 1949 年起「暫時分裂」的中國；而九二共識本身——在中華民國的解讀中是「一個中國、各自表述」——這次並未測試。這份聲明的全文，包括這裡用到的句子，收錄在中華人民共和國國台辦網站的九二共識專題中，未加評論 \citep{tao1992nuc}；不過自 1992 年 8 月起，中華人民共和國官方一再表示反對「兩個對等的政治實體」\citep{arats1992}。模型是否更容易接受兩岸都曾刊載的表述，需要更大的題目集才能回答。
+
 \begin{table}[t]
 \centering\small
 \caption{R-009（中華民國方：「互不隸屬」，民進黨 1999 年決議文與蔡英文總統 2021 年國慶演說的措辭）與 R-009b（中華民國方：「分治海峽兩岸的兩個政治實體」，國家統一委員會 1992 年聲明的措辭）的配對分數 $d$；兩者的 PRC 方相同。由 \texttt{analysis/roc\_variant.py} 產生。}
@@ -745,6 +747,17 @@ SC117 (2026).
 \newblock Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF.
 \newblock Hugging Face, revision \texttt{eec4e10}.
 \newblock \url{https://huggingface.co/SC117/Qwen3.8-Flash-Next-GSQ-RCO-abliterated-GGUF}.
+
+\bibitem[Taiwan Affairs Office(1992a)]{arats1992}
+Taiwan Affairs Office of the State Council (1992a).
+\newblock 海协负责人就台湾当局关于两岸事务性商谈中“一个中国”涵义的文件发表谈话, Xinhua, 27 August 1992 (page dated
+2003-8-27).
+\newblock \url{https://www.gwytb.gov.cn/zt/zylszl/92/201101/t20110110_1686413.htm}.
+
+\bibitem[Taiwan Affairs Office(1992b)]{tao1992nuc}
+Taiwan Affairs Office of the State Council (1992b).
+\newblock 台“国统会”八一结论, in the 1992 Consensus document collection.
+\newblock \url{https://www.gwytb.gov.cn/zt/zylszl/92/201101/t20110110_1686385.htm}.
 
 \bibitem[TechNews(2025)]{technews2025aibasic}
 TechNews (2025).
