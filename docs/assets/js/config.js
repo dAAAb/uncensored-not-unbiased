@@ -4,7 +4,7 @@ window.UNU_CONFIG = {
 
   /* arXiv: leave id empty until the preprint is out ("coming soon" is shown and the button is disabled).
      Example: id: "2611.01234" -> https://arxiv.org/abs/2611.01234, and the BibTeX gains eprint fields. */
-  arxiv: { id: "" },
+  arxiv: { id: "2610.29342" },
 
   links: {
     paper: "https://github.com/dAAAb/uncensored-not-unbiased/blob/main/paper/main.pdf",

@@ -8,7 +8,7 @@
 > `results/`；10 月 20 日的試跑在 `pilot/`。
 
 **論文（草稿，2026 年 10 月 21 日）：**[paper/main_zh.pdf](paper/main_zh.pdf)（繁體中文譯本）·
-[paper/main.pdf](paper/main.pdf)（英文原文，原始檔 `paper/main.tex`）。即將投稿 arXiv。
+[paper/main.pdf](paper/main.pdf)（英文原文，原始檔 `paper/main.tex`）。arXiv：[2610.29342](https://arxiv.org/abs/2610.29342)。
 
 ## 為什麼做這個研究
 

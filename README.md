@@ -8,7 +8,7 @@ Ju-Chun Ko · [繁體中文說明](README_zh.md)
 > and rerun. Results in this README are from the runs in `results/`; the 20 October pilot is in `pilot/`.
 
 **Paper (draft, 21 October 2026):** [paper/main.pdf](paper/main.pdf) (English, source `paper/main.tex`) ·
-[paper/main_zh.pdf](paper/main_zh.pdf) (Traditional Chinese translation). arXiv submission pending.
+[paper/main_zh.pdf](paper/main_zh.pdf) (Traditional Chinese translation). arXiv: [2610.29342](https://arxiv.org/abs/2610.29342).
 
 ## Why
 
