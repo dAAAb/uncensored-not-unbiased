@@ -1,7 +1,7 @@
 """Build the JSON data of the project page (docs/data/) from the repository's own files.
 
-Reads (never writes): items/*.jsonl|json, results/<label>/*.jsonl, analysis/roc_denial_coding.json,
-analysis/tsb_rubric_coding.json, data_audit/results.json, configs/system_prompt_roc.txt, steer/directions.py.
+Reads (never writes): items/*.jsonl|json (the stance-vector split: items/roc_steer_items.json), results/<label>/*.jsonl,
+analysis/roc_denial_coding.json, analysis/tsb_rubric_coding.json, data_audit/results.json, configs/system_prompt_roc.txt.
 Free-text tags are computed with the repository's own functions (analysis/metrics.py, analysis/roc.py,
 analysis/tsb_rubric.py), so the page shows only what the analysis computes or codes.
 
@@ -15,7 +15,6 @@ import sys
 
 sys.dont_write_bytecode = True  # do not leave __pycache__ in analysis/ or run/
 
-import ast  # noqa: E402
 import json  # noqa: E402
 import re  # noqa: E402
 from collections import defaultdict  # noqa: E402
@@ -41,12 +40,14 @@ RUNS = {
     "qo": ("qwen38fn-iq2xs-original", "sample"),
     "qa": ("qwen38fn-iq2xs-abliterated-sc117", "sample"),
     "qs": ("qwen38fn-iq2xs-abliterated-sc117+sysprompt", "sample"),
-    "sb": ("bolt74b-24gb-abliterated-boldingbuilds+steerbase", "logprob"),
-    "sv": ("bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "logprob"),
-    "sn": ("bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s-4", "logprob"),
+    # stance vector, version 2 of the paper (ROC wording, items/roc_steer_items.json); sn has only a3_probe_logprob.jsonl
+    "sb": ("bolt74b-24gb-abliterated-boldingbuilds+steerbase-a3", "logprob"),
+    "sv": ("bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2", "logprob"),
+    "sn": ("bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s-4", "logprob"),
 }
 LABEL2RUN = {v[0]: k for k, v in RUNS.items()}
 MAIN = ("bo", "ba", "qo", "qa")
+STEER = ("sb", "sv", "sn")
 
 MODELS = [
     {"id": "bo", "family": "bolt", "version": "original", "main": True,
@@ -68,11 +69,11 @@ MODELS = [
      "name": {"zh": "Bolt 去審查 · 引導實驗基準（不加向量）", "en": "Bolt abliterated · steering baseline (no vector)"},
      "short": {"zh": "Bolt 去審查・引導基準", "en": "Bolt abl. · steering baseline"}},
     {"id": "sv", "family": "bolt", "version": "abliterated", "main": False, "base": "sb", "kind": "steer",
-     "name": {"zh": "Bolt 去審查 + 立場向量（第 37 層 ×2）", "en": "Bolt abliterated + stance vector (layer 37, ×2)"},
+     "name": {"zh": "Bolt 去審查 + 立場向量（第 45 層 ×2）", "en": "Bolt abliterated + stance vector (layer 45, ×2)"},
      "short": {"zh": "Bolt 去審查＋立場向量", "en": "Bolt abl. + stance vector"}},
     {"id": "sn", "family": "bolt", "version": "abliterated", "main": False, "base": "sb", "kind": "steer",
-     "name": {"zh": "Bolt 去審查 + 反向立場向量（第 37 層 ×−4）",
-              "en": "Bolt abliterated + negated stance vector (layer 37, ×−4)"},
+     "name": {"zh": "Bolt 去審查 + 反向立場向量（第 45 層 ×−4）",
+              "en": "Bolt abliterated + negated stance vector (layer 45, ×−4)"},
      "short": {"zh": "Bolt 去審查＋反向向量", "en": "Bolt abl. + negated vector"}},
 ]
 for m in MODELS:
@@ -81,6 +82,7 @@ for m in MODELS:
 GROUPS = [
     {"id": "sov", "name": {"zh": "主權配對（沿用措辭）", "en": "Sovereignty pairs (inherited wording)"}},
     {"id": "roc", "name": {"zh": "主權配對（中華民國（台灣）措辭）", "en": "Sovereignty pairs (ROC wording)"}},
+    {"id": "fresh", "name": {"zh": "立場向量測試用新配對", "en": "Fresh pairs (stance-vector test)"}},
     {"id": "tam", "name": {"zh": "1989 天安門", "en": "1989 Tiananmen"}},
     {"id": "ctl", "name": {"zh": "對照組（其他國家）", "en": "Controls (other countries)"}},
     {"id": "open", "name": {"zh": "開放題", "en": "Open questions"}},
@@ -182,6 +184,20 @@ def build_probe():
         if rows:
             for pair, v in probe_block(rows).items():
                 c92.setdefault(pair, {})[run] = v
+        # stance-vector runs: a3_probe_<mode>.jsonl (items/roc_steer_probe_items.jsonl) = the ROC-wording pairs with
+        # R-009b and R-014c, the fresh pairs F-01..F-08, the 1989 pairs and the controls. Its prompts are those of the
+        # inherited / ROC-wording probe files; where a run has those too the values must agree, otherwise the a3 file
+        # fills in (the negated run sn has only this file).
+        rows = results(run, f"a3_probe_{mode}.jsonl")
+        if rows:
+            topic = {r["pair"]: r["topic"] for r in rows}
+            for pair, v in probe_block(rows).items():
+                dst = inh if topic[pair] in ("tiananmen", "control") else rocd
+                have = dst.get(pair, {}).get(run)
+                if have is None:
+                    dst.setdefault(pair, {})[run] = v
+                elif any(have[s][sd]["p"] != v[s][sd]["p"] for s in v for sd in ("pro", "con")):
+                    sys.exit(f"a3 probe disagrees with the other probe file of {run} on {pair}")
     return inh, rocd, c92
 
 
@@ -189,8 +205,9 @@ def build_probe():
 
 def build_direct():
     """{item id: {"q": question, "prompt": {script: text}, "runs": {run: {script: {p, mass, c?}}}}}.
-    Bolt (and the steering runs), inherited questions: yesno_first_token.jsonl (plain server, paper Table 4 and the
-    stance-vector table); every ROC-wording question, and Qwen's inherited ones: roc_yesno_first_token.jsonl."""
+    Bolt, inherited questions: yesno_first_token.jsonl (plain server, paper Table 4); every ROC-wording question, and
+    Qwen's inherited ones: roc_yesno_first_token.jsonl. The steering runs have both question sets in
+    yesno_first_token.jsonl (stance-vector table, src "steer")."""
     out = {}
     for run in RUNS:
         plain = results(run, "yesno_first_token.jsonl") or []
@@ -209,7 +226,7 @@ def build_direct():
             v = {"p": r3(r["p_yes"]), "mass": r2(r.get("p_mass"))}
             if r.get("counts"):
                 v["c"] = [r["counts"]["yes"], r["counts"]["no"], r["counts"]["other"]]
-            v["src"] = "plain" if r in plain else "roc"
+            v["src"] = "steer" if run in STEER else "plain" if r in plain else "roc"
             e["runs"].setdefault(run, {})[s] = v
     return out
 
@@ -237,7 +254,9 @@ def build_open(items, roc_items):
     for wording, fname, its in (("inherited", "generate.jsonl", items), ("ROC", "roc_generate.jsonl", roc_items)):
         ids = {it["id"]: it for it in its}
         for run in RUNS:
-            rows = results(run, fname)
+            # the no-vector steering server's answers are not scored by analysis/tsb_rubric.py (EXCLUDE), so their tags
+            # would be incomplete; the explorer shows the open answers of the stance-vector run (sv) only
+            rows = results(run, fname) if run != "sb" else None
             if not rows:
                 continue
             label = RUNS[run][0]
@@ -312,27 +331,34 @@ def index_s(rows, topics, only=None):
 
 
 def steer_split():
-    tree = ast.parse((ROOT / "steer" / "directions.py").read_text(encoding="utf-8"))
-    vals = {}
-    for node in tree.body:
-        if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name) and node.targets[0].id in ("TRAIN", "TEST"):
-            vals[node.targets[0].id] = ast.literal_eval(node.value)
-    return vals["TRAIN"], vals["TEST"]
+    """The stance vector's split of the ROC-wording pairs (version 2 of the paper): train (builds the vector), select
+    (chooses layer and scale), fresh (test only); replaced = ROC-wording pair -> the restatement used in its place
+    (R-009 -> R-009b, R-014 -> R-014c)."""
+    sp = json.loads((ROOT / "items" / "roc_steer_items.json").read_text(encoding="utf-8"))
+    rows = load_jsonl(ROOT / "items" / "roc_steer_probe_items.jsonl")
+    replaced = {r["mirrors"]: r["pair"] for r in rows if r["side"] == "pro" and (r.get("mirrors") or "").startswith("R-")}
+    return {"train": sp["train"], "select": sp["select"], "fresh": [p["id"] for p in sp["fresh_pairs"]],
+            "replaced": replaced}
 
 
 def build_summary():
-    train, test = steer_split()
-    out = {"index": {}, "heldout": {}, "roc": {}}
+    split = steer_split()
+    out = {"index": {}, "roc": {}, "stance": {}}
     for run in RUNS:
         mode = RUNS[run][1]
         rows = results(run, f"probe_{mode}.jsonl")
         if rows:
             out["index"][run] = {"sov": index_s(rows, SOV), "tam": index_s(rows, {"tiananmen"}),
                                  "ctl": index_s(rows, {"control"})}
-            out["heldout"][run] = index_s(rows, SOV, only=set(test))
         rows = results(run, f"roc_probe_{mode}.jsonl")
         if rows:
             out["roc"][run] = index_s(rows, {"roc_subject"})
+        rows = results(run, f"a3_probe_{mode}.jsonl")  # stance-vector runs (paper tables tab:steerA2, tab:steerfresh)
+        if rows:
+            out["stance"][run] = {"train": index_s(rows, {"roc_subject"}, only=set(split["train"])),
+                                  "select": index_s(rows, {"roc_subject"}, only=set(split["select"])),
+                                  "fresh": index_s(rows, {"roc_fresh"}), "tam": index_s(rows, {"tiananmen"}),
+                                  "ctl": index_s(rows, {"control"})}
     audit = json.loads((ROOT / "data_audit" / "results.json").read_text(encoding="utf-8"))
     ps = audit["per_script"]
     out["corpus"] = {
@@ -342,7 +368,7 @@ def build_summary():
         "trad": {"docs": ps["traditional"]["docs_scanned"], "taiwan": ps["traditional"]["taiwan_docs"],
                  "prc": ps["traditional"]["prc"]["rate"], "roc": ps["traditional"]["tw"]["rate"]},
     }
-    out["steer"] = {"train": train, "test": test}
+    out["steer"] = split
     return out
 
 
@@ -377,6 +403,13 @@ def build_meta(direct):
             e["mirBy"] = mirrored_by[e["id"]]
         items.append(e)
     for e in pairs(rocp, lambda r: "roc", "roc"):
+        items.append(e)
+    # stance-vector items not already listed: R-014c (group roc) and the fresh pairs F-01..F-08 (group fresh); their
+    # data, from a3_probe_*.jsonl, are in probe_roc.json (steering runs only)
+    known = {e["id"] for e in items}
+    steerp = [r for r in load_jsonl(ROOT / "items" / "roc_steer_probe_items.jsonl")
+              if r["pair"] not in known and r["topic"] in ("roc_subject", "roc_fresh")]
+    for e in pairs(steerp, lambda r: "fresh" if r["topic"] == "roc_fresh" else "roc", "roc"):
         items.append(e)
 
     open_items = load_jsonl(ROOT / "items" / "open_items.jsonl")
@@ -490,9 +523,27 @@ def checks(inh, rocd, direct, opn, summary, c92p):
     ck("H6 largest ROC-minus-inherited change", max(deltas), 0.33, 0.006)
     for s, want in zip(SCRIPTS, (0.97, 0.95, 0.93)):
         ck(f"H7 system prompt Index S {s}", summary["index"]["qs"]["sov"][s][0], want)
-    for run, wants in (("sb", (0.63, 0.23, 0.72)), ("sv", (0.71, 0.35, 0.79)), ("sn", (0.29, -0.01, 0.48))):
+    # H8: stance vector, version 2 (ROC wording): paper tables tab:steerA2 (selection pairs) and tab:steerfresh
+    st = lambda run, part, s: summary["stance"][run][part][s][0]  # noqa: E731
+    for part, runs in (("select", (("sb", (0.74, 0.35, 0.80)), ("sv", (0.82, 0.45, 0.89)), ("sn", (0.44, 0.17, 0.48)))),
+                       ("fresh", (("sb", (0.79, 0.65, 0.79)), ("sv", (0.84, 0.71, 0.84)), ("sn", (0.58, 0.45, 0.62)))),
+                       ("tam", (("sb", (0.43, 0.30, 0.49)), ("sv", (0.49, 0.35, 0.58))))):
+        for run, wants in runs:
+            for s, want in zip(SCRIPTS, wants):
+                ck(f"H8 stance vector, {part} pairs, Index S {run} {s}", st(run, part, s), want)
+    for run, wants in (("sv", (0.05, 0.06, 0.04)), ("sn", (-0.21, -0.20, -0.18))):
         for s, want in zip(SCRIPTS, wants):
-            ck(f"H8 held-out Index S {run} {s}", summary["heldout"][run][s][0], want)
+            ck(f"H8 stance vector, fresh pairs, {run} minus no vector {s}", st(run, "fresh", s) - st("sb", "fresh", s), want)
+    for run, want in (("sb", 0.96), ("sv", 0.99), ("sn", 0.76)):
+        ck(f"H8 stance vector, controls (mean over scripts) {run}", mean([st(run, "ctl", s) for s in SCRIPTS]), want)
+    # script direction (version 2, ROC wording): no setting but the degenerate scale 100 moved the held-out (selection)
+    # Simplified score by more than 0.03 (paper Table tab:steer)
+    a1 = [p for p in (ROOT / "results").glob(f"{RUNS['ba'][0]}+a1roc*/a3_probe_logprob.jsonl")
+          if not p.parent.name.endswith("-s100")]
+    a1d = max(abs(index_s(load_jsonl(p), {"roc_subject"}, only=set(summary["steer"]["select"]))["zh_cn"][0]
+                  - st("sb", "select", "zh_cn")) for p in a1)
+    res.append((len(a1) == 7 and a1d <= 0.0351, f"script direction: largest change of the held-out Simplified Index S "
+                f"over {len(a1)} settings (at most)", r3(a1d), 0.03))
     c = summary["corpus"]
     ck("H9 corpus PRC-framing ratio Simp/Trad", c["simp"]["prc"] / c["trad"]["prc"], 3.7, 0.05)
     ck("H9 corpus Simplified PRC-framing share", c["simp"]["prc"], 0.145, 0.0006)
@@ -503,7 +554,10 @@ def checks(inh, rocd, direct, opn, summary, c92p):
     ck("H10 Bolt answers failed by TSB rules only for a denial ('not part of the PRC')", neg, 12, 0)
     neg_all = sum(1 for k, v in opn.items() for run in v for s in SCRIPTS for e in v[run].get(s, [])
                   if e.get("tags", {}).get("tsb", {}).get("neg"))
-    ck("H10 all answers failed only for a denial (paper: 15)", neg_all, 15, 0)
+    ck("H10 all answers failed only for a denial (paper: 16)", neg_all, 16, 0)
+    every = [e for v in opn.values() for run in v for s in SCRIPTS for e in v[run].get(s, [])]
+    ck("TSB rules: open answers scored", len(every), 1152, 0)
+    ck("TSB rules: answers failed by either scorer", sum(1 for e in every if e.get("tags", {}).get("tsb")), 576, 0)
     for run, n_fail, n_notA in (("bo", 89, 64), ("ba", 93, 68)):
         f = [e for v in opn.values() for s in SCRIPTS for e in v.get(run, {}).get(s, []) if e.get("tags", {}).get("tsb")]
         ck(f"H10 {run} answers failed by either TSB scorer", len(f), n_fail, 0)

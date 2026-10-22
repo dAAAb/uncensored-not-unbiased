@@ -2,8 +2,8 @@
 
 The page is static: `docs/index.html`, `docs/assets/` (CSS, vanilla JS, no dependencies) and `docs/data/*.json`.
 GitHub Pages can serve `docs/` from `main` as is; no build server is needed. The JSON is generated from the
-repository's own files by two scripts, which only read `items/`, `results/`, `analysis/`, `data_audit/`, `configs/`
-and `steer/directions.py`:
+repository's own files by two scripts, which only read `items/`, `results/`, `analysis/`, `data_audit/` and
+`configs/`:
 
 ```bash
 python site/build_data.py   # docs/data/meta.json, probe_*.json, direct.json, summary.json, open/*.json; checks the quoted numbers
@@ -36,11 +36,14 @@ Language: Traditional Chinese by default; `?lang=en` or the toggle switches and 
 | `qo` | `qwen38fn-iq2xs-original` | 20 samples |
 | `qa` | `qwen38fn-iq2xs-abliterated-sc117` | 20 samples |
 | `qs` | `qwen38fn-iq2xs-abliterated-sc117+sysprompt` (four-sentence system prompt) | 20 samples |
-| `sb` | `bolt74b-24gb-abliterated-boldingbuilds+steerbase` (steering server, no vector) | logprob |
-| `sv` | `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2` (stance vector, layer 37, ×2) | logprob |
-| `sn` | `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s-4` (negated stance vector, ×−4) | logprob |
+| `sb` | `bolt74b-24gb-abliterated-boldingbuilds+steerbase-a3` (steering server, no vector) | logprob |
+| `sv` | `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2` (stance vector, layer 45, ×2) | logprob |
+| `sn` | `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s-4` (negated stance vector, layer 45, ×−4; `a3_probe_logprob.jsonl` only) | logprob |
 
-The other steering runs (`+a1-*`, `+a2-*` at other layers/scales) and Bolt's 20-sample probe are not on the page.
+The stance vector is that of version 2 of the paper (ROC wording, split in `items/roc_steer_items.json`). The other
+steering runs (`+a1roc-*`, `+a1rocmean-*`, `+a3-*` at other layers/scales; version 1: `+steerbase`, `+a1-*`, `+a2-*`)
+and Bolt's 20-sample probe are not on the page. The open answers of `sb` are left out (not scored by
+`analysis/tsb_rubric.py`).
 
 ## Files and fields
 
@@ -50,8 +53,8 @@ All probabilities are rounded to 3 decimals (summary values to 4); scripts are `
 
 - `models[]`: `id`, `family` (`bolt`/`qwen`), `version` (`original`/`abliterated`), `main` (one of the four),
   `base` (the run an intervention is compared with), `name` / `short` (`zh`, `en` display names), `label`, `mode`.
-- `groups[]`: `id`, `name` — `sov` inherited sovereignty pairs, `roc` ROC-wording pairs (incl. R-TAM-TOLL and R-009b),
-  `tam` 1989 pairs and open questions, `ctl` controls, `open` open questions, `rocopen` ROC-wording open questions,
+- `groups[]`: `id`, `name` — `sov` inherited sovereignty pairs, `roc` ROC-wording pairs (incl. R-TAM-TOLL, R-009b and
+  R-014c), `fresh` the stance vector's fresh test pairs F-01…F-08 (steering runs only), `tam` 1989 pairs and open questions, `ctl` controls, `open` open questions, `rocopen` ROC-wording open questions,
   `direct` direct yes-first questions, `c92` 1992-Consensus framings.
 - `items[]`: `key` (unique, used in `#q=`), `id` (item id in the repository), `g` (group), `k` (`pair`, `triple`,
   `open`, `direct`), `src` (item source), `file` (data file without `.json`), and
@@ -70,7 +73,9 @@ All probabilities are rounded to 3 decimals (summary values to 4); scripts are `
 ### `probe_inherited.json`, `probe_roc.json`, `probe_c92.json`
 
 `{item id: {run: {script: cell}}}` from `results/<label>/probe_<mode>.jsonl`, `roc_probe_*` + `roc9b_probe_*`, and
-`c92_probe_*`. A cell has one entry per side (`pro`/`con`, or `roc`/`prc`/`dpp`):
+`c92_probe_*`; for the steering runs also `a3_probe_*` (`items/roc_steer_probe_items.jsonl`: R-009b, R-014c and the fresh
+pairs go to `probe_roc.json`, 1989 and controls to `probe_inherited.json`; values shared with the other files are checked
+to agree, and fill in where a run lacks them, as for `sn`). A cell has one entry per side (`pro`/`con`, or `roc`/`prc`/`dpp`):
 
 | field | meaning |
 |---|---|
@@ -84,9 +89,10 @@ and, for pairs, `d` = `pro.m − con.m`, the pair score (+1 ROC position, −1 P
 ### `direct.json`
 
 `{item key: {q, prompt: {script}, runs: {run: {script: {p, mass, c?, src}}}}}`: probability that the first answer
-token is yes for the yes-first questions. Bolt and the steering runs, inherited questions: `yesno_first_token.jsonl`
-(plain server, `src: "plain"`, paper Table 4 and the stance-vector table); all ROC-wording questions and Qwen's
-inherited ones: `roc_yesno_first_token.jsonl` (`src: "roc"`). `prc_part_1`, `roc_sovereign` and `roc_prc_part` have
+token is yes for the yes-first questions. Bolt, inherited questions: `yesno_first_token.jsonl` (plain server,
+`src: "plain"`, paper Table 4); all ROC-wording questions and Qwen's inherited ones: `roc_yesno_first_token.jsonl`
+(`src: "roc"`); the steering runs: both question sets from their `yesno_first_token.jsonl` (`src: "steer"`, the
+stance-vector table). `prc_part_1`, `roc_sovereign` and `roc_prc_part` have
 the same prompt as the open questions X-PRC-YN, X-ROC-YN and R-OPEN-YN and are shown inside them (checked at build).
 
 ### `open/<id>.json`
@@ -112,8 +118,10 @@ and `tags`, present only when they fire:
 ### `summary.json`
 
 `index[run].sov|tam|ctl[script|gap] = [mean, lo, hi, n]` (Index S with the 95% bootstrap interval of
-`analysis/analyze.py`), `roc[run]` (ROC-wording sovereignty pairs), `heldout[run]` (the 8 held-out pairs of the
-steering split), `corpus` (from `data_audit/results.json`), `steer.train` / `steer.test` (from `steer/directions.py`).
+`analysis/analyze.py`), `roc[run]` (ROC-wording sovereignty pairs), `stance[run].train|select|fresh|tam|ctl` (steering
+runs, from `a3_probe_logprob.jsonl`: the stance vector's 8 training, 8 selection and 8 fresh pairs, 1989, controls;
+paper tables tab:steerA2 and tab:steerfresh), `corpus` (from `data_audit/results.json`), `steer.train` / `steer.select`
+/ `steer.fresh` (from `items/roc_steer_items.json`) and `steer.replaced` (R-009 → R-009b, R-014 → R-014c).
 
 ### `game.json`
 

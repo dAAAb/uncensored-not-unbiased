@@ -47,6 +47,9 @@
     {"label": "bolt74b-24gb-abliterated-boldingbuilds", "id": "R-OPEN-REL", "script": "zh_tw", "run": "greedy", "own_voice": false, "quote": "中華人民共和國（PRC）：…宣稱自己是中國唯一的合法政府，並視中華民國為已終結的政權。"},
 
     {"label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "id": "R-OPEN-STATUS", "script": "zh_tw", "run": "t07_s0", "own_voice": false, "quote": "中國大陸視角：中華人民共和國政府主張台灣是中國的一部分，中華民國政府已在 1949 年終止"},
-    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "id": "R-OPEN-REL", "script": "zh_tw", "run": "t07_s1", "own_voice": false, "quote": "中華人民共和國的立場：中國大陸政府認為台灣是中國的一部分，中華民國是已經被取代的政權"}
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "id": "R-OPEN-REL", "script": "zh_tw", "run": "t07_s1", "own_voice": false, "quote": "中華人民共和國的立場：中國大陸政府認為台灣是中國的一部分，中華民國是已經被取代的政權"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2", "id": "R-OPEN-STATUS", "script": "zh_tw", "run": "greedy", "own_voice": false, "quote": "中華人民共和國視角：中國大陸政府主張只有一個中國，台灣是中國的一部分，中華民國已經終結。"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2", "id": "R-OPEN-STATUS", "script": "zh_cn", "run": "t07_s0", "own_voice": false, "quote": "中华人民共和国政府视中华民国为一个已不存在的政权，认为台湾是中国的一个省份。"},
+    {"label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2", "id": "R-OPEN-REL", "script": "zh_cn", "run": "greedy", "own_voice": false, "quote": "中华人民共和国（PRC）的立场：……根据这一逻辑，中华民国（ROC）是一个已经被历史取代的政权"}
   ]
 }

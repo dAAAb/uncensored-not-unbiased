@@ -188,16 +188,16 @@
         <p><span data-lang="zh">在去審查版 Qwen 前加四句繁體系統提示，主權題的 Index S 變成繁 +0.97、簡 +0.95、英 +0.93。但提示寫出了題目要問的事實：量到的是模型多聽話，不是它知道什麼。</span><span data-lang="en">With a four-sentence Traditional-Chinese system prompt, the abliterated Qwen scores +0.97 / +0.95 / +0.93 on the sovereignty pairs. The prompt states the facts the probe asks about, so this measures how readily the model follows context, not what it knows.</span></p>
         <span class="go"><span data-lang="zh">看介入實驗 →</span><span data-lang="en">See the interventions →</span></span>
       </a>
-      <a class="card hl" href="#q=S1-002&amp;x=1">
-        <div class="num">+0.23 → +0.35 <small>/</small> −0.01</div>
+      <a class="card hl" href="#q=F-06">
+        <div class="num">+0.65 → +0.71 <small>/</small> +0.45</div>
         <h3><span data-lang="zh">一個「立場向量」能把 Bolt 往兩邊推</span><span data-lang="en">One stance vector pushes Bolt either way</span></h3>
-        <p><span data-lang="zh">用 144 組提示建出的立場方向加進活化值，留出題的簡體 Index S 從 +0.23 升到 +0.35；反過來加（×−4）則降到 −0.01。握有權重的人，可以讓模型的立場往任一方向偏。</span><span data-lang="en">Adding a stance direction built from 144 prompt pairs raises the held-out Simplified-Chinese Index S from +0.23 to +0.35; negated (×−4) it falls to −0.01. Whoever holds the weights can tilt the stance either way.</span></p>
+        <p><span data-lang="zh">以中華民國（台灣）措辭的 144 組提示對建出立場方向，加進第 45 層的活化值：8 組建向量、選層都沒用過的新配對，簡體 Index S 從 +0.65 升到 +0.71；反過來加（×−4）則降到 +0.45。往中華民國方只推得動一點，往反方向容易得多：握有權重的人，可以讓模型的立場往任一方向偏。</span><span data-lang="en">A stance direction built from 144 prompt pairs in the Republic of China (Taiwan) wording and added at layer 45 raises the Simplified-Chinese Index S on 8 fresh pairs, used neither to build nor to choose it, from +0.65 to +0.71; negated (×−4) it falls to +0.45. It moves a little toward the ROC position and more readily away from it: whoever holds the weights can tilt the stance either way.</span></p>
         <span class="go"><span data-lang="zh">看立場向量 →</span><span data-lang="en">See the stance vector →</span></span>
       </a>
       <a class="card hl" href="#q=X-PRC-YN&amp;m=bo">
-        <div class="num">15</div>
+        <div class="num">16</div>
         <h3><span data-lang="zh">說「台灣不是中華人民共和國的一部分」，也會被評分規則判不通過</span><span data-lang="en">Saying "Taiwan is not part of the PRC" can fail the scoring rules</span></h3>
-        <p><span data-lang="zh">用台灣主權基準（TSB，作者自己的 TSB Pro 也一樣）的關鍵字規則重評開放回答，有 15 個只因為否認北京主張的句子（如「台灣並非中華人民共和國的一部分」）被判不通過，12 個來自兩個 Bolt。</span><span data-lang="en">Re-scored with the keyword rules of the Taiwan Sovereignty Benchmark (shared by the author's own TSB Pro), 15 open answers fail only on a sentence denying the PRC claim, such as 「台灣並非中華人民共和國的一部分」; 12 of them come from the two Bolt models.</span></p>
+        <p><span data-lang="zh">用台灣主權基準（TSB，作者自己的 TSB Pro 也一樣）的關鍵字規則重評開放回答，有 16 個只因為否認北京主張的句子（如「台灣並非中華人民共和國的一部分」）被判不通過，12 個來自兩個 Bolt。</span><span data-lang="en">Re-scored with the keyword rules of the Taiwan Sovereignty Benchmark (shared by the author's own TSB Pro), 16 open answers fail only on a sentence denying the PRC claim, such as 「台灣並非中華人民共和國的一部分」; 12 of them come from the two Bolt models.</span></p>
         <span class="go"><span data-lang="zh">看被判不通過的回答 →</span><span data-lang="en">See a failed answer →</span></span>
       </a>
     </div>
@@ -338,19 +338,19 @@
       <div class="card pad">
         <p class="kicker"><span data-lang="zh">活化值引導</span><span data-lang="en">Activation steering</span></p>
         <div class="num">±</div>
-        <h3><span data-lang="zh">字體方向推不動，立場方向推得動，兩邊都行</span><span data-lang="en">The script direction does nothing; the stance direction works, both ways</span></h3>
+        <h3><span data-lang="zh">字體方向推不動；立場方向推得動一點，反方向推得更多</span><span data-lang="en">The script direction does nothing; the stance direction moves Bolt a little, and further the other way</span></h3>
         <ul>
-          <li><span data-lang="zh"><strong>字體方向</strong>（繁減簡的平均差，扣掉對照組的部分）：在留出題上看得出來，但加回去毫無作用，簡體分數變動不超過 0.01。</span><span data-lang="en"><strong>Script direction</strong> (Traditional minus Simplified, control part removed): visible on held-out pairs, but adding it changed the held-out Simplified score by at most 0.01.</span></li>
-          <li><span data-lang="zh"><strong>立場方向</strong>（中華民國方答案減北京方答案，第 37 層 ×2）：留出題 +0.63→+0.71、+0.23→+0.35、+0.72→+0.79，1989 年也上升，對照組不受影響。</span><span data-lang="en"><strong>Stance direction</strong> (ROC-side minus PRC-side answer, layer 37, ×2): held-out +0.63→+0.71, +0.23→+0.35, +0.72→+0.79; 1989 rises too; controls unaffected.</span></li>
-          <li><span data-lang="zh"><strong>反過來加（×−4）</strong>：+0.29／−0.01／+0.48。</span><span data-lang="en"><strong>Negated (×−4)</strong>: +0.29 / −0.01 / +0.48.</span></li>
+          <li><span data-lang="zh"><strong>字體方向</strong>（繁減簡的平均差，扣掉對照組的部分）：在留出題上看得出來，但加回去毫無作用，簡體分數變動不超過 0.03。</span><span data-lang="en"><strong>Script direction</strong> (Traditional minus Simplified, control part removed): visible on held-out pairs, but adding it changed the held-out Simplified score by at most 0.03.</span></li>
+          <li><span data-lang="zh"><strong>立場方向</strong>（中華民國方答案減北京方答案，由 8 組訓練配對的 144 組提示對建成，第 45 層 ×2）：8 組新配對 +0.79→+0.84、+0.65→+0.71、+0.79→+0.84，1989 年也上升，對照組沒有下降。</span><span data-lang="en"><strong>Stance direction</strong> (ROC-side minus PRC-side answer, built from 144 prompt pairs of 8 training pairs; layer 45, ×2): on 8 fresh pairs +0.79→+0.84, +0.65→+0.71, +0.79→+0.84; 1989 rises too; controls do not fall.</span></li>
+          <li><span data-lang="zh"><strong>反過來加（×−4）</strong>：新配對 +0.58／+0.45／+0.62（−0.21／−0.20／−0.18）。</span><span data-lang="en"><strong>Negated (×−4)</strong>: fresh pairs +0.58 / +0.45 / +0.62 (−0.21 / −0.20 / −0.18).</span></li>
         </ul>
-        <p class="small muted"><span data-lang="zh">層與倍率是看留出題選的；增益和字體落差比起來仍小。</span><span data-lang="en">Layer and scale were chosen on the held-out pairs; the gain is small next to the script gap.</span></p>
+        <p class="small muted"><span data-lang="zh">論文第 2 版兩項實驗都改用中華民國（台灣）措辭。層與倍率依第一次引導實驗前寫下的規則，在 8 組選擇配對上選定；新配對既沒用來建向量，也沒用來選。增益和字體落差比起來仍小。</span><span data-lang="en">Version 2 of the paper runs both experiments on the Republic of China (Taiwan) wording. Layer and scale were chosen on 8 selection pairs by a rule written down before the first steered run; the fresh pairs were used neither to build nor to choose the vector. The gain is small next to the script gap.</span></p>
       </div>
       <div class="card pad">
         <p class="kicker"><span data-lang="zh">評分規則</span><span data-lang="en">Scoring rules</span></p>
-        <div class="num">580 <small>/ 1,152</small></div>
+        <div class="num">576 <small>/ 1,152</small></div>
         <h3><span data-lang="zh">關鍵字分不出主張、轉述與否認</span><span data-lang="en">Keyword rules cannot tell asserting from reporting or denying</span></h3>
-        <p><span data-lang="zh">套用 TSB 與作者自己的 TSB Pro 的規則，1,152 個開放回答有 580 個不通過。對原版 Qwen 規則有效：211 個不通過裡 206 個確實以自己的口吻講北京立場。對兩個 Bolt 則多半誤判：89 個與 93 個裡分別有 64、68 個沒有這種主張。照 TSB 第一階段的規則，每個模型在每種文字下都是零分。</span><span data-lang="en">Under the rules of TSB and the author's own TSB Pro, 580 of 1,152 open answers fail. For the original Qwen they work: 206 of its 211 failures assert the PRC position in its own voice. For the two Bolt models they mostly do not: 64 of 89 and 68 of 93 failures contain no such assertion. Under TSB's stage-1 rule every model would score zero in every script.</span></p>
+        <p><span data-lang="zh">套用 TSB 與作者自己的 TSB Pro 的規則，1,152 個開放回答有 576 個不通過。對原版 Qwen 規則有效：211 個不通過裡 206 個確實以自己的口吻講北京立場。對兩個 Bolt 則多半誤判：89 個與 93 個裡分別有 64、68 個沒有這種主張。照 TSB 第一階段的規則，每個模型在每種文字下都是零分。</span><span data-lang="en">Under the rules of TSB and the author's own TSB Pro, 576 of 1,152 open answers fail. For the original Qwen they work: 206 of its 211 failures assert the PRC position in its own voice. For the two Bolt models they mostly do not: 64 of 89 and 68 of 93 failures contain no such assertion. Under TSB's stage-1 rule every model would score zero in every script.</span></p>
         <p class="small muted"><span data-lang="zh">規則還把「台灣省」、沒加引號的「一個中國」列為淘汰詞，「九二共識」和統戰標語列在同一張清單。論文建議事實題以中華民國憲法為共同參照。單一編碼者，沒有第二位評審。</span><span data-lang="en">The rules also fail "Taiwan Province" and an unquoted "one China", and list the 1992 Consensus beside united-front slogans. The paper proposes the ROC Constitution as the common reference for factual items. One coder, no second rater.</span></p>
       </div>
       <div class="card pad">
@@ -386,7 +386,7 @@
         <li><strong>開放回答</strong>：自由文字的指標是機械式的；兩位評審的盲測編碼已準備好，但還沒做。</li>
         <li><strong>設定</strong>：關閉思考模式，Bolt 的是非題用了推測解碼的草稿模型；開啟推理時結果可能不同。</li>
         <li><strong>立場</strong>：作者是中華民國立法委員。每組的「中華民國方」依中華民國憲法與治理現實：國家是中華民國，它不是中華人民共和國的一部分。沿用的題目有五組以「中國」稱中華人民共和國，一組用民進黨 1999 年決議文的說法，那不是作者的措辭；作者自己的 TSB Pro 也共用這些措辭與評分規則。兩種措辭的逐題結果都公開，讀者可自行判讀。</li>
-        <li><strong>後續分析</strong>：語料稽核只數一個開放語料中的用語，不是立場，也不是兩個模型的訓練資料；引導實驗只做了一個模型、兩種方向估法、只用活化值加法，立場向量的層與倍率是看留出題選的。</li>
+        <li><strong>後續分析</strong>：語料稽核只數一個開放語料中的用語，不是立場，也不是兩個模型的訓練資料；引導實驗只做了一個模型、兩種方向估法、只用活化值加法；立場向量的層與倍率依事先寫定的規則在選擇配對上選定，測試只建立在 8 組新配對上。</li>
         <li><strong>OpenCC</strong>：t2s 轉換換的是字形不是用語，所以操弄的是字體，不是地區用語。</li>
         <li><strong>時間</strong>：模型和社群版本會變；所有權重都以 revision 與雜湊值釘住。</li>
       </ul>
@@ -397,7 +397,7 @@
         <li><strong>Open answers.</strong> The free-text measures are mechanical. Blind coding by two raters is prepared but not done.</li>
         <li><strong>Settings.</strong> Thinking was disabled, and the Bolt probe used the speculative drafter; results with reasoning enabled may differ.</li>
         <li><strong>Positionality.</strong> The author is a member of the Legislative Yuan of the Republic of China. The ROC side of each pair follows the ROC Constitution and governing reality: the state is the Republic of China, and it is not part of the PRC. Five inherited pairs call the PRC "China" and one states the ROC side in the words of the DPP's 1999 resolution; that wording is not the author's, and the author's own earlier benchmark shares it and its scoring rules. Both wordings are reported item by item so readers can apply their own reading.</li>
-        <li><strong>Follow-up analyses.</strong> The corpus audit counts vocabulary in one open corpus, not stance and not either model's training data. Steering covers one model, two ways of estimating a direction and activation addition only; for the stance vector, layer and scale were chosen on the held-out pairs.</li>
+        <li><strong>Follow-up analyses.</strong> The corpus audit counts vocabulary in one open corpus, not stance and not either model's training data. Steering covers one model, two ways of estimating a direction and activation addition only; the stance vector's layer and scale were chosen on the selection pairs by a rule fixed in advance, and its test rests on eight fresh pairs.</li>
         <li><strong>OpenCC.</strong> The t2s conversion changes characters, not vocabulary, so the manipulation is script, not regional usage.</li>
         <li><strong>Time.</strong> Models and builds change; all weights are pinned by revision and hash.</li>
       </ul>

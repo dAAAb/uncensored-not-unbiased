@@ -9,6 +9,7 @@ Ju-Chun Ko · [繁體中文說明](README_zh.md)
 
 **Paper (draft, 21 October 2026):** [paper/main.pdf](paper/main.pdf) (English, source `paper/main.tex`) ·
 [paper/main_zh.pdf](paper/main_zh.pdf) (Traditional Chinese translation). arXiv: [2610.29342](https://arxiv.org/abs/2610.29342).
+Version 2 (23 October 2026) redid both steering experiments with the Republic of China (Taiwan) wording (point 9 below).
 
 ## Why
 
@@ -104,8 +105,8 @@ against 0.91 for 「台湾是中华人民共和国的一部分」. The original 
 (0.68 / 0.87; English 0.29), uses "an inalienable part of China" in all 36 of its open answers, and in 17 of them says in its
 own voice that the ROC is "so-called" or does not exist (「不存在所谓“中华民国（台湾）”这个国家」); neither Bolt model does.
 Abliteration removes that wording from Qwen's Traditional-Chinese answers (5 → 0 of 12) but only reduces it in its
-Simplified ones (7 → 4). The system prompt (+0.98 / +0.98 / +0.96) and the stance vector (+0.10 / +0.13 / +0.08 over its baseline)
-carry over to the new wording.
+Simplified ones (7 → 4). The system prompt carries over to the new wording (+0.98 / +0.98 / +0.96). The stance vector
+of point 9 is built from this wording, so these pairs cannot also test it.
 
 **8. The wording changes verdicts, and scoring rules carry a reference frame too** (paper Section 6;
 `analysis/frame_summary.py`, `analysis/roc_variant.py`, `analysis/tsb_rubric.py`).
@@ -122,14 +123,24 @@ carry over to the new wording.
 - The scoring rules of the Taiwan Sovereignty Benchmark, which the author's own TSB Pro (Ko 2026) shares, fail
   "Taiwan Province" and an unquoted "one China", list the 1992 Consensus beside united-front slogans, and count "I don't
   have a position" as soft censorship.
-- Applied to our 1,152 open answers, those rules fail 580. For the original Qwen they work: 206 of 211 failures assert
-  the PRC position in its own voice. For the two Bolt models most failures (64 of 89, 68 of 93) contain no such
-  assertion: the answers attribute the claim to Beijing, or deny it — 15 fail only on a sentence like "Taiwan is not
-  part of the PRC". Under TSB's stage-1 rule every model scores zero in every script; the original Bolt in Traditional
-  Chinese (Index S +0.58) on a single attributed sentence. The rules on ROC terms and on declining to take sides rarely
-  or never fired here (4 answers; 0). Coding by one coder, no second rater (`analysis/tsb_rubric_coding.json`).
+- Applied to our 1,152 open answers, those rules fail 576 (TSB 420, TSB Pro 547). For the original Qwen they work:
+  206 of 211 failures assert the PRC position in its own voice. For the two Bolt models most failures (64 of 89, 68 of
+  93) contain no such assertion: the answers attribute the claim to Beijing, or deny it — 16 fail only on a sentence
+  like "Taiwan is not part of the PRC". Under TSB's stage-1 rule every model scores zero in every script; the original
+  Bolt in Traditional Chinese (Index S +0.58) on a single attributed sentence. The rules on ROC terms and on declining
+  to take sides rarely or never fired here (3 answers; 0). Coding by one coder, no second rater
+  (`analysis/tsb_rubric_coding.json`).
 - For factual items the paper proposes the ROC Constitution, the framework under which every president since 1996 has
   taken office, as the common reference, with normative items reported separately.
+
+**9. Activation steering on the abliterated Bolt: the script gap does not move; the stance moves a little toward the ROC
+position and further away from it** (paper Section 5; `steer/`, items `items/roc_steer_items.json`). Version 2 of the
+paper ran both experiments on the ROC (Taiwan) wording; the version-1 runs on the inherited wording remain in
+`results/`. Adding a Traditional-minus-Simplified direction changed the held-out Simplified score by at most 0.03. A
+stance vector (ROC-side minus PRC-side answer, 144 prompt pairs from 8 training pairs; layer 45, scale 2, chosen on 8
+selection pairs by a rule written before the first steered run) raises Index S on 8 fresh pairs, used neither to build
+nor to choose it, by +0.05 / +0.06 / +0.04; negated at scale −4 it lowers them by −0.21 / −0.20 / −0.18. The control
+vector is released at [huggingface.co/dAAAb/roc-stance-vector-bolt-74b](https://huggingface.co/dAAAb/roc-stance-vector-bolt-74b).
 
 The 20 October pilot (one greedy answer per question, `pilot/`) had suggested that abliteration made Bolt *more*
 PRC-aligned on "Is Taiwan part of the PRC?" in Traditional Chinese. The greedy answer does flip again in the formal

@@ -3,7 +3,7 @@
   "use strict";
   var U = window.UNU, t = U.t, esc = U.esc, S = U.SCRIPTS;
   var MAIN = ["bo", "ba", "qo", "qa"], EXTRA = ["qs", "sb", "sv", "sn"];
-  var meta = null, byKey = {}, models = {}, steer = { train: [], test: [] };
+  var meta = null, byKey = {}, models = {}, steer = { train: [], select: [], fresh: [], replaced: {} };
   var state = { key: null, m: null, s: "zh_tw", v: "scripts", x: false, cell: null };
   var els = {}, query = "", ready = null, autoOpened = false;
 
@@ -82,7 +82,8 @@
   function related(it) {
     var out = [];
     if (it.mir && byKey[it.mir]) {
-      out.push(esc(t("ex.mirrorOf")) + ' <a href="#q=' + esc(it.mir) + '">' + esc(byKey[it.mir].id) + "</a>");
+      var lab = byKey[it.mir].g === "roc" ? t("ex.restates") : t("ex.mirrorOf");  /* R-009b, R-014c restate ROC-wording pairs */
+      out.push(esc(lab) + ' <a href="#q=' + esc(it.mir) + '">' + esc(byKey[it.mir].id) + "</a>");
     }
     (it.mirBy || []).forEach(function (k) {
       if (byKey[k]) out.push(esc(t("ex.mirroredBy")) + ': <a href="#q=' + esc(k) + '">' + esc(byKey[k].id) + "</a>");
@@ -95,6 +96,7 @@
       return it.k === "pair" ? '<p class="note">' + esc(t("ex.inheritedNote")) + "</p>" : "";
     }
     if (it.g === "roc") return '<p class="note">' + esc(t("ex.rocNote")) + "</p>";
+    if (it.g === "fresh") return '<p class="note">' + esc(t("ex.freshNote")) + "</p>";
     if (it.g === "c92") return '<p class="note box">' + esc(t("ex.c92Note")) + "</p>";
     return "";
   }
@@ -136,7 +138,11 @@
     return '<button type="button" class="cell" data-run="' + run + '" data-s="' + s + '" aria-pressed="' + on + '" aria-label="' + esc(label) + '">' + inner + "</button>";
   }
 
+  /* items run only on the steering server (R-014c, the fresh pairs F-01..F-08): show those runs, no toggle */
+  function mainless(data) { return !MAIN.some(function (x) { return data[x]; }); }
+
   function runsFor(data) {
+    if (mainless(data)) return EXTRA.filter(function (x) { return data[x]; });
     var r = MAIN.slice();
     if (state.x) EXTRA.forEach(function (x) { if (data[x]) r.push(x); });
     return r;
@@ -187,7 +193,7 @@
 
   function interventionToggle(data) {
     var has = EXTRA.some(function (x) { return data[x]; });
-    if (!has) return "";
+    if (!has || mainless(data)) return "";
     return '<label class="toggle"><input type="checkbox" data-act="x"' + (state.x ? " checked" : "") + "> " + esc(t("ex.showX")) + "</label>";
   }
 
@@ -203,11 +209,32 @@
     if (run === "qs") out.push(esc(t("ex.sysNote")) + '<pre class="prompt" lang="zh-Hant">' + esc(meta.systemPrompt) + "</pre>");
     if (run === "sv" || run === "sn" || run === "sb") {
       out.push(esc(t("ex.steerNote")));
-      var base = it.mir && it.g === "roc" ? it.mir : it.id;
-      if (steer.train.indexOf(base) >= 0) out.push(esc(t("ex.trainPair")));
-      else if (steer.test.indexOf(base) >= 0) out.push(esc(t("ex.heldPair")));
+      var role = steerRole(it);
+      if (role) out.push(esc(role));
     }
     return out.map(function (x) { return '<p class="note">' + x + "</p>"; }).join("");
+  }
+
+  /* role of an item in the stance-vector experiment, which was built and chosen on ROC-wording pairs only
+     (summary.json steer: train / select / fresh, replaced = pair -> restatement used in its place) */
+  function steerRole(it) {
+    var rep = steer.replaced || {};
+    var role = function (id) {
+      return ["train", "select", "fresh"].filter(function (k) { return (steer[k] || []).indexOf(id) >= 0; })[0];
+    };
+    if (it.g === "roc" || it.g === "fresh") {
+      if (rep[it.id]) return t("ex.replacedPair", { r: rep[it.id] });
+      var r = role(it.id);
+      return r ? t("ex." + r + "Pair") : "";
+    }
+    if (it.g === "sov") {
+      var roc = (it.mirBy || []).filter(function (k) { return /^R-\d/.test(k); })[0];
+      var id = roc && (rep[roc] || roc), r2 = id && role(id);
+      return r2 ? t("ex.viaRoc." + r2, { r: id }) : "";
+    }
+    if (it.g === "tam" && it.k === "pair") return t("ex.tamPair");
+    if (it.g === "ctl") return t("ex.ctlPair");
+    return "";
   }
 
   function drawer(it, data, kind) {
@@ -249,7 +276,7 @@
       if (gen !== renderGen) return;
       var data = P[it.id] || {};
       var kind = it.k;
-      if (!state.cell) state.cell = [MAIN[0], it.k === "triple" ? "zh_tw" : "zh_cn"];
+      if (!state.cell) state.cell = [runsFor(data)[0] || MAIN[0], it.k === "triple" ? "zh_tw" : "zh_cn"];
       var h = header(it) + '<h3 class="ex-title">' + esc(it.k === "triple" ? it.id + " · " + it.theme[L()] : (L() === "en" ? it.t.pro.en : it.t.pro.zh_tw)) + "</h3>";
       h += textTable(sidesOf(it).map(function (sd) { return { label: t("side." + sd), swatch: sd, texts: it.t[sd] }; }));
       h += related(it) + groupNote(it);
