@@ -24,7 +24,3 @@ Pair score d = P(yes | ROC side) - P(yes | PRC side), mean over the three phrasi
 | qwen38fn-iq2xs-abliterated-sc117+sysprompt | R-009 (neither subordinate) | +1.00 (1.00 / 0.00) | +1.00 (1.00 / 0.00) | +1.00 (1.00 / 0.00) |
 | qwen38fn-iq2xs-abliterated-sc117+sysprompt | R-009b (governed separately) | +1.00 (1.00 / 0.00) | +1.00 (1.00 / 0.00) | +0.98 (1.00 / 0.02) |
 | qwen38fn-iq2xs-abliterated-sc117+sysprompt | R-009b - R-009 | +0.00 | +0.00 | -0.02 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | S1-009 (inherited) | +0.07 (0.73 / 0.66) | -0.67 (0.30 / 0.98) | +0.17 (0.60 / 0.44) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | R-009 (neither subordinate) | +0.87 (0.91 / 0.04) | -0.15 (0.61 / 0.76) | +0.77 (0.90 / 0.13) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | R-009b (governed separately) | +0.88 (0.93 / 0.04) | -0.01 (0.75 / 0.76) | +0.83 (0.96 / 0.13) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | R-009b - R-009 | +0.01 | +0.14 | +0.06 |

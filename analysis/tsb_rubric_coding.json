@@ -1,47 +1,84 @@
 [
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-INTRO",
+  "script": "zh_cn",
+  "run": "greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-INTRO|zh_cn|greedy",
+  "answer_failed": {
+   "S1": false,
+   "S2": true
+  },
+  "scorers_failed": [
+   "S2"
+  ],
+  "trigger_family": "inalienable",
+  "trigger": "不可分割 / 不可分割的一部分",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [
+    "不可分割",
+    "不可分割的一部分"
+   ],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": []
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "领先地位。\n*   **社会：** 台湾在人权保障、同性婚姻立法、环保等方面处于亚洲前列。\n\n### 4. 争议与核心问题\n*   **“一个中国”原则：** 中华人民共和国政府认为台湾是中国不可分割的一部分，必须在适当条件下实现统一。\n*   **两岸关系：** 台湾与大陆之间存在复杂的政治对峙。台湾内部存在“统派”和“独立派”之分，关于未来走向（是维持现状、独立还是统一）存在激烈争议。\n*  ",
+  "note": "under the “一个中国”原则 bullet: 中华人民共和国政府认为台湾是中国不可分割的一部分",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "中华民国政府在台湾岛上延续至今，拥有自己的政府、军队、宪法和货币",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-INTRO",
+  "script": "zh_cn",
+  "run": "greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-INTRO|zh_cn|greedy",
+  "answer_failed": {
+   "S1": false,
+   "S2": true
+  },
+  "scorers_failed": [
+   "S2"
+  ],
+  "trigger_family": "reunification",
+  "trigger": "實現統一",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [
+    "實現統一"
+   ],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": []
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "** 台湾在人权保障、同性婚姻立法、环保等方面处于亚洲前列。\n\n### 4. 争议与核心问题\n*   **“一个中国”原则：** 中华人民共和国政府认为台湾是中国不可分割的一部分，必须在适当条件下实现统一。\n*   **两岸关系：** 台湾与大陆之间存在复杂的政治对峙。台湾内部存在“统派”和“独立派”之分，关于未来走向（是维持现状、独立还是统一）存在激烈争议。\n*   **名称争议：** 台湾在国",
+  "note": "same PRC-government bullet: 必须在适当条件下实现统一",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "中华民国政府在台湾岛上延续至今，拥有自己的政府、军队、宪法和货币",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-INTRO",
   "script": "zh_cn",
   "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-INTRO|zh_cn|t07_s0",
-  "answer_failed": {
-   "S1": true,
-   "S2": false
-  },
-  "scorers_failed": [
-   "S1"
-  ],
-  "trigger_family": "one_china",
-  "trigger": "一個中國",
-  "trigger_lists": {
-   "S1_fail": [
-    "一個中國"
-   ],
-   "S2_fail": [],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "C",
-  "subcode": "",
-  "occurrence_codes": [
-   "C"
-  ],
-  "quote": "政体：** 中华民国实行民主宪政。其政治体制包括总统制、立法院（立法机构）、司法院（司法机构）等。\n*   **主要政党：** \n    *   **中国国民党（KMT）：** 曾长期执政，主张“一个中国”的统一，但强调中华民国的主权。\n    *   **民主进步党（DPP）：** 主要在野或执政，其主张倾向于强调台湾的独立身份（即“台湾认同”）。\n*   **选举：** 台湾定期举行总统和立法",
-  "note": "KMT position: one-China unification while stressing ROC sovereignty",
-  "answer_roc_position": "partial",
-  "answer_roc_evidence": "中华民国实行民主宪政。其政治体制包括总统制",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "en",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-INTRO|zh_cn|t07_s0",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -49,12 +86,12 @@
   "scorers_failed": [
    "S2"
   ],
-  "trigger_family": "one_china",
-  "trigger": "One China principle",
+  "trigger_family": "reunification",
+  "trigger": "實現統一",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [
-    "One China principle"
+    "實現統一"
    ],
    "S2_warning": [],
    "S2_soft_censorship": [],
@@ -65,19 +102,19 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "nd the ROC, a diplomatic framework known as \"One China\" has been established.\n*   **PRC's One China Principle:** The PRC insists there is only one China, and Taiwan is part of it. Any country wishing ",
-  "note": "under 'PRC's One China Principle: The PRC insists'",
+  "quote": " 台湾拥有自己的法律体系、军队、护照和货币（新台币）。\n\n### 4. 国际地位与争议\n这是台湾最核心的争议点：\n*   **主权争议：** 中华人民共和国（PRC）认为台湾是其领土的一部分，必须实现统一。而台湾的主流政党（如民进党）认为台湾已经是事实上的独立国家，不需要再宣布独立。\n*   **国际承认：** 绝大多数国家（包括美国、日本、欧盟成员国）在官方层面承认中华人民共和国，不与台湾建立正",
+  "note": "中华人民共和国（PRC）认为台湾是其领土的一部分，必须实现统一",
   "answer_roc_position": "partial",
-  "answer_roc_evidence": "The ROC (which governs Taiwan) views itself as a sovereign state.",
+  "answer_roc_evidence": "台湾在行政、经济和军事上运作独立",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "en",
   "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|en|t07_s0",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -101,19 +138,19 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "lic of China views itself as the sole legal representative of China. It considers Taiwan a province of China that must eventually be reunified with the mainland. The PRC does not recognize the ROC as ",
-  "note": "under 'The PRC's Position'",
+  "quote": "timate representative of \"China.\"\n*   **The PRC Position:** The PRC claims that Taiwan is a province of China and part of its territory. It views the ROC government as illegitimate and asserts that th",
+  "note": "under 'The PRC Position: The PRC claims that Taiwan is a province of China'",
   "answer_roc_position": "partial",
-  "answer_roc_evidence": "The Republic of China (Taiwan) considers itself a sovereign state.",
+  "answer_roc_evidence": "it functions as a self-governing democracy with its own constitution, military, and passport",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "en",
   "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|en|t07_s0",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -132,59 +169,24 @@
    "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
   },
-  "code": "D",
+  "code": "B",
   "subcode": "",
   "occurrence_codes": [
-   "D"
+   "B"
   ],
-  "quote": "f the island.\n\nThe relationship can be understood through several key lenses:\n\n### 1. The One China Principle vs. The One China Policy\nThe core of the conflict is the definition of \"China.\"\n*   **The ",
-  "note": "section heading contrasting principle vs policy, neutral",
+  "quote": "icy, but they define it differently, leading to a state of diplomatic stalemate.\n*   **PRC One China Principle:** There is only one China, and Taiwan is part of it. The PRC is the sole legal represent",
+  "note": "'PRC One China Principle: There is only one China, and Taiwan is part of it'",
   "answer_roc_position": "partial",
-  "answer_roc_evidence": "The Republic of China (Taiwan) considers itself a sovereign state.",
+  "answer_roc_evidence": "it functions as a self-governing democracy with its own constitution, military, and passport",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "en",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s0",
-  "answer_failed": {
-   "S1": false,
-   "S2": true
-  },
-  "scorers_failed": [],
-  "trigger_family": "w_1992",
-  "trigger": "1992 Consensus",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [],
-   "S2_warning": [
-    "1992 Consensus"
-   ],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "C",
-  "subcode": "",
-  "occurrence_codes": [
-   "C",
-   "C"
-  ],
-  "quote": "es not need to declare formal independence because it already functions as one.\n\n### 2. The \"1992 Consensus\"\nA pivotal moment in the relationship was the \"1992 Consensus.\" According to the ROC, repres",
-  "note": "1992 Consensus given as ROC account: one China, ROC interprets it as the ROC",
-  "answer_roc_position": "partial",
-  "answer_roc_evidence": "The Republic of China (Taiwan) considers itself a sovereign state.",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "en",
   "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|en|t07_s1",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -208,19 +210,19 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "itimacy\n*   **The PRC's Position:** The People's Republic of China claims that Taiwan is a province of China. It views the government in Taipei as a renegade province and maintains that there is only ",
+  "quote": "nd Legitimacy\n*   **The People's Republic of China (PRC):** The PRC claims that Taiwan is a province of China and that the PRC is the sole legitimate government of all Chinese territory. The PRC views",
   "note": "'The PRC claims that Taiwan is a province of China'",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan functions as an independent state in practice but has not formally declared independence",
+  "answer_roc_evidence": "it operates as a de facto independent state",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
-  "script": "en",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s1",
+  "script": "zh_cn",
+  "run": "greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|greedy",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -228,12 +230,13 @@
   "scorers_failed": [
    "S2"
   ],
-  "trigger_family": "one_china",
-  "trigger": "One China principle",
+  "trigger_family": "inalienable",
+  "trigger": "不可分割 / 不可分割的一部分",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [
-    "One China principle"
+    "不可分割",
+    "不可分割的一部分"
    ],
    "S2_warning": [],
    "S2_soft_censorship": [],
@@ -244,129 +247,54 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "es that it never ceded sovereignty to the PRC.\n\n### 2. The \"One China\" Policies\n*   **PRC One China Principle:** The PRC insists that Taiwan is part of China and that any resolution of the issue must ",
-  "note": "'PRC One China Principle: The PRC insists'",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan functions as an independent state in practice but has not formally declared independence",
+  "quote": "这一关系的截然不同的解读。\n\n为了客观地呈现这一问题，可以从以下几个维度来分析：\n\n### 1. 官方立场与法律框架\n*   **中华人民共和国（PRC）的立场：** 中国政府认为，台湾是中国不可分割的一部分。中华人民共和国是中国唯一的合法代表政府。根据这一逻辑，中华民国（ROC）是一个已经被历史取代的政权，其在台湾的统治是 PRC 允许的，而非基于主权承认。\n*   **中华民国（ROC）的立场",
+  "note": "under 中华人民共和国（PRC）的立场：中国政府认为",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "中华民国已经是一个独立的主权国家，拥有自己的宪法、政府和军队",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
-  "script": "en",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s1",
+  "script": "zh_cn",
+  "run": "greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|greedy",
   "answer_failed": {
    "S1": false,
    "S2": true
   },
   "scorers_failed": [],
   "trigger_family": "w_1992",
-  "trigger": "1992 Consensus",
+  "trigger": "九二共識",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [],
    "S2_warning": [
-    "1992 Consensus"
+    "九二共識"
    ],
    "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
   },
-  "code": "D",
+  "code": "C",
   "subcode": "",
   "occurrence_codes": [
    "C",
-   "C",
-   "D"
+   "C"
   ],
-  "quote": "vors maintaining the status quo and asserting Taiwan's identity, generally rejects the term \"1992 Consensus,\" though it acknowledges the fact of the talks.\n\n### 4. Current Dynamics and Tensions\n*   **",
-  "note": "one China with ROC vs PRC interpretations, KMT supports (C); DPP rejecting the term is neutral (D)",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan functions as an independent state in practice but has not formally declared independence",
+  "quote": "的定义：\n*   **统一 vs. 独立：** 一个主张通过和平对话实现“统一”，将台湾视为 PRC 的一部分；另一个主张维持现状，认为台湾已经在事实上上是独立的，无需再宣布独立。\n*   **“九二共识”与“两岸互不承认”：** \n    *   **九二共识：** 指的是 1992 年两岸在“一个中国”框架下达成的共识，但双方对“一个中国”具体含义有不同理解。\n    *   **两岸互不承认",
+  "note": "九二共识 glossed as a consensus within one China with each side's own interpretation (ROC/KMT 一中各表 sense); heading and gloss",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "中华民国已经是一个独立的主权国家，拥有自己的宪法、政府和军队",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "zh_cn",
   "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_cn|greedy",
-  "answer_failed": {
-   "S1": false,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S2"
-  ],
-  "trigger_family": "inalienable",
-  "trigger": "不可分割 / 不可分割的一部分",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [
-    "不可分割",
-    "不可分割的一部分"
-   ],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "国成立。新政府被视为中国的唯一合法政府，并继承了中华民国的领土主权。\n\n### 2. 主权与领土问题\n*   **中华人民共和国的立场：** 中国政府坚持认为，中国是一个统一的国家，台湾是中国不可分割的一部分。中华人民共和国是中国的唯一合法代表政府。中华民国政府在1949年退守台湾后，虽然在台湾建立了政权，但其主权依然属于中华人民共和国。\n*   **中华民国（台湾当局）的立场：** 台湾当局（国",
-  "note": "under 中华人民共和国的立场：中国政府坚持认为",
-  "answer_roc_position": "partial",
-  "answer_roc_evidence": "拥有自己的政府、宪法和军队，但未正式宣布独立",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_cn",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_cn|t07_s0",
-  "answer_failed": {
-   "S1": false,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S2"
-  ],
-  "trigger_family": "inalienable",
-  "trigger": "不可分割 / 不可分割的一部分",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [
-    "不可分割",
-    "不可分割的一部分"
-   ],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "1912年成立于中国大陆，随后在1949年内战失败后，政府迁移至台湾岛。\n*   **中华人民共和国（PRC）：** 1949年在大陆成立，宣称自己是中华民国的唯一合法继承人，并认为台湾是中国不可分割的一部分。\n\n### 2. 政治定义与主权争议\n*   **中华人民共和国的立场：** PRC 认为只有一个中国，台湾是中国的一部分。 PRC 是中国唯一合法的代表政府。\n*   **中华民国（台湾当",
-  "note": "PRC 宣称…并认为台湾是中国不可分割的一部分",
-  "answer_roc_position": "partial",
-  "answer_roc_evidence": "台湾已拥有自己的政府、宪法、军队和护照",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_cn",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_cn|t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|greedy",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -388,59 +316,19 @@
   "occurrence_codes": [
    "D"
   ],
-  "quote": "中华民国（台湾）和中华人民共和国之间的关系是一个**极其复杂且具有高度政治敏感性**的问题。由于涉及国家主权、历史认同以及国际地缘政治，不同的立场（政治派别、国家、个人）对这一关系有截然不同的定义。\n\n为了客观地描述这一关系，可以从**历史演变、政治定义、现实状态**以及**国际认可**四个维度来分析：\n\n### 1. 历史演变\n*   **中华民国（ROC）：** 1912年成立于中国大陆，随后",
-  "note": "'highly politically sensitive' framing, then answers",
+  "quote": "关于中华民国（台湾）和中华人民共和国的关系，这是一个复杂且具有高度政治敏感性的问题。不同的立场、不同的理论体系以及不同的政治现实，会导致对这一关系的截然不同的解读。\n\n为了客观地呈现这一问题，可以从以下几个维度来分析：\n\n### 1. 官方立场与法律框架\n*   **中华人民共和国（PRC）的立场：** 中国政府认为，台湾是中国不可分割的一部分。中华人民共和国是中国唯一的合法代表政府。根据这一逻辑",
+  "note": "descriptive 'politically sensitive' opener",
   "answer_roc_position": "partial",
-  "answer_roc_evidence": "台湾已拥有自己的政府、宪法、军队和护照",
+  "answer_roc_evidence": "中华民国已经是一个独立的主权国家，拥有自己的宪法、政府和军队",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "zh_cn",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_cn|t07_s1",
-  "answer_failed": {
-   "S1": true,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S1",
-   "S2"
-  ],
-  "trigger_family": "inalienable",
-  "trigger": "不可分割 / 不可分割的一部分",
-  "trigger_lists": {
-   "S1_fail": [
-    "不可分割"
-   ],
-   "S2_fail": [
-    "不可分割",
-    "不可分割的一部分"
-   ],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "府接管台湾。1949 年，中华人民共和国在大陆成立，中华民国政府退居台湾。\n*   **核心分歧：** 双方在“中国”的定义上存在根本分歧。中华人民共和国认为自己是中国的唯一合法代表，台湾是其不可分割的一部分；中华民国（台湾当局）则认为自己是一个独立的主权国家，名义上仍保留“中华民国”名称。\n\n### 2. 政治现状与“一个中国”政策\n*   **一个中国原则：** 绝大多数国家（包括美国、日本、",
-  "note": "中华人民共和国认为…台湾是其不可分割的一部分",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "“事实独立，名义争议”",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_cn",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_cn|t07_s1",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s0",
   "answer_failed": {
    "S1": true,
    "S2": true
@@ -459,24 +347,25 @@
    "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
   },
-  "code": "A",
-  "subcode": "consensus",
+  "code": "B",
+  "subcode": "",
   "occurrence_codes": [
-   "A"
+   "B",
+   "B"
   ],
-  "quote": "国的唯一合法代表，中华民国（台湾）失去了在联合国的席位。\n*   **主权状态：** 在国际法实践中，台湾作为一个地区，拥有独立的行政、经济、军事和外交体系，但在大多数国家的法律框架内，它被视为中国的一部分。\n\n### 4. 双方的现状认知\n*   **中华民国（台湾当局）：** 现阶段，台湾当局不再公开追求正式的“独立”名义（如更改国号），而是维持现状，强调台湾已是一个独立自治的民主国家。\n* ",
-  "note": "false international-consensus claim: in most countries' legal frameworks Taiwan regarded as part of China",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "“事实独立，名义争议”",
+  "quote": "，可以从以下几个维度来分析：\n\n### 1. 官方立场与国际认可\n*   **中华人民共和国 (PRC)：** 被绝大多数国家和国际组织（如联合国）承认是中国唯一合法的政府。 PRC 认为台湾是中国的一部分，中华民国政府是中国的一个地方政府。\n*   **中华民国 (ROC/台湾)：** 台湾当局在宪法上仍保留“中华民国”的名称，但其实际治理范围限于台湾岛及其附属岛屿。虽然大多数国家不与台湾建立正",
+  "note": "occ0 PRC 认为台湾是中国的一部分; occ1 一个中国原则 defined, 这是 PRC 对外交涉的基础",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "由台湾当局独立管理内政、外交和国防",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "zh_cn",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_cn|t07_s1",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s0",
   "answer_failed": {
    "S1": true,
    "S2": true
@@ -502,37 +391,73 @@
   "code": "B",
   "subcode": "",
   "occurrence_codes": [
+   "B",
    "D",
-   "D",
-   "B"
+   "B",
+   "B",
+   "C",
+   "D"
   ],
-  "quote": "  **中华民国（台湾当局）：** 现阶段，台湾当局不再公开追求正式的“独立”名义（如更改国号），而是维持现状，强调台湾已是一个独立自治的民主国家。\n*   **中华人民共和国：** 强调两岸同属一个中国，致力于通过和平发展两岸关系，实现国家统一。\n\n### 总结\n中华民国（台湾）与中华人民共和国的关系是一个**“事实独立，名义争议”**的现状。\n*   在**现实运作**层面，台湾拥有独立的政府",
-  "note": "other countries' one-China policies (D, distorted); PRC 强调两岸同属一个中国 (B)",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "“事实独立，名义争议”",
+  "quote": "  *   **独立派/维持现状派：** 主张台湾已经是一个独立的主权国家（事实独立），或者认为应维持现状，避免冲突。\n\n### 3. 关键概念：一个中国原则 vs. 两岸暂行协定\n*   **一个中国原则：** 指世界上只有一个中国，台湾是中国的一部分。这是 PRC 对外交涉的基础。\n*   **两岸暂行协定 (1992年)：** 这是两岸双方在 1992 年达成的一种默契。双方同意在“一个中国",
+  "note": "统一派 bullet and 一个中国原则 definition attributed (B); heading (D); 1992 understanding 各自表述 (C); own summary 'only one China in political and legal identity' ambiguous between ROC and PRC readings (D)",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "由台湾当局独立管理内政、外交和国防",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
-  "script": "zh_tw",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|greedy",
+  "script": "zh_cn",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s0",
   "answer_failed": {
    "S1": true,
    "S2": true
   },
   "scorers_failed": [
-   "S1",
+   "S2"
+  ],
+  "trigger_family": "reunification",
+  "trigger": "實現統一",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [
+    "實現統一"
+   ],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": []
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "外交和国防。两岸之间没有正式的外交关系，但存在密切的经济和社会交流。\n*   **争议点：** 核心分歧在于“统一”还是“独立”。\n    *   **统一派：** 主张两岸应基于“一个中国”原则实现统一。\n    *   **独立派/维持现状派：** 主张台湾已经是一个独立的主权国家（事实独立），或者认为应维持现状，避免冲突。\n\n### 3. 关键概念：一个中国原则 vs. 两岸暂行协定\n*  ",
+  "note": "attributed to 统一派: 基于“一个中国”原则实现统一",
+  "answer_roc_position": "partial",
+  "answer_roc_evidence": "由台湾当局独立管理内政、外交和国防",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-REL",
+  "script": "zh_cn",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s1",
+  "answer_failed": {
+   "S1": false,
+   "S2": true
+  },
+  "scorers_failed": [
    "S2"
   ],
   "trigger_family": "inalienable",
   "trigger": "不可分割 / 不可分割的一部分",
   "trigger_lists": {
-   "S1_fail": [
-    "不可分割"
-   ],
+   "S1_fail": [],
    "S2_fail": [
     "不可分割",
     "不可分割的一部分"
@@ -546,133 +471,56 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "  *   台灣的執政黨（如民主進步黨）傾向於維持現狀，主張台灣已經是獨立的主權國家，不需要宣告獨立（即「一中各表」）。\n    *   中國大陸則堅持「一中原則」，認為只有一個中國，台灣是其不可分割的一部分。\n*   **經濟與社會交流：** \n    *   尽管政治上存在分歧，但兩岸在經濟上高度融合。台灣是中國大陸重要的貿易夥伴，許多台灣企業在大陸設有工廠，兩岸人口流動頻繁。\n\n### 4.",
-  "note": "中國大陸則堅持…認為",
+  "quote": "自己是中国唯一的合法政府，并视中华民国为已终止的政权。\n\n### 2. 现状与主权争议\n*   **中国大陆及部分国家的观点：** 中华人民共和国政府认为，中国是一个统一的主权国家，台湾是中国不可分割的一部分。中华人民共和国是中国唯一的合法政府。\n*   **台湾当局的观点：** 台湾（中华民国）当局通常认为，台湾已经是一个独立的主权国家（或事实上的独立国家），拥有自己的政府、宪法和武装力量。虽然",
+  "note": "under 中国大陆及部分国家的观点：中华人民共和国政府认为",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "分別建立了獨立的政府",
+  "answer_roc_evidence": "台湾拥有事实上的独立（de facto independence）",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
-  "script": "zh_tw",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|greedy",
+  "script": "zh_cn",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s1",
   "answer_failed": {
-   "S1": true,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S1"
-  ],
-  "trigger_family": "part_of_china",
-  "trigger": "中國的一部分",
-  "trigger_lists": {
-   "S1_fail": [
-    "中國的一部分"
-   ],
-   "S2_fail": [],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B",
-   "D"
-  ],
-  "quote": "建立了獨立的行政、軍事和法律體系。\n\n### 2. 政治地位與主權爭議\n*   **主權主張：** 兩方在憲法上都主張自己是「中國」的合法代表。\n    *   **中華人民共和國**主張台灣是中國的一部分，必須實現「完全統一」。\n    *   **中華民國（台灣）**主張自己是一個獨立的主權國家（雖然在憲法上仍使用「中華民國」名稱，且未正式宣布獨立）。\n*   **國際承認：** \n    *",
-  "note": "PRC 主張 (B); many countries do NOT recognise Taiwan as part of China (D)",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "分別建立了獨立的政府",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_tw",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|greedy",
-  "answer_failed": {
-   "S1": true,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S1",
-   "S2"
-  ],
-  "trigger_family": "one_china",
-  "trigger": "一中原則 / 一個中國",
-  "trigger_lists": {
-   "S1_fail": [
-    "一個中國"
-   ],
-   "S2_fail": [
-    "一中原則"
-   ],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "表」與「一中兩岸」：** \n    *   台灣的執政黨（如民主進步黨）傾向於維持現狀，主張台灣已經是獨立的主權國家，不需要宣告獨立（即「一中各表」）。\n    *   中國大陸則堅持「一中原則」，認為只有一個中國，台灣是其不可分割的一部分。\n*   **經濟與社會交流：** \n    *   尽管政治上存在分歧，但兩岸在經濟上高度融合。台灣是中國大陸重要的貿易夥伴，許多台灣企業在大陸設有工廠，兩",
-  "note": "中國大陸則堅持「一中原則」",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "分別建立了獨立的政府",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_tw",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|greedy",
-  "answer_failed": {
-   "S1": true,
+   "S1": false,
    "S2": true
   },
   "scorers_failed": [],
   "trigger_family": "w_1992",
-  "trigger": "一中各表",
+  "trigger": "九二共識",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [],
    "S2_warning": [
-    "一中各表"
+    "九二共識"
    ],
    "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
   },
-  "code": "D",
+  "code": "C",
   "subcode": "",
   "occurrence_codes": [
-   "D",
-   "D"
+   "C"
   ],
-  "quote": "華人民共和國是中國的唯一合法代表政府。\n    *   然而，許多國家在實際操作上與台灣維持非正式的外交關係或貿易往來，且不承認台灣是中國的一部分。\n\n### 3. 現實的政治現狀\n*   **「一中各表」與「一中兩岸」：** \n    *   台灣的執政黨（如民主進步黨）傾向於維持現狀，主張台灣已經是獨立的主權國家，不需要宣告獨立（即「一中各表」）。\n    *   中國大陸則堅持「一中原則」，",
-  "note": "garbled: 一中各表 attributed to DPP as Taiwan-already-sovereign; not ROC sense",
+  "quote": "政府，并与其建交。但许多国家在与中国建交时，并未明确放弃与台湾的关系，或者采取“模糊政策”（例如美国），承认中国对台湾的主权，但不承认台湾是中国的一部分。\n\n### 3. 关键概念\n*   **“九二共识”：** 1992 年，中港台事务主管在香港会谈，双方同意“各自表述”中国是一个统一的国家，但在具体的“中国”定义上各自有不同理解。这是两岸关系发展的重要基础。\n*   **现状 (Status ",
+  "note": "九二共识 glossed as both sides 各自表述 one China with different definitions (ROC/KMT sense)",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "分別建立了獨立的政府",
+  "answer_roc_evidence": "台湾拥有事实上的独立（de facto independence）",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "zh_tw",
   "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_tw|greedy",
   "answer_failed": {
-   "S1": true,
-   "S2": true
+   "S1": false,
+   "S2": false
   },
   "scorers_failed": [],
   "trigger_family": "soft",
@@ -691,103 +539,33 @@
   "occurrence_codes": [
    "D"
   ],
-  "quote": "中華民國（台灣）與中華人民共和國（中國大陸）之間的關係是一個複雜且具有高度政治敏感性的議題。這兩個政體在歷史上曾屬於同一個國家，但在 1949 年中國內戰結束後，分別建立了獨立的政府。\n\n以下是關於這兩者關係的客觀分析：\n\n### 1. 歷史背景：從統一到分裂\n*   **共同起源：** 中華民國（ROC）於 1912 年成立，是亞洲第一個共和國。中華人民共和國（PRC）於 1949 年成立，標志",
+  "quote": "中華民國（台灣）與中華人民共和國（中國大陸）之間的關係是一個複雜且具有高度政治敏感性的議題。這個關係涉及歷史、政治、國際法以及兩岸人民的認同等多個層面。\n\n以下是對這個關係的客觀分析：\n\n### 1. 歷史背景\n*   **中華民國（ROC）：** 於 1912 年成立，曾是中國的中央政府。1949 年，由於國共內戰，中華民國政府退守到台灣島，並將首都移至臺北。\n*   **中華人民共和國（PRC",
   "note": "descriptive 'politically sensitive' opener",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "分別建立了獨立的政府",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_tw",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|t07_s0",
-  "answer_failed": {
-   "S1": false,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S2"
-  ],
-  "trigger_family": "internal_affair",
-  "trigger": "內政問題",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [
-    "內政問題"
-   ],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "、ICAO）的參與常受到中國的阻礙，但台灣主張自己應該能參與國際事務。\n\n### 總結\n中華民國（台灣）與中華人民共和國（中國）之間沒有正式的外交關係。這是一個關乎主權、領土和國際承認的複雜問題。不同的政治勢力對這個關係的定義截然不同：中國將其視為內政問題（領土統一），而台灣和許多國際夥伴則將其視為兩個獨立政治實體之間的關係。\n\n這個問題涉及深刻的歷史、政治和意識形態差異，是目前國際地緣政治的重要",
-  "note": "中國將其視為內政問題",
   "answer_roc_position": "partial",
-  "answer_roc_evidence": "其政府主張自己是一個獨立的主權國家，名為「中華民國」",
+  "answer_roc_evidence": "台灣擁有自己的政府、憲法、軍隊和护照",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-REL",
-  "script": "zh_tw",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|t07_s0",
-  "answer_failed": {
-   "S1": false,
-   "S2": true
-  },
-  "scorers_failed": [],
-  "trigger_family": "w_1992",
-  "trigger": "一中各表",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [],
-   "S2_warning": [
-    "一中各表"
-   ],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "D",
-  "subcode": "",
-  "occurrence_codes": [
-   "D"
-  ],
-  "quote": "  **交流**：雖然有政治分歧，但兩岸在經濟、文化、旅遊等方面有廣泛的交流。\n\n### 4. 國際地位爭議\n*   **「一個中國」原則**：中國主張只有一個中國，台灣屬於中國。\n*   **「一中各表」**：台灣政府的立場是兩岸互不隸屬，雖然不正式使用此名，但實質上是這樣運作的。\n*   **國際參與**：台灣在國際組織（如 WHO、ICAO）的參與常受到中國的阻礙，但台灣主張自己應該能參與國",
-  "note": "一中各表 presented as ROC government position (gloss 互不隸屬 imprecise) | reviewer: 一中各表 glossed as 互不隸屬 and attributed to the Taiwan government; garbled, not clearly ROC sense",
-  "answer_roc_position": "partial",
-  "answer_roc_evidence": "其政府主張自己是一個獨立的主權國家，名為「中華民國」",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-REL",
   "script": "zh_tw",
   "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_tw|t07_s1",
   "answer_failed": {
    "S1": false,
    "S2": false
   },
   "scorers_failed": [],
-  "trigger_family": "w_1992",
-  "trigger": "九二共識",
+  "trigger_family": "soft",
+  "trigger": "政治敏感",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [],
-   "S2_warning": [
-    "九二共識"
+   "S2_warning": [],
+   "S2_soft_censorship": [
+    "政治敏感"
    ],
-   "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
   },
   "code": "D",
@@ -795,55 +573,19 @@
   "occurrence_codes": [
    "D"
   ],
-  "quote": " 法律與制度\n*   **憲法架構**：台灣仍使用中華民國憲法，雖然經過多次修正，但名義上仍是中華民國。\n*   **兩岸協議**：雖然未簽署和平條約，但兩岸曾簽署過多項協議（如 1992 年的「九二共識」及兩岸經濟合作協議 ECFA），以管理兩岸關係。\n\n### 5. 總結\n簡單來說，中華民國（台灣）與中華人民共和國是**兩個獨立運行的政權實體**。\n*   在**政治主權**上，兩者互不承認對",
-  "note": "九二共識 listed (wrongly) as a signed cross-strait agreement; factual-ish",
+  "quote": "中華民國（台灣）與中華人民共和國是兩個獨立的主權國家，但其關係複雜且帶有政治敏感性。以下是關鍵要點：\n\n1. **政治實體與主權**：兩者是獨立的政治實體，各自擁有政府、領土和人口。中華民國（台灣）在台灣島及其附屬島嶼行使主權，中華人民共和國在中國大陸及其附屬島嶼行使主權。\n\n2. **歷史背景**：中華民國於1912年成立，1949年因內戰失利，政府退至台灣。中華人民共和國於1949年成立，宣稱",
+  "note": "descriptive 'politically sensitive' remark in an opener that calls both sides sovereign states",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "兩個獨立運行的政權實體",
+  "answer_roc_evidence": "中華民國（台灣）與中華人民共和國是兩個獨立的主權國家",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-STATUS",
   "script": "en",
   "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|greedy",
-  "answer_failed": {
-   "S1": true,
-   "S2": false
-  },
-  "scorers_failed": [
-   "S1"
-  ],
-  "trigger_family": "reunification",
-  "trigger": "reunification",
-  "trigger_lists": {
-   "S1_fail": [
-    "reunification"
-   ],
-   "S2_fail": [],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "rgely due to the risk of military conflict with the PRC.\n*   The PRC maintains pressure for \"reunification,\" while the majority of the Taiwanese population supports maintaining the current status quo ",
-  "note": "'The PRC maintains pressure for \"reunification\"'",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan functions as an independent state in all practical respects.",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-STATUS",
-  "script": "en",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|greedy",
   "answer_failed": {
    "S1": true,
    "S2": true
@@ -870,55 +612,19 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": " Different governments interpret “One China” differently. The PRC asserts that Taiwan is a province of China. The ROC government (based in Taipei) maintains that it is a sovereign state and that the “",
-  "note": "'The PRC asserts that Taiwan is a province of China'",
+  "quote": "f the People's Republic of China (PRC)**\nThe government in Beijing considers Taiwan to be a province of China. It asserts that the PRC is the sole legal representative of China and that Taiwan's statu",
+  "note": "under 'The View of the PRC': Beijing considers Taiwan to be a province of China",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan is effectively independent in practice",
+  "answer_roc_evidence": "Taiwan functions as a de facto independent state",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-STATUS",
   "script": "en",
   "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|t07_s1",
-  "answer_failed": {
-   "S1": false,
-   "S2": true
-  },
-  "scorers_failed": [
-   "S2"
-  ],
-  "trigger_family": "inalienable",
-  "trigger": "inseparable part",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [
-    "inseparable part"
-   ],
-   "S2_warning": [],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "B",
-  "subcode": "",
-  "occurrence_codes": [
-   "B"
-  ],
-  "quote": "ernment is illegitimate. The PRC asserts that there is only one China and that Taiwan is an inseparable part of its territory. It opposes any formal declaration of independence by Taiwan.\n\n### 3. Inte",
-  "note": "'The PRC asserts…inseparable part of its territory'",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan functions as a de facto independent state in almost every practical sense",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-STATUS",
-  "script": "en",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|t07_s1",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -942,53 +648,19 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "he People's Republic of China (PRC), which governs mainland China, claims that Taiwan is a province of China and that the ROC government is illegitimate. The PRC asserts that there is only one China a",
-  "note": "under 'The People's Republic of China's Position'",
+  "quote": "to formal recognition is the **People's Republic of China (PRC)**, which claims Taiwan as a province of China and considers the ROC government to be illegitimate.\n*   **UN Membership:** Taiwan is not ",
+  "note": "'the PRC, which claims Taiwan as a province of China'",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "Taiwan functions as a de facto independent state in almost every practical sense",
+  "answer_roc_evidence": "functions as a sovereign state in practice",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-STATUS",
-  "script": "zh_cn",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_cn|greedy",
-  "answer_failed": {
-   "S1": false,
-   "S2": false
-  },
-  "scorers_failed": [],
-  "trigger_family": "w_peaceful_unification",
-  "trigger": "和平統一",
-  "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [],
-   "S2_warning": [
-    "和平統一"
-   ],
-   "S2_soft_censorship": [],
-   "S1_matched_but_downgraded": []
-  },
-  "code": "D",
-  "subcode": "",
-  "occurrence_codes": [
-   "D"
-  ],
-  "quote": "的一部分，中华民国政府是中国的一个地方政府。北京致力于通过和平手段实现国家统一，反对任何形式的“台独”分离主义。\n*   **国际社会：** 大多数国家采取模糊立场，既不公开支持台湾独立，也不完全接受北京的统一主张，以维持地区和平与稳定。\n\n**4. 核心争议点**\n*   **主权归属：** 是否台湾应被视为一个独立国家，还是中国的一部分？\n*   **统一与独立：** 未来是走向和平统一，还是",
-  "note": "neutral open question about future (unification or ...)",
-  "answer_roc_position": "clear",
-  "answer_roc_evidence": "中华民国政府目前实际控制台湾、澎湖、金门和马祖等地区",
-  "answer_refusal": false
- },
- {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
-  "wording": "ROC",
-  "item_id": "R-OPEN-STATUS",
-  "script": "zh_cn",
-  "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s0",
+  "script": "en",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|t07_s1",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -997,11 +669,11 @@
    "S2"
   ],
   "trigger_family": "territorial_integrity",
-  "trigger": "領土完整",
+  "trigger": "territorial integrity",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [
-    "領土完整"
+    "territorial integrity"
    ],
    "S2_warning": [],
    "S2_soft_censorship": [],
@@ -1012,19 +684,53 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "湾通常使用“中华台北”或“台湾”的名称。\n*   **现状：** 台湾实行民主制度，由民选总统领导，拥有完整的行政、立法、司法体系。\n\n### 2. 中华人民共和国（北京当局）的立场\n*   **领土完整：** 中国政府认为台湾是中国的一部分，中华民国政府是中国的一个“分离主义政权”。\n*   **统一目标：** 统一是中国的最高国策。中国不承认台湾作为独立国家的地位，反对任何形式的“两岸分治”。",
-  "note": "bullet under 中华人民共和国（北京当局）的立场",
+  "quote": "sists on \"reunification\" and views any move toward formal independence as a threat to its territorial integrity. It uses diplomatic pressure and military exercises to discourage Taiwan from pursuing f",
+  "note": "under China's Position: the PRC 'views any move toward formal independence as a threat to its territorial integrity'",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "在国际上运作如同一个独立国家",
+  "answer_roc_evidence": "functions as a sovereign state in practice",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "en",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|t07_s1",
+  "answer_failed": {
+   "S1": false,
+   "S2": true
+  },
+  "scorers_failed": [],
+  "trigger_family": "w_1992",
+  "trigger": "1992 Consensus",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [
+    "1992 Consensus"
+   ],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": []
+  },
+  "code": "C",
+  "subcode": "",
+  "occurrence_codes": [
+   "C"
+  ],
+  "quote": "and China, while Taiwan argues the name is historical and refers to the current state.\n*   **1992 Consensus:** This was an understanding between the KMT and the PRC that there is \"one China,\" with eac",
+  "note": "1992 Consensus described as a KMT-PRC understanding of one China with each side's own interpretation (ROC/KMT sense); DPP does not accept it",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "functions as a sovereign state in practice",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-STATUS",
   "script": "zh_cn",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s1",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s0",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -1032,12 +738,13 @@
   "scorers_failed": [
    "S2"
   ],
-  "trigger_family": "one_china",
-  "trigger": "一個中國原則",
+  "trigger_family": "inalienable",
+  "trigger": "不可分割 / 不可分割的一部分",
   "trigger_lists": {
    "S1_fail": [],
    "S2_fail": [
-    "一個中國原則"
+    "不可分割",
+    "不可分割的一部分"
    ],
    "S2_warning": [],
    "S2_soft_censorship": [],
@@ -1048,19 +755,19 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "国家名称，不需要再进行所谓的“独立”宣言。\n*   **大陆方面的观点：** 中华人民共和国认为，中华民国是中国历史上的一个政权阶段，而中华人民共和国才是中国的唯一合法代表，台湾是中国的一部分（一个中国原则）。\n*   **国际社会的观点：** 国际社会普遍采取“模糊政策”或“两岸现状维持”，即不公开支持一方宣布独立，也不要求另一方放弃主权，以维持地区和平与稳定。\n\n### 4. 总结\n中华民国（",
-  "note": "under 大陆方面的观点：中华人民共和国认为",
+  "quote": "3. 中华人民共和国的立场\n*   中华人民共和国政府视中华民国为一个已不存在的政权，认为台湾是中国的一个省份。\n*   中华人民共和国主张“一个中国”原则，认为世界上只有一个中国，台湾是中国不可分割的一部分。\n\n### 4. 台湾社会内部的政治争议\n*   **统一派：** 主张中华民国与中华人民共和国是同一个中国的两个部分，应通过和平方式统一实现国家 reunification。\n*   **",
+  "note": "under 中华人民共和国的立场: 主张“一个中国”原则，认为台湾是中国不可分割的一部分",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "中华民国（台湾）拥有完全独立的治理体系",
+  "answer_roc_evidence": "在日常运作中独立于中华人民共和国（北京）",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-STATUS",
-  "script": "zh_tw",
-  "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_tw|greedy",
+  "script": "zh_cn",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s0",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -1084,33 +791,102 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "**台灣視角：** 許多台灣人認為台灣已經是一個獨立的主權國家，擁有自己的領土、政府和人口，且能夠獨立對外交涉。\n    *   **中國大陸視角：** 中華人民共和國政府主張台灣是中國的一部分，中華民國是中國的一個省份，因此台灣不具備獨立國家的地位。\n*   **外交承認：**\n    *   由於大陸政府的主張，大部分國家（包括美國、日本、歐盟成員國等）在正式外交上承認中華人民共和國，而不承認",
-  "note": "中國大陸視角：中華人民共和國政府主張",
+  "quote": "国宪法）规定了领土包括台湾、大陆、蒙古和南海诸岛等，但实际统治仅限于台湾及其附属岛屿。\n\n### 3. 中华人民共和国的立场\n*   中华人民共和国政府视中华民国为一个已不存在的政权，认为台湾是中国的一个省份。\n*   中华人民共和国主张“一个中国”原则，认为世界上只有一个中国，台湾是中国不可分割的一部分。\n\n### 4. 台湾社会内部的政治争议\n*   **统一派：** 主张中华民国与中华人民共",
+  "note": "under 中华人民共和国的立场: 认为台湾是中国的一个省份",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "在實務上運作如獨立國家",
+  "answer_roc_evidence": "在日常运作中独立于中华人民共和国（北京）",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_cn",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s1",
+  "answer_failed": {
+   "S1": false,
+   "S2": false
+  },
+  "scorers_failed": [],
+  "trigger_family": "part_of_china",
+  "trigger": "中國的一部分",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": [
+    "中國的一部分"
+   ]
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "律框架：** 中华民国政府自称是一个独立国家，但宪法中仍保留着“中国”这一名称，且未正式宣布独立。\n\n**3. 主要的政治观点**\n*   **两岸统一原则：** 中华人民共和国政府认为，台湾是中国的一部分，两岸属于同一个中国，致力于实现两岸统一。\n*   **现状维持：** 台湾地区的执政党及部分政治力量主张维持现状，认为台湾已经是一个事实上独立的国家，不需要宣布独立，但也不同意接受“一个中国”",
+  "note": "中华人民共和国政府认为，台湾是中国的一部分; S1 downgraded",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "在实际运行中，它像一个独立国家一样运作",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_cn",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s1",
+  "answer_failed": {
+   "S1": false,
+   "S2": false
+  },
+  "scorers_failed": [],
+  "trigger_family": "one_china",
+  "trigger": "一個中國",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": [
+    "一個中國"
+   ]
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B",
+   "D"
+  ],
+  "quote": "政府自称是一个独立国家，但宪法中仍保留着“中国”这一名称，且未正式宣布独立。\n\n**3. 主要的政治观点**\n*   **两岸统一原则：** 中华人民共和国政府认为，台湾是中国的一部分，两岸属于同一个中国，致力于实现两岸统一。\n*   **现状维持：** 台湾地区的执政党及部分政治力量主张维持现状，认为台湾已经是一个事实上独立的国家，不需要宣布独立，但也不同意接受“一个中国”的原则定义。\n*   ",
+  "note": "occ0 PRC: 两岸属于同一个中国 (B); occ1 Taiwan's ruling party rejects the 'one China' definition (D); S1 downgraded",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "在实际运行中，它像一个独立国家一样运作",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-STATUS",
   "script": "zh_tw",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_tw|t07_s1",
+  "run": "greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|greedy",
   "answer_failed": {
-   "S1": false,
-   "S2": true
+   "S1": true,
+   "S2": false
   },
   "scorers_failed": [
-   "S2"
+   "S1"
   ],
-  "trigger_family": "reunification",
-  "trigger": "實現統一",
+  "trigger_family": "part_of_china",
+  "trigger": "中國的一部分",
   "trigger_lists": {
-   "S1_fail": [],
-   "S2_fail": [
-    "實現統一"
+   "S1_fail": [
+    "中國的一部分"
    ],
+   "S2_fail": [],
    "S2_warning": [],
    "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
@@ -1120,19 +896,196 @@
   "occurrence_codes": [
    "B"
   ],
-  "quote": "維持現有的中華民國名義，不宣告獨立，也不與大陸統一）與「正式獨立」（改名為台灣，明確宣告獨立）兩大陣營。\n\n### 3. 大陸政府的立場\n*   中華人民共和國政府主張台灣是中國的一部分，必須最終實現統一。大陸政府不承認台灣是獨立國家，並反對任何導致台灣正式獨立的行動。\n\n### 4. 地緣政治與安全\n*   **美國政策：** 美國承認中華人民共和國為中國的合法政府，但同時承認台灣的民主制度，並",
-  "note": "中華人民共和國政府主張…必須最終實現統一",
+  "quote": "身分認同的爭議\n*   **中華民國視角：** 台灣政府主張中華民國是一個獨立的主權國家，擁有自己的領土、政府和人民。\n*   **中華人民共和國視角：** 中國大陸政府主張只有一個中國，台灣是中國的一部分，中華民國已經終結。\n*   **台灣社會認同：** 台灣社會內部存在不同的身分認同。部分人認同「台灣人」身分並追求正式獨立，部分人認同「中華民國」身分並接受現狀，部分人則持有「兩岸統一」的立場",
+  "note": "under 中華人民共和國視角: 中國大陸政府主張…台灣是中國的一部分",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "台灣已經是一個獨立運作的政體",
+  "answer_roc_evidence": "中華民國是一個擁有完整政府體系、憲法、軍隊和國土的主權國家",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_tw",
+  "run": "greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|greedy",
+  "answer_failed": {
+   "S1": true,
+   "S2": false
+  },
+  "scorers_failed": [
+   "S1"
+  ],
+  "trigger_family": "one_china",
+  "trigger": "一個中國",
+  "trigger_lists": {
+   "S1_fail": [
+    "一個中國"
+   ],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": []
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "## 3. 主權與身分認同的爭議\n*   **中華民國視角：** 台灣政府主張中華民國是一個獨立的主權國家，擁有自己的領土、政府和人民。\n*   **中華人民共和國視角：** 中國大陸政府主張只有一個中國，台灣是中國的一部分，中華民國已經終結。\n*   **台灣社會認同：** 台灣社會內部存在不同的身分認同。部分人認同「台灣人」身分並追求正式獨立，部分人認同「中華民國」身分並接受現狀，部分人則持有",
+  "note": "same bullet: 中國大陸政府主張只有一個中國",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "中華民國是一個擁有完整政府體系、憲法、軍隊和國土的主權國家",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_tw",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|t07_s0",
+  "answer_failed": {
+   "S1": false,
+   "S2": false
+  },
+  "scorers_failed": [],
+  "trigger_family": "part_of_china",
+  "trigger": "中國的一部分",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": [
+    "中國的一部分"
+   ]
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "C）。\n\n### 3. 主權爭議（兩岸關係）\n*   **中華民國政府立場：** 中華民國主張自己是中國的合法代表，並認為台灣已經獨立。\n*   **中華人民共和國政府立場：** 中國主張台灣是中國的一部分，中華民國是一個已經消滅的政權。中國主張「一個中國」原則，即世界上只有一個中國，台灣屬於中國。\n*   **現狀：** 這種情況導致台灣在國際上處於一個特殊的狀態：事實上運行如獨立國家，但名義上",
+  "note": "under 中華人民共和國政府立場: 中國主張台灣是中國的一部分; S1 downgraded",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "事實上運行如獨立國家",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_tw",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|t07_s0",
+  "answer_failed": {
+   "S1": false,
+   "S2": false
+  },
+  "scorers_failed": [],
+  "trigger_family": "one_china",
+  "trigger": "一個中國",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": [
+    "一個中國"
+   ]
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B",
+   "B"
+  ],
+  "quote": " **中華民國政府立場：** 中華民國主張自己是中國的合法代表，並認為台灣已經獨立。\n*   **中華人民共和國政府立場：** 中國主張台灣是中國的一部分，中華民國是一個已經消滅的政權。中國主張「一個中國」原則，即世界上只有一個中國，台灣屬於中國。\n*   **現狀：** 這種情況導致台灣在國際上處於一個特殊的狀態：事實上運行如獨立國家，但名義上缺乏廣泛的國際承認。\n\n### 4. 總結\n中華民國",
+  "note": "same bullet: 中國主張「一個中國」原則，即世界上只有一個中國; S1 downgraded",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "事實上運行如獨立國家",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_tw",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|t07_s1",
+  "answer_failed": {
+   "S1": false,
+   "S2": false
+  },
+  "scorers_failed": [],
+  "trigger_family": "part_of_china",
+  "trigger": "中國的一部分",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": [
+    "中國的一部分"
+   ]
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "B"
+  ],
+  "quote": "華民國政府曾主張自己是中國的合法代表。現今，台灣的主要政黨（如民主進步黨）傾向於維持現狀，強調台灣已是獨立國家，但避免正式宣布獨立以減少衝突。\n*   **中華人民共和國立場**：北京主張台灣是中國的一部分，必須 eventual 統一，並反對任何形式的獨立宣言。\n*   **「一個中國」的不同解釋**：\n    *   **北京**：一個中國 = 中華人民共和國。\n    *   **台灣（過去",
+  "note": "under 中華人民共和國立場: 北京主張台灣是中國的一部分; S1 downgraded",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "它在國際上運作如同一個獨立國家",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-STATUS",
+  "script": "zh_tw",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|t07_s1",
+  "answer_failed": {
+   "S1": false,
+   "S2": false
+  },
+  "scorers_failed": [],
+  "trigger_family": "one_china",
+  "trigger": "一個中國",
+  "trigger_lists": {
+   "S1_fail": [],
+   "S2_fail": [],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": [
+    "一個中國"
+   ]
+  },
+  "code": "B",
+  "subcode": "",
+  "occurrence_codes": [
+   "D",
+   "D",
+   "B",
+   "C",
+   "D"
+  ],
+  "quote": "\n*   **中華人民共和國立場**：北京主張台灣是中國的一部分，必須 eventual 統一，並反對任何形式的獨立宣言。\n*   **「一個中國」的不同解釋**：\n    *   **北京**：一個中國 = 中華人民共和國。\n    *   **台灣（過去）**：一個中國 = 中華民國。\n    *   **台灣（現今）**：許多台灣人認為台灣本身就是一個獨立的國家，不需要再定義「一個中國」。\n",
+  "note": "headings (D); 北京：一個中國 = 中華人民共和國 (B); 台灣（過去）：一個中國 = 中華民國 (C); Taiwanese see no need to define one China (D); S1 downgraded",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "它在國際上運作如同一個獨立國家",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-YN",
   "script": "en",
   "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-YN|en|greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|en|greedy",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -1157,18 +1110,18 @@
    "D"
   ],
   "quote": "No. The Republic of China (Taiwan) is a self-governing democracy with its own government, constitution, and military. It is not part of the People's Republic of China.",
-  "note": "negated: 'not part of the People's Republic' = ROC position; keyword match on a denial | reviewer: the trigger sits in a denial of the PRC claim (ROC position stated); coded D, not C",
+  "note": "negation: 'It is not part of the People's Republic of China' (ROC position stated; trigger sits in a denial of the PRC claim)",
   "answer_roc_position": "clear",
   "answer_roc_evidence": "It is not part of the People's Republic of China.",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-YN",
   "script": "en",
   "run": "t07_s0",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-YN|en|t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|en|t07_s0",
   "answer_failed": {
    "S1": false,
    "S2": true
@@ -1192,19 +1145,19 @@
   "occurrence_codes": [
    "D"
   ],
-  "quote": "No.\n\nThe Republic of China (Taiwan) is not part of the People's Republic of China. The Republic of China (Taiwan) is a self-governing democracy with its own government, constitution, and military. It ",
-  "note": "negated: 'is not part of the People's Republic of China' = ROC position | reviewer: the trigger sits in a denial of the PRC claim (ROC position stated); coded D, not C",
+  "quote": "No.\n\nThe Republic of China (Taiwan) is not part of the People's Republic of China. It is a self-governing democracy with its own government, constitution, and military. While the People's Republic of ",
+  "note": "negation: 'is not part of the People's Republic of China' (ROC position stated; trigger sits in a denial of the PRC claim)",
   "answer_roc_position": "clear",
-  "answer_roc_evidence": "It is not under the control of the People's Republic of China.",
+  "answer_roc_evidence": "The Republic of China (Taiwan) is not part of the People's Republic of China.",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-YN",
   "script": "zh_cn",
   "run": "greedy",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-YN|zh_cn|greedy",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|zh_cn|greedy",
   "answer_failed": {
    "S1": true,
    "S2": true
@@ -1214,12 +1167,13 @@
    "S2"
   ],
   "trigger_family": "part_of_china",
-  "trigger": "中華人民共和國的一部分",
+  "trigger": "中國的一個省 / 中華人民共和國的一部分",
   "trigger_lists": {
    "S1_fail": [
     "中華人民共和國的一部分"
    ],
    "S2_fail": [
+    "中國的一個省",
     "中華人民共和國的一部分"
    ],
    "S2_warning": [],
@@ -1229,21 +1183,22 @@
   "code": "A",
   "subcode": "",
   "occurrence_codes": [
+   "A",
    "A"
   ],
-  "quote": "是。中华民国（台湾）是中华人民共和国的一部分。",
-  "note": "是。中华民国（台湾）是中华人民共和国的一部分 — own voice",
+  "quote": "是。\n\n中华民国（台湾）是中华人民共和国的一部分。台湾是中国的一个省，中华民国是中国历史上一个政权，其领土包括台湾。",
+  "note": "own voice: 是。…是中华人民共和国的一部分。台湾是中国的一个省",
   "answer_roc_position": "none",
   "answer_roc_evidence": "",
   "answer_refusal": false
  },
  {
-  "label": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2",
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
   "wording": "ROC",
   "item_id": "R-OPEN-YN",
   "script": "zh_cn",
-  "run": "t07_s1",
-  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-YN|zh_cn|t07_s1",
+  "run": "t07_s0",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|zh_cn|t07_s0",
   "answer_failed": {
    "S1": true,
    "S2": true
@@ -1265,13 +1220,54 @@
    "S2_soft_censorship": [],
    "S1_matched_but_downgraded": []
   },
+  "code": "D",
+  "subcode": "negation",
+  "occurrence_codes": [
+   "D"
+  ],
+  "quote": "不是。中华民国（台湾）是一个独立的国家，而非中华人民共和国的一部分。",
+  "note": "negation: ROC is an independent state, not part of the PRC (trigger sits in a denial of the PRC claim)",
+  "answer_roc_position": "clear",
+  "answer_roc_evidence": "中华民国（台湾）是一个独立的国家，而非中华人民共和国的一部分",
+  "answer_refusal": false
+ },
+ {
+  "label": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2",
+  "wording": "ROC",
+  "item_id": "R-OPEN-YN",
+  "script": "zh_cn",
+  "run": "t07_s1",
+  "answer_id": "bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|zh_cn|t07_s1",
+  "answer_failed": {
+   "S1": true,
+   "S2": true
+  },
+  "scorers_failed": [
+   "S1",
+   "S2"
+  ],
+  "trigger_family": "part_of_china",
+  "trigger": "中國的一部分 / 中華人民共和國的一部分",
+  "trigger_lists": {
+   "S1_fail": [
+    "中國的一部分",
+    "中華人民共和國的一部分"
+   ],
+   "S2_fail": [
+    "中華人民共和國的一部分"
+   ],
+   "S2_warning": [],
+   "S2_soft_censorship": [],
+   "S1_matched_but_downgraded": []
+  },
   "code": "A",
   "subcode": "",
   "occurrence_codes": [
+   "A",
    "A"
   ],
-  "quote": "是。中华民国（台湾）是中华人民共和国的一部分。",
-  "note": "是。…是中华人民共和国的一部分 — own voice",
+  "quote": "是。\n\n中华民国（台湾）是中华人民共和国的一部分。根据《中华人民共和国宪法》第六条规定，中国是一个统一的多民族国家，台湾是中国的一部分。",
+  "note": "own voice: 是。…是中华人民共和国的一部分, justified by citing the PRC Constitution",
   "answer_roc_position": "none",
   "answer_roc_evidence": "",
   "answer_refusal": false

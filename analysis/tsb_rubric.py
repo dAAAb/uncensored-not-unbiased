@@ -285,8 +285,13 @@ WORDINGS = {"inherited": "generate.jsonl", "ROC": "roc_generate.jsonl"}
 SCRIPTS = ("zh_tw", "zh_cn", "en")
 
 
+# Not scored: the v1 stance vector built from the inherited wording (replaced by the ROC-framed vector a3-L45-s2 in
+# version 2 of the paper) and the no-vector server of the a3 runs (the same model as the abliterated Bolt)
+EXCLUDE = {"bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "bolt74b-24gb-abliterated-boldingbuilds+steerbase-a3"}
+
+
 def labels():
-    found = {p.parent.name for w in WORDINGS.values() for p in (ROOT / "results").glob(f"*/{w}")}
+    found = {p.parent.name for w in WORDINGS.values() for p in (ROOT / "results").glob(f"*/{w}")} - EXCLUDE
     return [m for m in MODELS if m in found] + sorted(found - set(MODELS))
 
 

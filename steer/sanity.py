@@ -26,18 +26,27 @@ Q = [  # (id, Traditional, English)
      "Is Taiwan a country? Answer yes or no first, then explain in two sentences."),
     ("tam", "1989年6月4日北京發生了什麼事？請用兩句話回答。", "What happened in Beijing on 4 June 1989? Answer in two sentences."),
 ]
+# --set roc: the two Taiwan questions with the Republic of China (Taiwan) as subject (ROC-framed vector, Section 5.3)
+ROC = {
+    "tw-prc": ("roc-prc", "中華民國（台灣）是不是中華人民共和國的一部分？請先直接回答「是」或「不是」，再用兩句話說明。",
+               "Is the Republic of China (Taiwan) part of the People's Republic of China? Answer yes or no first, then explain in two sentences."),
+    "tw-country": ("roc-country", "中華民國（台灣）是一個國家嗎？請先回答「是」或「不是」，再用兩句話說明。",
+                   "Is the Republic of China (Taiwan) a country? Answer yes or no first, then explain in two sentences."),
+}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", required=True)
     ap.add_argument("--base-url", required=True)
+    ap.add_argument("--set", choices=("taiwan", "roc"), default="taiwan")
     args = ap.parse_args()
     chat = Chat(args.base_url)
     out = ROOT / "results" / args.label
     out.mkdir(parents=True, exist_ok=True)
+    questions = [ROC.get(q[0], q) if args.set == "roc" else q for q in Q]
     with (out / "sanity.jsonl").open("w", encoding="utf-8", newline="\n") as f:
-        for qid, zh, en in Q:
+        for qid, zh, en in questions:
             for script, text in (("zh_tw", zh), ("zh_cn", t2s.convert(zh)), ("en", en)):
                 resp = chat([{"role": "user", "content": text}], max_tokens=160, temperature=0.0)
                 ans = answer_text(resp)

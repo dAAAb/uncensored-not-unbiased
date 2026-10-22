@@ -10,6 +10,8 @@ layer to choose where to apply the vector. Writes steer/work/cvec_<name>.gguf wi
 so scale 1.0 adds the full average Traditional-minus-Simplified shift at the chosen layer).
 
 usage: python steer/directions.py steer/work/hidden_<model>.bin --name <name>
+       python steer/directions.py steer/work/hidden_a1roc_<model>.bin --name <name> --index index_a1roc.jsonl \
+           --splits roc_steer_items.json      (ROC wording: train/select pairs of items/roc_steer_items.json)
 """
 import argparse
 import json
@@ -43,14 +45,20 @@ def main():
     ap.add_argument("hidden")
     ap.add_argument("--name", required=True)
     ap.add_argument("--pos", type=int, default=0, help="0 = last prompt token, 1 = mean over prompt tokens")
+    ap.add_argument("--index", default="index.jsonl", help="index written by make_prompts.py, in steer/work/")
+    ap.add_argument("--splits", default="", help="json in items/ with 'train' and 'select' pair lists")
     args = ap.parse_args()
+    train, test = TRAIN, TEST
+    if args.splits:
+        sp = json.loads((ROOT / "items" / args.splits).read_text(encoding="utf-8"))
+        train, test = sp["train"], sp["select"]
 
-    idx = [json.loads(x) for x in (W / "index.jsonl").read_text(encoding="utf-8").splitlines()]
+    idx = [json.loads(x) for x in (W / args.index).read_text(encoding="utf-8").splitlines()]
     H = load(args.hidden)[:, args.pos]  # [n, L, E]
     n, L, E = H.shape
     assert n == len(idx), (n, len(idx))
 
-    tw_i, cn_i = script_pairs(idx, TRAIN)
+    tw_i, cn_i = script_pairs(idx, train)
     d_tw = (H[tw_i] - H[cn_i]).mean(0)
     ct_i, cc_i = script_pairs(idx, CTRL)
     d_ctl = (H[ct_i] - H[cc_i]).mean(0)
@@ -58,7 +66,7 @@ def main():
     d = d_tw - (d_tw * d_ctl).sum(-1, keepdims=True) / denom * d_ctl
 
     # held-out check: projection of test-pair activations on the unit direction, Traditional vs Simplified
-    te_tw, te_cn = script_pairs(idx, TEST)
+    te_tw, te_cn = script_pairs(idx, test)
     rows = []
     for l in range(L):
         nrm = np.linalg.norm(d[l])

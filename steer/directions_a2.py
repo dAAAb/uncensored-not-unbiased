@@ -1,7 +1,7 @@
 """A2 direction: mean over train items of h_l(prompt + ROC-side answer) - h_l(prompt + PRC-side answer), at the
 answer token. Reports held-out separation on the test pairs and writes a control-vector GGUF.
 
-usage: python steer/directions_a2.py steer/work/hidden_a2_<model>.bin --name <name>
+usage: python steer/directions_a2.py steer/work/hidden_a2_<model>.bin --name <name> [--index index_a3.jsonl]
 """
 import argparse
 import json
@@ -19,8 +19,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("hidden")
     ap.add_argument("--name", required=True)
+    ap.add_argument("--index", default="index_a2.jsonl", help="index written by make_prompts_a2.py, in steer/work/")
     args = ap.parse_args()
-    idx = [json.loads(x) for x in (W / "index_a2.jsonl").read_text(encoding="utf-8").splitlines()]
+    idx = [json.loads(x) for x in (W / args.index).read_text(encoding="utf-8").splitlines()]
     H = load(args.hidden)[:, 0]  # last token = the answer token
     n, L, E = H.shape
     assert n == len(idx)

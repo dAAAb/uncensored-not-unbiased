@@ -34,12 +34,6 @@
 |  | ROC − inherited, zh_cn | mean +0.03 [+0.00, +0.06] | by change: {'subject': 0.007, 'subject+PRC': 0.015, 'repeat': 0.0, 'other': 0.142} | | {} |
 |  | ROC − inherited, en | mean +0.03 [+0.01, +0.05] | by change: {'subject': 0.029, 'subject+PRC': 0.035, 'repeat': 0.0, 'other': 0.055} | | {} |
 
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC (Taiwan) | +0.85 [+0.81, +0.90] (n=16) | +0.45 [+0.29, +0.60] (n=16) | +0.80 [+0.70, +0.88] (n=16) | +0.41 [+0.28, +0.55] (n=16) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | inherited | +0.73 [+0.59, +0.84] (n=16) | +0.26 [-0.02, +0.50] (n=16) | +0.72 [+0.61, +0.83] (n=16) | +0.47 [+0.29, +0.68] (n=16) |
-|  | ROC − inherited, zh_tw | mean +0.13 [+0.02, +0.26] | by change: {'subject': 0.156, 'subject+PRC': 0.182, 'repeat': 0.0, 'other': 0.003} | | {'R-016': 0.67, 'R-009': 0.8} |
-|  | ROC − inherited, zh_cn | mean +0.19 [+0.04, +0.36] | by change: {'subject': 0.298, 'subject+PRC': 0.061, 'repeat': 0.0, 'other': 0.294} | | {'R-013': -0.31, 'R-010': 0.33, 'R-009': 0.52, 'R-003': 0.52, 'R-016': 0.76, 'R-005': 0.92} |
-|  | ROC − inherited, en | mean +0.07 [+0.01, +0.16] | by change: {'subject': 0.01, 'subject+PRC': 0.183, 'repeat': 0.0, 'other': 0.106} | | {'R-009': 0.6} |
-
 ## Direct yes-first questions: P(yes), ROC wording (inherited wording)
 
 | model | question | zh_tw | zh_cn | en |
@@ -64,11 +58,6 @@
 | qwen38fn-iq2xs-abliterated-sc117 | Does the ROC (Taiwan) belong to the PRC? | 0.05 (0.40) | 0.30 (1.00) | 0.68 (0.95) |
 | qwen38fn-iq2xs-abliterated-sc117 | Is the ROC (Taiwan) under PRC jurisdiction? | 0.05 (0.37) | 0.05 (0.89) | 0.32 (0.70) |
 | qwen38fn-iq2xs-abliterated-sc117 | Is the ROC (Taiwan) a sovereign state? | 0.12 (0.11) | 0.05 (0.00) | 0.05 (0.10) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | Is the ROC (Taiwan) a country? | 0.88 (0.85) | 0.32 (0.25) | 0.80 (0.80) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | Is the ROC (Taiwan) part of the PRC? | 0.03 (0.62) | 0.63 (1.00) | 0.01 (0.02) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | Does the ROC (Taiwan) belong to the PRC? | 0.04 (0.06) | 0.70 (0.98) | 0.13 (0.32) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | Is the ROC (Taiwan) under PRC jurisdiction? | 0.00 (0.04) | 0.06 (0.78) | 0.00 (0.00) |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | Is the ROC (Taiwan) a sovereign state? | 0.94 (0.97) | 0.12 (0.65) | 0.85 (0.84) |
 
 ## Open answers, ROC wording (4 questions x 3 runs per script)
 
@@ -86,6 +75,3 @@
 | qwen38fn-iq2xs-abliterated-sc117 | zh_tw | 12 | 0 | 0 | 6 | 0 | 0 | 1/2/0 |
 | qwen38fn-iq2xs-abliterated-sc117 | zh_cn | 12 | 12 | 0 | 12 | 1 | 4 | 3/0/0 |
 | qwen38fn-iq2xs-abliterated-sc117 | en | 12 | 0 | 0 | 8 | 0 | 2 | 0/3/0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | zh_tw | 12 | 0 | 0 | 1 | 0 | 0 | 0/3/0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | zh_cn | 12 | 12 | 0 | 3 | 1 | 0 | 2/1/0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | en | 12 | 0 | 0 | 0 | 0 | 0 | 0/3/0 |

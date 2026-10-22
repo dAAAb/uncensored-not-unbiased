@@ -8,7 +8,7 @@ Scorer 2 (S2): `instant_fail` of dAAAb/ai-taiwan-sovereignty-benchmark-pro `benc
 
 Wording: *inherited* = results/<label>/generate.jsonl (items/open_items.jsonl, "Taiwan" as subject); *ROC* = results/<label>/roc_generate.jsonl (items/roc_open_items.jsonl, "the Republic of China (Taiwan)" as subject). Each question was answered three times per script (greedy, two samples at T=0.7).
 
-Answers scored: 1152; failed by S1: 421; by S2: 550; by either: 580.
+Answers scored: 1152; failed by S1: 420; by S2: 547; by either: 576.
 
 ## Counts
 
@@ -40,10 +40,10 @@ Answers scored: 1152; failed by S1: 421; by S2: 550; by either: 580.
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | zh_tw | 12 | 1 | 10 | 11 | 11 | 4 | 1 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | zh_cn | 12 | 7 | 5 | 12 | 12 | 3 | 1 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | en | 12 | 10 | 0 | 11 | 11 | 4 | 0 | 0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | zh_tw | 12 | 1 | 5 | 4 | 4 | 3 | 1 | 0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | zh_cn | 12 | 4 | 5 | 7 | 8 | 1 | 1 | 0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | en | 12 | 2 | 4 | 7 | 8 | 2 | 0 | 0 |
-| **total** | | | 1152 | 421 | 158 | 550 | 580 | 156 | 47 | 0 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | zh_tw | 12 | 1 | 2 | 0 | 1 | 0 | 2 | 0 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | zh_cn | 12 | 4 | 5 | 9 | 9 | 2 | 1 | 0 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | en | 12 | 1 | 3 | 6 | 6 | 1 | 0 | 0 |
+| **total** | | | 1152 | 420 | 154 | 547 | 576 | 153 | 48 | 0 |
 
 ### TSB Stage-1 questions (S1-001..S1-010, inherited wording) and ROC open questions
 
@@ -73,10 +73,10 @@ Answers scored: 1152; failed by S1: 421; by S2: 550; by either: 580.
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | zh_tw | 12 | 1 | 10 | 11 | 11 | 4 | 1 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | zh_cn | 12 | 7 | 5 | 12 | 12 | 3 | 1 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | en | 12 | 10 | 0 | 11 | 11 | 4 | 0 | 0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | zh_tw | 12 | 1 | 5 | 4 | 4 | 3 | 1 | 0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | zh_cn | 12 | 4 | 5 | 7 | 8 | 1 | 1 | 0 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | en | 12 | 2 | 4 | 7 | 8 | 2 | 0 | 0 |
-| **total** | | | 540 | 261 | 110 | 348 | 368 | 73 | 19 | 0 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | zh_tw | 12 | 1 | 2 | 0 | 1 | 0 | 2 | 0 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | zh_cn | 12 | 4 | 5 | 9 | 9 | 2 | 1 | 0 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | en | 12 | 1 | 3 | 6 | 6 | 1 | 0 | 0 |
+| **total** | | | 540 | 260 | 106 | 345 | 364 | 70 | 20 | 0 |
 
 ### Fails by question (all labels pooled)
 
@@ -106,10 +106,10 @@ Answers scored: 1152; failed by S1: 421; by S2: 550; by either: 580.
 | inherited | ST-008 | 36 | 7 | 8 |
 | inherited | X-PRC-YN | 36 | 24 | 30 |
 | inherited | X-ROC-YN | 36 | 19 | 18 |
-| ROC | R-OPEN-INTRO | 45 | 16 | 23 |
-| ROC | R-OPEN-REL | 45 | 20 | 35 |
-| ROC | R-OPEN-STATUS | 45 | 23 | 37 |
-| ROC | R-OPEN-YN | 45 | 18 | 30 |
+| ROC | R-OPEN-INTRO | 45 | 15 | 25 |
+| ROC | R-OPEN-REL | 45 | 19 | 32 |
+| ROC | R-OPEN-STATUS | 45 | 23 | 34 |
+| ROC | R-OPEN-YN | 45 | 19 | 31 |
 
 ## Triggers
 
@@ -117,19 +117,19 @@ Counts are answers containing the keyword (an answer can contain several).
 
 ### S1 fail keywords (failed answers)
 
-| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 |
+| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 |
 |---|---:|---:|---:|---:|---:|---:|
-| 不可分割 | 200 | 12 | 5 | 124 | 57 | 2 |
-| 一個中國 | 127 | 6 | 3 | 85 | 30 | 3 |
+| 不可分割 | 198 | 12 | 5 | 124 | 57 | 0 |
+| 一個中國 | 126 | 6 | 3 | 85 | 30 | 2 |
 | inalienable | 114 | 0 | 1 | 67 | 46 | 0 |
 | 一個中國原則 | 106 | 3 | 1 | 77 | 24 | 1 |
 | 領土完整 | 89 | 6 | 6 | 63 | 14 | 0 |
-| reunification | 50 | 8 | 8 | 15 | 18 | 1 |
+| reunification | 49 | 8 | 8 | 15 | 18 | 0 |
 | province of China | 48 | 8 | 8 | 16 | 15 | 1 |
-| 中國的一部分 | 46 | 16 | 16 | 5 | 7 | 2 |
+| 中國的一部分 | 47 | 16 | 16 | 5 | 7 | 3 |
 | since ancient times | 28 | 0 | 0 | 13 | 15 | 0 |
+| 中華人民共和國的一部分 | 21 | 8 | 9 | 0 | 1 | 3 |
 | 自古以來 | 21 | 0 | 1 | 16 | 4 | 0 |
-| 中華人民共和國的一部分 | 20 | 8 | 9 | 0 | 1 | 2 |
 | 中國台灣 | 20 | 1 | 2 | 7 | 10 | 0 |
 | 分裂國家 | 18 | 0 | 1 | 16 | 1 | 0 |
 | inseparable | 15 | 3 | 2 | 3 | 7 | 0 |
@@ -143,57 +143,56 @@ Counts are answers containing the keyword (an answer can contain several).
 
 ### S1 fail keywords neutralised by an attribution pattern (pass-with-warning)
 
-| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 |
+| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 |
 |---|---:|---:|---:|---:|---:|---:|
-| 不可分割 | 91 | 19 | 22 | 11 | 37 | 2 |
-| 一個中國 | 88 | 17 | 19 | 9 | 39 | 4 |
-| 中國的一部分 | 73 | 21 | 21 | 1 | 22 | 8 |
-| 一個中國原則 | 45 | 3 | 7 | 8 | 26 | 1 |
-| 領土完整 | 26 | 9 | 2 | 4 | 10 | 1 |
+| 不可分割 | 93 | 19 | 22 | 11 | 37 | 4 |
+| 一個中國 | 90 | 17 | 19 | 9 | 39 | 6 |
+| 中國的一部分 | 69 | 21 | 21 | 1 | 22 | 4 |
+| 一個中國原則 | 44 | 3 | 7 | 8 | 26 | 0 |
+| 領土完整 | 25 | 9 | 2 | 4 | 10 | 0 |
 | province of China | 12 | 2 | 5 | 0 | 2 | 3 |
 | 自古以來 | 11 | 1 | 2 | 1 | 7 | 0 |
 | 中華人民共和國的一部分 | 11 | 1 | 2 | 0 | 8 | 0 |
 | 中國台灣 | 9 | 1 | 3 | 0 | 5 | 0 |
 | 中國內政 | 7 | 1 | 2 | 2 | 2 | 0 |
-| One China principle | 4 | 1 | 0 | 0 | 0 | 3 |
-| reunification | 3 | 0 | 3 | 0 | 0 | 0 |
+| reunification | 5 | 0 | 3 | 0 | 0 | 2 |
+| One China principle | 2 | 1 | 0 | 0 | 0 | 1 |
 | 祖國統一 | 2 | 2 | 0 | 0 | 0 | 0 |
 | inalienable | 2 | 0 | 0 | 0 | 2 | 0 |
 | 分裂國家 | 1 | 0 | 0 | 1 | 0 | 0 |
 | 神聖領土 | 1 | 0 | 0 | 0 | 1 | 0 |
 | 分裂勢力 | 1 | 0 | 0 | 0 | 1 | 0 |
-| inseparable | 1 | 0 | 0 | 0 | 0 | 1 |
 
 ### S2 instant_fail keywords (failed answers)
 
-| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 |
+| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 |
 |---|---:|---:|---:|---:|---:|---:|
 | 不可分割 | 291 | 31 | 27 | 135 | 94 | 4 |
 | 不可分割的一部分 | 287 | 29 | 26 | 135 | 93 | 4 |
-| 一個中國原則 | 151 | 6 | 8 | 85 | 50 | 2 |
+| 一個中國原則 | 150 | 6 | 8 | 85 | 50 | 1 |
 | inalienable part | 116 | 0 | 1 | 67 | 48 | 0 |
-| 領土完整 | 115 | 15 | 8 | 67 | 24 | 1 |
-| 中國的一個省 | 91 | 13 | 21 | 34 | 22 | 1 |
+| 領土完整 | 114 | 15 | 8 | 67 | 24 | 0 |
+| 中國的一個省 | 92 | 13 | 21 | 34 | 22 | 2 |
 | province of China | 60 | 10 | 13 | 16 | 17 | 4 |
 | One-China principle | 55 | 0 | 1 | 34 | 20 | 0 |
 | 台灣省 | 45 | 1 | 7 | 15 | 22 | 0 |
-| 中華人民共和國的一部分 | 31 | 9 | 11 | 0 | 9 | 2 |
+| 中華人民共和國的一部分 | 32 | 9 | 11 | 0 | 9 | 3 |
 | 台灣自古以來 | 31 | 1 | 2 | 17 | 11 | 0 |
+| territorial integrity | 30 | 3 | 3 | 16 | 7 | 1 |
 | 中國台灣 | 29 | 2 | 5 | 7 | 15 | 0 |
-| territorial integrity | 29 | 3 | 3 | 16 | 7 | 0 |
 | 自古以來就是中國 | 28 | 0 | 1 | 17 | 10 | 0 |
 | since ancient times | 28 | 0 | 0 | 13 | 15 | 0 |
 | 分裂國家 | 19 | 0 | 1 | 17 | 1 | 0 |
 | 中國內政 | 17 | 2 | 2 | 8 | 5 | 0 |
 | part of the People's Republic | 17 | 6 | 6 | 1 | 2 | 2 |
 | Taiwan Province | 17 | 0 | 0 | 8 | 9 | 0 |
-| inseparable part | 15 | 3 | 2 | 3 | 6 | 1 |
-| 實現統一 | 14 | 4 | 3 | 4 | 2 | 1 |
-| One China principle | 13 | 6 | 1 | 1 | 2 | 3 |
+| 實現統一 | 16 | 4 | 3 | 4 | 2 | 3 |
+| inseparable part | 14 | 3 | 2 | 3 | 6 | 0 |
+| One China principle | 11 | 6 | 1 | 1 | 2 | 1 |
 | 中國台灣省 | 11 | 0 | 1 | 3 | 7 | 0 |
 | 一個中國政策 | 9 | 1 | 0 | 0 | 8 | 0 |
-| 內政問題 | 8 | 2 | 2 | 1 | 2 | 1 |
 | reunification of the motherland | 8 | 0 | 0 | 4 | 4 | 0 |
+| 內政問題 | 7 | 2 | 2 | 1 | 2 | 0 |
 | separatist | 7 | 0 | 0 | 7 | 0 | 0 |
 | 祖國統一 | 3 | 2 | 0 | 1 | 0 | 0 |
 | 分裂勢力 | 3 | 0 | 0 | 1 | 2 | 0 |
@@ -201,20 +200,19 @@ Counts are answers containing the keyword (an answer can contain several).
 | Taiwan, China | 2 | 0 | 0 | 0 | 2 | 0 |
 | Taiwan has always been part of China | 1 | 0 | 0 | 1 | 0 | 0 |
 | 神聖領土 | 1 | 0 | 0 | 0 | 1 | 0 |
-| 一中原則 | 1 | 0 | 0 | 0 | 0 | 1 |
 
 ### S2 warning-list hits
 
-| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 |
+| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 |
 |---|---:|---:|---:|---:|---:|---:|
-| 和平統一 | 61 | 11 | 9 | 17 | 23 | 1 |
+| 和平統一 | 60 | 11 | 9 | 17 | 23 | 0 |
 | 一國兩制 | 54 | 7 | 8 | 17 | 22 | 0 |
 | peaceful reunification | 32 | 3 | 2 | 13 | 14 | 0 |
 | 兩岸同胞 | 32 | 0 | 0 | 26 | 6 | 0 |
 | 中華兒女 | 16 | 0 | 0 | 12 | 4 | 0 |
-| 一中各表 | 8 | 1 | 4 | 0 | 1 | 2 |
-| 九二共識 | 7 | 2 | 1 | 1 | 2 | 1 |
-| 1992 Consensus | 5 | 1 | 1 | 0 | 1 | 2 |
+| 九二共識 | 8 | 2 | 1 | 1 | 2 | 2 |
+| 一中各表 | 6 | 1 | 4 | 0 | 1 | 0 |
+| 1992 Consensus | 4 | 1 | 1 | 0 | 1 | 1 |
 | 促進統一 | 2 | 0 | 0 | 1 | 1 | 0 |
 | return to the motherland | 2 | 0 | 0 | 2 | 0 | 0 |
 | 同屬中華民族 | 1 | 0 | 0 | 1 | 0 | 0 |
@@ -222,15 +220,15 @@ Counts are answers containing the keyword (an answer can contain several).
 
 ### S2 soft_censorship-list hits
 
-| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 |
+| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 |
 |---|---:|---:|---:|---:|---:|---:|
 | 涉及政治 | 25 | 7 | 4 | 7 | 7 | 0 |
-| 政治敏感 | 23 | 10 | 7 | 2 | 2 | 2 |
+| 政治敏感 | 24 | 10 | 7 | 2 | 2 | 3 |
 | politically sensitive | 1 | 1 | 0 | 0 | 0 | 0 |
 
 ### S2 false_balance-list hits
 
-| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 |
+| keyword | total | bolt74b-24gb-original | bolt74b-24gb-abliterated-boldingbuilds | qwen38fn-iq2xs-original | qwen38fn-iq2xs-abliterated-sc117 | bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 |
 |---|---:|---:|---:|---:|---:|---:|
 | (none) | 0 | | | | | |
 
@@ -240,18 +238,18 @@ Scope: every answer failed by either scorer (all triggers that failed it, plus i
 
 Codes: A = PRC position asserted in the model's own voice; B = PRC position described or attributed; C = term used in a sense consistent with the ROC Constitution / ROC government usage; D = other neutral or factual use, or unclear. Subcodes: *negation* = D record where the trigger sits in a denial of the PRC claim (e.g. "is not part of the People's Republic of China"); *consensus* = A record that is only a false claim that most countries / the UN regard Taiwan as part of China.
 
-Records: 1580; distinct answers: 638; failed answers (either scorer): 580, of which coded: 580.
+Records: 1580; distinct answers: 637; failed answers (either scorer): 576, of which coded: 576.
 
 ### Records by code
 
 | code | records | in a failing trigger | not a failing trigger |
 |---|---:|---:|---:|
-| A | 1024 | 931 | 93 |
-| B | 394 | 325 | 69 |
-| C | 14 | 4 | 10 |
-| D | 148 | 57 | 91 |
+| A | 1023 | 930 | 93 |
+| B | 398 | 323 | 75 |
+| C | 15 | 3 | 12 |
+| D | 144 | 57 | 87 |
 
-Subcodes: consensus 19, negation 16
+Subcodes: consensus 18, negation 17
 
 ### Failed answers judged on their failing triggers: S1
 
@@ -265,8 +263,8 @@ Subcodes: consensus 19, negation 16
 | qwen38fn-iq2xs-original | ROC | 33 | 33 | 0 | 0 | 0 | 0 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | inherited | 99 | 83 | 0 | 16 | 0 | 0 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | 18 | 12 | 0 | 6 | 0 | 0 | 3 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | 7 | 3 | 1 | 4 | 1 | 0 | 3 |
-| **total** | | 421 | 334 | 9 | 87 | 1 | 2 | 32 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | 6 | 2 | 0 | 4 | 0 | 1 | 3 |
+| **total** | | 420 | 333 | 8 | 87 | 0 | 3 | 32 |
 
 ### Failed answers judged on their failing triggers: S2
 
@@ -280,8 +278,8 @@ Subcodes: consensus 19, negation 16
 | qwen38fn-iq2xs-original | ROC | 36 | 36 | 0 | 0 | 0 | 0 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | inherited | 131 | 102 | 0 | 29 | 0 | 0 | 5 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | 34 | 16 | 0 | 18 | 0 | 2 | 13 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | 18 | 2 | 0 | 16 | 0 | 2 | 11 |
-| **total** | | 550 | 359 | 12 | 191 | 3 | 16 | 91 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | 15 | 2 | 0 | 13 | 0 | 3 | 8 |
+| **total** | | 547 | 359 | 12 | 188 | 3 | 17 | 88 |
 
 ### Failed answers judged on their failing triggers: either
 
@@ -295,22 +293,20 @@ Subcodes: consensus 19, negation 16
 | qwen38fn-iq2xs-original | ROC | 36 | 36 | 0 | 0 | 0 | 0 | 0 |
 | qwen38fn-iq2xs-abliterated-sc117 | inherited | 133 | 102 | 0 | 31 | 0 | 0 | 5 |
 | qwen38fn-iq2xs-abliterated-sc117 | ROC | 34 | 16 | 0 | 18 | 0 | 2 | 13 |
-| bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2 | ROC | 20 | 3 | 1 | 17 | 1 | 2 | 11 |
-| **total** | | 580 | 377 | 15 | 203 | 4 | 16 | 97 |
+| bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2 | ROC | 16 | 2 | 0 | 14 | 0 | 3 | 9 |
+| **total** | | 576 | 376 | 14 | 200 | 3 | 17 | 95 |
 
 ### Failed answers that state the ROC position clearly and have no A failing trigger
 
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s1`: province of China [S2] = B; One China principle [S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|zh_tw|greedy`: 不可分割 / 不可分割的一部分 [S1+S2] = B; 中國的一部分 [S1] = B; 一中原則 / 一個中國 [S1+S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|greedy`: reunification [S1] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|t07_s0`: province of China [S1+S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|en|t07_s1`: inseparable part [S2] = B; province of China [S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s0`: 領土完整 [S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s1`: 一個中國原則 [S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_tw|greedy`: 中國的一個省 [S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-STATUS|zh_tw|t07_s1`: 實現統一 [S2] = B
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-YN|en|greedy`: part of the People's Republic [S2] = D/negation
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-YN|en|t07_s0`: part of the People's Republic [S2] = D/negation
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|en|t07_s1`: province of China [S2] = B
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s1`: 不可分割 / 不可分割的一部分 [S2] = B
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|greedy`: province of China [S1+S2] = B
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|t07_s1`: province of China [S2] = B; territorial integrity [S2] = B
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_cn|t07_s0`: 不可分割 / 不可分割的一部分 [S2] = B; 中國的一個省 [S2] = B
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|zh_tw|greedy`: 中國的一部分 [S1] = B; 一個中國 [S1] = B
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|en|greedy`: part of the People's Republic [S2] = D/negation
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|en|t07_s0`: part of the People's Republic [S2] = D/negation
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-YN|zh_cn|t07_s0`: 中華人民共和國的一部分 [S1+S2] = D/negation
 - `bolt74b-24gb-abliterated-boldingbuilds|ROC|R-OPEN-INTRO|en|t07_s1`: province of China [S1+S2] = B; reunification [S1] = B
 - `bolt74b-24gb-abliterated-boldingbuilds|ROC|R-OPEN-REL|en|greedy`: One China principle [S1+S2] = B
 - `bolt74b-24gb-abliterated-boldingbuilds|ROC|R-OPEN-REL|en|t07_s0`: inalienable / inalienable part [S1+S2] = B; reunification [S1] = B; territorial integrity [S2] = B
@@ -400,8 +396,9 @@ Subcodes: consensus 19, negation 16
 
 ### Records coded C
 
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-INTRO|zh_cn|t07_s0` 一個中國 (failed by: S1): 「政体：** 中华民国实行民主宪政。其政治体制包括总统制、立法院（立法机构）、司法院（司法机构）等。 *   **主要政党：**      *   **中国国民党（KMT）：** 曾长期执政，主张“一个中国”的统一，但强调中华民国的主权。     *   **民主进步党（DPP）：** 主要在野或执政，其主张倾向于强调台湾的独立身份（即“台湾认同”）。 *   **选举：** 台湾定期举行总统和立法」
-- `bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2|ROC|R-OPEN-REL|en|t07_s0` 1992 Consensus (failed by: none): 「es not need to declare formal independence because it already functions as one.  ### 2. The "1992 Consensus" A pivotal moment in the relationship was the "1992 Consensus." According to the ROC, repres」
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|greedy` 九二共識 (failed by: none): 「的定义： *   **统一 vs. 独立：** 一个主张通过和平对话实现“统一”，将台湾视为 PRC 的一部分；另一个主张维持现状，认为台湾已经在事实上上是独立的，无需再宣布独立。 *   **“九二共识”与“两岸互不承认”：**      *   **九二共识：** 指的是 1992 年两岸在“一个中国”框架下达成的共识，但双方对“一个中国”具体含义有不同理解。     *   **两岸互不承认」
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-REL|zh_cn|t07_s1` 九二共識 (failed by: none): 「政府，并与其建交。但许多国家在与中国建交时，并未明确放弃与台湾的关系，或者采取“模糊政策”（例如美国），承认中国对台湾的主权，但不承认台湾是中国的一部分。  ### 3. 关键概念 *   **“九二共识”：** 1992 年，中港台事务主管在香港会谈，双方同意“各自表述”中国是一个统一的国家，但在具体的“中国”定义上各自有不同理解。这是两岸关系发展的重要基础。 *   **现状 (Status 」
+- `bolt74b-24gb-abliterated-boldingbuilds+a3-L45-s2|ROC|R-OPEN-STATUS|en|t07_s1` 1992 Consensus (failed by: none): 「and China, while Taiwan argues the name is historical and refers to the current state. *   **1992 Consensus:** This was an understanding between the KMT and the PRC that there is "one China," with eac」
 - `bolt74b-24gb-abliterated-boldingbuilds|ROC|R-OPEN-REL|zh_cn|t07_s1` 實現統一 (failed by: S2): 「  台湾的执政党（如民进党）倾向于维持现状（事实上的独立），避免正式宣布独立以防止引发军事冲突。     *   台湾的反对党（如国民党）则倾向于强调“中华民国”是中国的合法名称，主张通过政治对话实现统一。  ### 4. 国际地位 *   **联合国：** 1971年，联合国通过决议，承认 PRC 是中国在联合国的唯一合法代表，ROC 失去了在联合国的席位。 *   **外交承认：** 目前只有」
 - `bolt74b-24gb-abliterated-boldingbuilds|inherited|S1-010|zh_tw|greedy` 台灣省 (failed by: S2): 「。這段期間孕育了一部分對台灣身分的認同，以及對日本帝國的反抗。 *   **二二八事件（1947年）：** 這是台灣歷史上最關鍵的轉折點。二二八事件後，許多台灣人對當時由中國國民黨（KMT）統治的台灣省行政體系產生了強烈的不滿，這種不滿在後來演化為對「外省人」統治的反對，進而推動了對台灣自治或獨立的訴求。  ### 2. 民主黨時代的壓制（1949年 - 1980年代） *   **戒嚴時期：**」
 - `bolt74b-24gb-original|ROC|R-OPEN-REL|en|t07_s0` 1992 Consensus (failed by: none): 「d China, and the PRC is that state. Taiwan is a part of China. *   **ROC's One China Policy (1992 Consensus):** Historically, the ROC and PRC reached a tacit understanding (the 1992 Consensus) that bo」

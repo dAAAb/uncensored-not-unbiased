@@ -31,8 +31,6 @@ MODELS = [  # label, probe mode, display name
 EXTRA = [  # same model as one of MODELS, with an intervention; compared against its own base
     ("qwen38fn-iq2xs-abliterated-sc117+sysprompt", "sample", "Qwen, abl.\\ + system prompt",
      "qwen38fn-iq2xs-abliterated-sc117"),
-    ("bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "logprob", "Bolt, abl.\\ + stance vector",
-     "bolt74b-24gb-abliterated-boldingbuilds+steerbase"),
 ]
 DIRECT = [  # (ROC question, inherited question, display)
     ("roc_country", "country", "Is the ROC (Taiwan) a country?"),

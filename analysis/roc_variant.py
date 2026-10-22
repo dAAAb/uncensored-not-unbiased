@@ -21,7 +21,6 @@ MODELS = [
     ("qwen38fn-iq2xs-original", "sample", "Qwen, original"),
     ("qwen38fn-iq2xs-abliterated-sc117", "sample", "Qwen, abliterated"),
     ("qwen38fn-iq2xs-abliterated-sc117+sysprompt", "sample", "Qwen, abl.\\ + system prompt"),
-    ("bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "logprob", "Bolt, abl.\\ + stance vector"),
 ]
 VARIANTS = [  # (file prefix, topics, pair, column)
     ("", {"sovereignty"}, "S1-009", "S1-009 (inherited)"),

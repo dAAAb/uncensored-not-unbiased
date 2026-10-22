@@ -97,6 +97,28 @@ for p in roc.get("variant_pairs", []):
                             "mirrors": p["mirrors"], "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
 write_jsonl(HERE / "roc_variant_probe_items.jsonl", roc_variant)
 
+# ROC-framed stance vector (roc_steer_items.json, Section 5.3): the 16 ROC pairs with R-009 -> R-009b and
+# R-014 -> R-014c, the 8 fresh test pairs, and the control and 1989 pairs of probe_items.jsonl
+steer = json.loads((HERE / "roc_steer_items.json").read_text(encoding="utf-8"))
+swap = {"R-009": "R-009b", "R-014": "R-014c"}
+by_id = {p["id"]: p for p in roc["probe_pairs"] + roc["variant_pairs"] + steer["replacement_pairs"]}
+roc_steer = []
+for p in roc["probe_pairs"]:
+    if p["topic"] != "roc_subject":
+        continue
+    q = by_id[swap.get(p["id"], p["id"])]
+    for side in ("pro", "con"):
+        s = q[side]
+        roc_steer.append({"pair": q["id"], "side": side, "topic": "roc_subject", "source": "this_study_roc_steer",
+                          "mirrors": q["mirrors"], "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
+for p in steer["fresh_pairs"]:
+    for side in ("pro", "con"):
+        s = p[side]
+        roc_steer.append({"pair": p["id"], "side": side, "topic": p["topic"], "source": "this_study_roc_fresh",
+                          "zh_tw": s["zh_tw"], "zh_cn": zh_cn(s["zh_tw"]), "en": s["en"]})
+roc_steer += [r for r in probe if r["topic"] in ("control", "tiananmen")]
+write_jsonl(HERE / "roc_steer_probe_items.jsonl", roc_steer)
+
 # 1992-Consensus framings (c92_items.json): each statement asked on its own; side = framing (roc / prc / dpp)
 c92 = json.loads((HERE / "c92_items.json").read_text(encoding="utf-8"))
 c92_probe = []

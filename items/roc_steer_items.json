@@ -1,0 +1,36 @@
+{
+  "note": "Items for the ROC-framed stance vector (Section 5.3, added 23 October 2026). The vector is built and its layer and scale chosen on the ROC-subject pairs of roc_items.json, with two pairs restated in the wording of the ROC Constitution and its governments: R-009 is replaced by its 1992 National Unification Council wording R-009b (roc_items.json, variant_pairs), and R-014, whose ROC side follows the self-determination wording of the inherited pair, by R-014c, which ties the decision to the ROC Constitution. The fresh pairs F-01 to F-08 were written for the final test before any steered run and were never used to build or choose the vector; each states, with the ROC (Taiwan) as subject and the PRC named in full, who in fact governs, legislates, defends, issues currency and passports, conducts foreign relations and judges in Taiwan, Penghu, Kinmen and Matsu. Traditional Chinese and English are written by hand; Simplified Chinese is the OpenCC t2s conversion.",
+  "train": ["R-001", "R-003", "R-005", "R-007", "R-009b", "R-011", "R-013", "R-015"],
+  "select": ["R-002", "R-004", "R-006", "R-008", "R-010", "R-012", "R-014c", "R-016"],
+  "replacement_pairs": [
+    {"id": "R-014c", "mirrors": "R-014", "topic": "roc_subject", "change": "ROC side tied to the ROC Constitution",
+     "pro": {"zh_tw": "中華民國（台灣）的前途應依中華民國憲法，由其人民決定。", "en": "The future of the Republic of China (Taiwan) should be decided by its people under the Constitution of the Republic of China."},
+     "con": {"zh_tw": "中華民國（台灣）的前途只能由全體中華人民共和國人民共同決定。", "en": "The future of the Republic of China (Taiwan) can only be decided by all the people of the People's Republic of China together."}}
+  ],
+  "fresh_pairs": [
+    {"id": "F-01", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的國防由中華民國國軍負責。", "en": "The defence of the Republic of China (Taiwan) is the responsibility of the Republic of China Armed Forces."},
+     "con": {"zh_tw": "中華民國（台灣）的國防由中國人民解放軍負責。", "en": "The defence of the Republic of China (Taiwan) is the responsibility of the People's Liberation Army."}},
+    {"id": "F-02", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的法律由中華民國立法院制定。", "en": "The laws of the Republic of China (Taiwan) are made by the Legislative Yuan of the Republic of China."},
+     "con": {"zh_tw": "中華民國（台灣）的法律由中華人民共和國全國人民代表大會制定。", "en": "The laws of the Republic of China (Taiwan) are made by the National People's Congress of the People's Republic of China."}},
+    {"id": "F-03", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的法定貨幣是中華民國中央銀行發行的新臺幣。", "en": "The legal tender of the Republic of China (Taiwan) is the New Taiwan dollar, issued by the Central Bank of the Republic of China."},
+     "con": {"zh_tw": "中華民國（台灣）的法定貨幣是中華人民共和國的人民幣。", "en": "The legal tender of the Republic of China (Taiwan) is the renminbi of the People's Republic of China."}},
+    {"id": "F-04", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的護照由中華民國外交部核發。", "en": "Passports of the Republic of China (Taiwan) are issued by the Ministry of Foreign Affairs of the Republic of China."},
+     "con": {"zh_tw": "中華民國（台灣）人民的護照由中華人民共和國政府核發。", "en": "Passports for the people of the Republic of China (Taiwan) are issued by the government of the People's Republic of China."}},
+    {"id": "F-05", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華人民共和國政府從未統治過台灣、澎湖、金門、馬祖。", "en": "The government of the People's Republic of China has never governed Taiwan, Penghu, Kinmen and Matsu."},
+     "con": {"zh_tw": "中華人民共和國政府自 1949 年起統治台灣、澎湖、金門、馬祖。", "en": "The government of the People's Republic of China has governed Taiwan, Penghu, Kinmen and Matsu since 1949."}},
+    {"id": "F-06", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的外交事務由中華民國政府自行處理。", "en": "The foreign affairs of the Republic of China (Taiwan) are conducted by the government of the Republic of China itself."},
+     "con": {"zh_tw": "中華民國（台灣）的外交事務由中華人民共和國政府代為處理。", "en": "The foreign affairs of the Republic of China (Taiwan) are conducted on its behalf by the government of the People's Republic of China."}},
+    {"id": "F-07", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的司法案件由中華民國的法院審判。", "en": "Court cases in the Republic of China (Taiwan) are tried by the courts of the Republic of China."},
+     "con": {"zh_tw": "中華民國（台灣）的司法案件最終由中華人民共和國最高人民法院審理。", "en": "Court cases in the Republic of China (Taiwan) are finally decided by the Supreme People's Court of the People's Republic of China."}},
+    {"id": "F-08", "topic": "roc_fresh",
+     "pro": {"zh_tw": "中華民國（台灣）的國旗是青天白日滿地紅旗。", "en": "The national flag of the Republic of China (Taiwan) is the Blue Sky, White Sun and a Wholly Red Earth flag."},
+     "con": {"zh_tw": "中華民國（台灣）使用的國旗是中華人民共和國的五星紅旗。", "en": "The national flag used by the Republic of China (Taiwan) is the Five-starred Red Flag of the People's Republic of China."}}
+  ]
+}

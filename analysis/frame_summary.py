@@ -15,8 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analyze import boot_ci, pair_scores  # noqa: E402
 from roc import MODELS, ROC, ROOT, SCRIPTS, SOV, change_groups, index_s, load, mean, mirrors, num  # noqa: E402
 
-EXTRA = [("qwen38fn-iq2xs-abliterated-sc117+sysprompt", "sample", "Qwen, abl.\\ + system prompt"),
-         ("bolt74b-24gb-abliterated-boldingbuilds+a2-L37-s2", "logprob", "Bolt, abl.\\ + stance vector")]
+EXTRA = [("qwen38fn-iq2xs-abliterated-sc117+sysprompt", "sample", "Qwen, abl.\\ + system prompt")]
 
 
 def num0(x):
