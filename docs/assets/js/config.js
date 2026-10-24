@@ -17,9 +17,9 @@ window.UNU_CONFIG = {
 
   /* Teaser video, one entry per language. Swap src/poster here for a new cut. */
   video: {
-    zh: { src: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-zh-v2.mp4",
-          poster: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-zh-v2-poster.jpg" },
-    en: { src: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-en-v2.mp4",
-          poster: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-en-v2-poster.jpg" }
+    zh: { src: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-zh-v3.mp4",
+          poster: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-zh-v3-poster.jpg" },
+    en: { src: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-en-v3.mp4",
+          poster: "https://blog.juchunko.com/images/uncensored-not-unbiased/intro-en-v3-poster.jpg" }
   }
 };
